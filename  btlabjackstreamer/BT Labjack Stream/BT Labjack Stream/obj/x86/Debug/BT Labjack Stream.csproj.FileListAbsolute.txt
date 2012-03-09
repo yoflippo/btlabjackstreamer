@@ -28,3 +28,5 @@ C:\Users\yflp\Desktop\LABJACK - kopie\BT Labjack Stream\BT Labjack Stream\obj\x8
 C:\Users\yflp\Desktop\LABJACK - kopie\BT Labjack Stream\BT Labjack Stream\obj\x86\Debug\BT_Labjack_Stream.Properties.Resources.resources
 C:\Users\yflp\Desktop\LABJACK - kopie\BT Labjack Stream\BT Labjack Stream\obj\x86\Debug\GenerateResource.read.1.tlog
 C:\Users\yflp\Desktop\LABJACK - kopie\BT Labjack Stream\BT Labjack Stream\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\yflp\Desktop\ btlabjackstreamer\BT Labjack Stream\BT Labjack Stream\obj\x86\Debug\BT Labjack Stream.exe
+C:\Users\yflp\Desktop\ btlabjackstreamer\BT Labjack Stream\BT Labjack Stream\obj\x86\Debug\BT Labjack Stream.pdb

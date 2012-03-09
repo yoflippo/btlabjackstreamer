@@ -97,7 +97,7 @@
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(486, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(424, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -225,12 +225,13 @@
             // 
             // btnStartStop
             // 
+            this.btnStartStop.BackColor = System.Drawing.Color.Silver;
             this.btnStartStop.Location = new System.Drawing.Point(65, 309);
             this.btnStartStop.Name = "btnStartStop";
             this.btnStartStop.Size = new System.Drawing.Size(75, 23);
             this.btnStartStop.TabIndex = 2;
             this.btnStartStop.Text = "Start";
-            this.btnStartStop.UseVisualStyleBackColor = true;
+            this.btnStartStop.UseVisualStyleBackColor = false;
             this.btnStartStop.Click += new System.EventHandler(this.btnStartStop_Click);
             // 
             // tbxFIO0
@@ -245,9 +246,9 @@
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsslbl_Error,
             this.tsslbl_Status});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 441);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 396);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(486, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(424, 22);
             this.statusStrip1.TabIndex = 4;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -313,6 +314,7 @@
             // lblFIO0
             // 
             this.lblFIO0.AutoSize = true;
+            this.lblFIO0.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.lblFIO0.Location = new System.Drawing.Point(62, 87);
             this.lblFIO0.Name = "lblFIO0";
             this.lblFIO0.Size = new System.Drawing.Size(30, 13);
@@ -322,6 +324,7 @@
             // lblFIO1
             // 
             this.lblFIO1.AutoSize = true;
+            this.lblFIO1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.lblFIO1.Location = new System.Drawing.Point(62, 113);
             this.lblFIO1.Name = "lblFIO1";
             this.lblFIO1.Size = new System.Drawing.Size(30, 13);
@@ -331,6 +334,7 @@
             // lblFIO2
             // 
             this.lblFIO2.AutoSize = true;
+            this.lblFIO2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.lblFIO2.Location = new System.Drawing.Point(62, 139);
             this.lblFIO2.Name = "lblFIO2";
             this.lblFIO2.Size = new System.Drawing.Size(30, 13);
@@ -340,6 +344,7 @@
             // lblFIO3
             // 
             this.lblFIO3.AutoSize = true;
+            this.lblFIO3.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.lblFIO3.Location = new System.Drawing.Point(62, 165);
             this.lblFIO3.Name = "lblFIO3";
             this.lblFIO3.Size = new System.Drawing.Size(30, 13);
@@ -349,6 +354,7 @@
             // lblFIO4
             // 
             this.lblFIO4.AutoSize = true;
+            this.lblFIO4.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.lblFIO4.Location = new System.Drawing.Point(62, 191);
             this.lblFIO4.Name = "lblFIO4";
             this.lblFIO4.Size = new System.Drawing.Size(30, 13);
@@ -358,6 +364,7 @@
             // lblFIO5
             // 
             this.lblFIO5.AutoSize = true;
+            this.lblFIO5.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.lblFIO5.Location = new System.Drawing.Point(62, 217);
             this.lblFIO5.Name = "lblFIO5";
             this.lblFIO5.Size = new System.Drawing.Size(30, 13);
@@ -367,6 +374,7 @@
             // lblFIO6
             // 
             this.lblFIO6.AutoSize = true;
+            this.lblFIO6.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.lblFIO6.Location = new System.Drawing.Point(62, 243);
             this.lblFIO6.Name = "lblFIO6";
             this.lblFIO6.Size = new System.Drawing.Size(30, 13);
@@ -376,6 +384,7 @@
             // lblFIO7
             // 
             this.lblFIO7.AutoSize = true;
+            this.lblFIO7.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.lblFIO7.Location = new System.Drawing.Point(62, 269);
             this.lblFIO7.Name = "lblFIO7";
             this.lblFIO7.Size = new System.Drawing.Size(30, 13);
@@ -482,6 +491,7 @@
             this.gbxInstellingen.Controls.Add(this.cbxFIO5);
             this.gbxInstellingen.Controls.Add(this.cbxFIO3);
             this.gbxInstellingen.Controls.Add(this.cbxFIO4);
+            this.gbxInstellingen.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.gbxInstellingen.Location = new System.Drawing.Point(213, 65);
             this.gbxInstellingen.Name = "gbxInstellingen";
             this.gbxInstellingen.Size = new System.Drawing.Size(136, 229);
@@ -573,7 +583,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(486, 463);
+            this.BackColor = System.Drawing.Color.DarkRed;
+            this.ClientSize = new System.Drawing.Size(424, 418);
             this.Controls.Add(this.gbxInstellingen);
             this.Controls.Add(this.lblFIO7);
             this.Controls.Add(this.lblFIO6);
