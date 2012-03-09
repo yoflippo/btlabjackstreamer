@@ -1,0 +1,30 @@
+D:\PROJECTEN\LABJACK\BT Labjack Stream\BT Labjack Stream\bin\Debug\BT Labjack Stream.exe
+D:\PROJECTEN\LABJACK\BT Labjack Stream\BT Labjack Stream\bin\Debug\BT Labjack Stream.pdb
+D:\PROJECTEN\LABJACK\BT Labjack Stream\BT Labjack Stream\bin\Debug\LJUDDotNet.dll
+D:\PROJECTEN\LABJACK\BT Labjack Stream\BT Labjack Stream\obj\x86\Debug\ResolveAssemblyReference.cache
+D:\PROJECTEN\LABJACK\BT Labjack Stream\BT Labjack Stream\obj\x86\Debug\BT_Labjack_Stream.Form1.resources
+D:\PROJECTEN\LABJACK\BT Labjack Stream\BT Labjack Stream\obj\x86\Debug\BT_Labjack_Stream.Properties.Resources.resources
+D:\PROJECTEN\LABJACK\BT Labjack Stream\BT Labjack Stream\obj\x86\Debug\GenerateResource.read.1.tlog
+D:\PROJECTEN\LABJACK\BT Labjack Stream\BT Labjack Stream\obj\x86\Debug\GenerateResource.write.1.tlog
+D:\PROJECTEN\LABJACK\BT Labjack Stream\BT Labjack Stream\obj\x86\Debug\BT Labjack Stream.exe
+D:\PROJECTEN\LABJACK\BT Labjack Stream\BT Labjack Stream\obj\x86\Debug\BT Labjack Stream.pdb
+H:\LABJACK - kopie\BT Labjack Stream\BT Labjack Stream\obj\x86\Debug\BT Labjack Stream.exe
+H:\LABJACK - kopie\BT Labjack Stream\BT Labjack Stream\obj\x86\Debug\BT Labjack Stream.pdb
+H:\LABJACK - kopie\BT Labjack Stream\BT Labjack Stream\bin\Debug\BT Labjack Stream.exe
+H:\LABJACK - kopie\BT Labjack Stream\BT Labjack Stream\bin\Debug\BT Labjack Stream.pdb
+H:\LABJACK - kopie\BT Labjack Stream\BT Labjack Stream\bin\Debug\LJUDDotNet.dll
+H:\LABJACK - kopie\BT Labjack Stream\BT Labjack Stream\obj\x86\Debug\ResolveAssemblyReference.cache
+H:\LABJACK - kopie\BT Labjack Stream\BT Labjack Stream\obj\x86\Debug\BT_Labjack_Stream.Form1.resources
+H:\LABJACK - kopie\BT Labjack Stream\BT Labjack Stream\obj\x86\Debug\BT_Labjack_Stream.Properties.Resources.resources
+H:\LABJACK - kopie\BT Labjack Stream\BT Labjack Stream\obj\x86\Debug\GenerateResource.read.1.tlog
+H:\LABJACK - kopie\BT Labjack Stream\BT Labjack Stream\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\yflp\Desktop\LABJACK - kopie\BT Labjack Stream\BT Labjack Stream\obj\x86\Debug\BT Labjack Stream.exe
+C:\Users\yflp\Desktop\LABJACK - kopie\BT Labjack Stream\BT Labjack Stream\obj\x86\Debug\BT Labjack Stream.pdb
+C:\Users\yflp\Desktop\LABJACK - kopie\BT Labjack Stream\BT Labjack Stream\bin\Debug\BT Labjack Stream.exe
+C:\Users\yflp\Desktop\LABJACK - kopie\BT Labjack Stream\BT Labjack Stream\bin\Debug\BT Labjack Stream.pdb
+C:\Users\yflp\Desktop\LABJACK - kopie\BT Labjack Stream\BT Labjack Stream\bin\Debug\LJUDDotNet.dll
+C:\Users\yflp\Desktop\LABJACK - kopie\BT Labjack Stream\BT Labjack Stream\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\yflp\Desktop\LABJACK - kopie\BT Labjack Stream\BT Labjack Stream\obj\x86\Debug\BT_Labjack_Stream.Form1.resources
+C:\Users\yflp\Desktop\LABJACK - kopie\BT Labjack Stream\BT Labjack Stream\obj\x86\Debug\BT_Labjack_Stream.Properties.Resources.resources
+C:\Users\yflp\Desktop\LABJACK - kopie\BT Labjack Stream\BT Labjack Stream\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\yflp\Desktop\LABJACK - kopie\BT Labjack Stream\BT Labjack Stream\obj\x86\Debug\GenerateResource.write.1.tlog

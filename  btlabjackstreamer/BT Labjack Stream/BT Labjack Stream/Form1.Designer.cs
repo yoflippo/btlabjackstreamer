@@ -1,0 +1,671 @@
+﻿namespace BT_Labjack_Stream
+{
+    partial class Form1
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.beeldToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.instellingenAanuitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.labjackToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.resetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.firmwareVersieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.serienummerToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.hardwareVersieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.instellingenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
+            this.tscbxSampleFrequentie = new System.Windows.Forms.ToolStripComboBox();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.creditzToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnStartStop = new System.Windows.Forms.Button();
+            this.tbxFIO0 = new System.Windows.Forms.TextBox();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.tsslbl_Error = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tsslbl_Status = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tbxFIO1 = new System.Windows.Forms.TextBox();
+            this.tbxFIO2 = new System.Windows.Forms.TextBox();
+            this.tbxFIO3 = new System.Windows.Forms.TextBox();
+            this.tbxFIO4 = new System.Windows.Forms.TextBox();
+            this.tbxFIO5 = new System.Windows.Forms.TextBox();
+            this.tbxFIO6 = new System.Windows.Forms.TextBox();
+            this.tbxFIO7 = new System.Windows.Forms.TextBox();
+            this.lblFIO0 = new System.Windows.Forms.Label();
+            this.lblFIO1 = new System.Windows.Forms.Label();
+            this.lblFIO2 = new System.Windows.Forms.Label();
+            this.lblFIO3 = new System.Windows.Forms.Label();
+            this.lblFIO4 = new System.Windows.Forms.Label();
+            this.lblFIO5 = new System.Windows.Forms.Label();
+            this.lblFIO6 = new System.Windows.Forms.Label();
+            this.lblFIO7 = new System.Windows.Forms.Label();
+            this.cbxFIO0 = new System.Windows.Forms.CheckBox();
+            this.cbxFIO1 = new System.Windows.Forms.CheckBox();
+            this.cbxFIO2 = new System.Windows.Forms.CheckBox();
+            this.cbxFIO3 = new System.Windows.Forms.CheckBox();
+            this.cbxFIO4 = new System.Windows.Forms.CheckBox();
+            this.cbxFIO5 = new System.Windows.Forms.CheckBox();
+            this.cbxFIO6 = new System.Windows.Forms.CheckBox();
+            this.cbxFIO7 = new System.Windows.Forms.CheckBox();
+            this.gbxInstellingen = new System.Windows.Forms.GroupBox();
+            this.cbxFIO1Digitaal = new System.Windows.Forms.CheckBox();
+            this.cbxFIO7Digitaal = new System.Windows.Forms.CheckBox();
+            this.cbxFIO0Digitaal = new System.Windows.Forms.CheckBox();
+            this.cbxFIO6Digitaal = new System.Windows.Forms.CheckBox();
+            this.cbxFIO2Digitaal = new System.Windows.Forms.CheckBox();
+            this.cbxFIO5Digitaal = new System.Windows.Forms.CheckBox();
+            this.cbxFIO3Digitaal = new System.Windows.Forms.CheckBox();
+            this.cbxFIO4Digitaal = new System.Windows.Forms.CheckBox();
+            this.menuStrip1.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
+            this.gbxInstellingen.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem,
+            this.beeldToolStripMenuItem,
+            this.labjackToolStripMenuItem,
+            this.instellingenToolStripMenuItem,
+            this.helpToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(486, 24);
+            this.menuStrip1.TabIndex = 1;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
+            this.fileToolStripMenuItem.Text = "Bestand";
+            // 
+            // beeldToolStripMenuItem
+            // 
+            this.beeldToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.instellingenAanuitToolStripMenuItem});
+            this.beeldToolStripMenuItem.Name = "beeldToolStripMenuItem";
+            this.beeldToolStripMenuItem.Size = new System.Drawing.Size(45, 20);
+            this.beeldToolStripMenuItem.Text = "Beeld";
+            // 
+            // instellingenAanuitToolStripMenuItem
+            // 
+            this.instellingenAanuitToolStripMenuItem.Checked = true;
+            this.instellingenAanuitToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.instellingenAanuitToolStripMenuItem.Name = "instellingenAanuitToolStripMenuItem";
+            this.instellingenAanuitToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.instellingenAanuitToolStripMenuItem.Text = "Instellingen aan/uit";
+            this.instellingenAanuitToolStripMenuItem.Click += new System.EventHandler(this.instellingenAanuitToolStripMenuItem_Click);
+            // 
+            // labjackToolStripMenuItem
+            // 
+            this.labjackToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.resetToolStripMenuItem,
+            this.toolStripSeparator2,
+            this.firmwareVersieToolStripMenuItem,
+            this.serienummerToolStripMenuItem1,
+            this.hardwareVersieToolStripMenuItem,
+            this.toolStripSeparator3});
+            this.labjackToolStripMenuItem.Name = "labjackToolStripMenuItem";
+            this.labjackToolStripMenuItem.Size = new System.Drawing.Size(55, 20);
+            this.labjackToolStripMenuItem.Text = "Labjack";
+            // 
+            // resetToolStripMenuItem
+            // 
+            this.resetToolStripMenuItem.Name = "resetToolStripMenuItem";
+            this.resetToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.resetToolStripMenuItem.Text = "Reset";
+            this.resetToolStripMenuItem.Click += new System.EventHandler(this.resetToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(150, 6);
+            // 
+            // firmwareVersieToolStripMenuItem
+            // 
+            this.firmwareVersieToolStripMenuItem.Name = "firmwareVersieToolStripMenuItem";
+            this.firmwareVersieToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.firmwareVersieToolStripMenuItem.Text = "Firmware versie";
+            // 
+            // serienummerToolStripMenuItem1
+            // 
+            this.serienummerToolStripMenuItem1.Name = "serienummerToolStripMenuItem1";
+            this.serienummerToolStripMenuItem1.Size = new System.Drawing.Size(153, 22);
+            this.serienummerToolStripMenuItem1.Text = "Serienummer";
+            // 
+            // hardwareVersieToolStripMenuItem
+            // 
+            this.hardwareVersieToolStripMenuItem.Name = "hardwareVersieToolStripMenuItem";
+            this.hardwareVersieToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.hardwareVersieToolStripMenuItem.Text = "Hardware versie";
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(150, 6);
+            // 
+            // instellingenToolStripMenuItem
+            // 
+            this.instellingenToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripTextBox1,
+            this.tscbxSampleFrequentie,
+            this.toolStripSeparator1});
+            this.instellingenToolStripMenuItem.Name = "instellingenToolStripMenuItem";
+            this.instellingenToolStripMenuItem.Size = new System.Drawing.Size(74, 20);
+            this.instellingenToolStripMenuItem.Text = "Instellingen";
+            // 
+            // toolStripTextBox1
+            // 
+            this.toolStripTextBox1.Name = "toolStripTextBox1";
+            this.toolStripTextBox1.Size = new System.Drawing.Size(100, 21);
+            this.toolStripTextBox1.Text = "Samplefrequentie";
+            // 
+            // tscbxSampleFrequentie
+            // 
+            this.tscbxSampleFrequentie.Items.AddRange(new object[] {
+            "10 ",
+            "20",
+            "50",
+            "100",
+            "200",
+            "500",
+            "1000",
+            "2000 "});
+            this.tscbxSampleFrequentie.Name = "tscbxSampleFrequentie";
+            this.tscbxSampleFrequentie.Size = new System.Drawing.Size(121, 21);
+            this.tscbxSampleFrequentie.Text = "500";
+            this.tscbxSampleFrequentie.TextChanged += new System.EventHandler(this.tscbxSampleFrequentie_TextChanged);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(178, 6);
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.creditzToolStripMenuItem});
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
+            this.helpToolStripMenuItem.Text = "Help";
+            // 
+            // creditzToolStripMenuItem
+            // 
+            this.creditzToolStripMenuItem.Name = "creditzToolStripMenuItem";
+            this.creditzToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
+            this.creditzToolStripMenuItem.Text = "Creditz";
+            // 
+            // btnStartStop
+            // 
+            this.btnStartStop.Location = new System.Drawing.Point(65, 309);
+            this.btnStartStop.Name = "btnStartStop";
+            this.btnStartStop.Size = new System.Drawing.Size(75, 23);
+            this.btnStartStop.TabIndex = 2;
+            this.btnStartStop.Text = "Start";
+            this.btnStartStop.UseVisualStyleBackColor = true;
+            this.btnStartStop.Click += new System.EventHandler(this.btnStartStop_Click);
+            // 
+            // tbxFIO0
+            // 
+            this.tbxFIO0.Location = new System.Drawing.Point(107, 84);
+            this.tbxFIO0.Name = "tbxFIO0";
+            this.tbxFIO0.Size = new System.Drawing.Size(100, 20);
+            this.tbxFIO0.TabIndex = 3;
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsslbl_Error,
+            this.tsslbl_Status});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 441);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(486, 22);
+            this.statusStrip1.TabIndex = 4;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // tsslbl_Error
+            // 
+            this.tsslbl_Error.Name = "tsslbl_Error";
+            this.tsslbl_Error.Size = new System.Drawing.Size(0, 17);
+            // 
+            // tsslbl_Status
+            // 
+            this.tsslbl_Status.Name = "tsslbl_Status";
+            this.tsslbl_Status.Size = new System.Drawing.Size(0, 17);
+            // 
+            // tbxFIO1
+            // 
+            this.tbxFIO1.Location = new System.Drawing.Point(107, 110);
+            this.tbxFIO1.Name = "tbxFIO1";
+            this.tbxFIO1.Size = new System.Drawing.Size(100, 20);
+            this.tbxFIO1.TabIndex = 5;
+            // 
+            // tbxFIO2
+            // 
+            this.tbxFIO2.Location = new System.Drawing.Point(107, 136);
+            this.tbxFIO2.Name = "tbxFIO2";
+            this.tbxFIO2.Size = new System.Drawing.Size(100, 20);
+            this.tbxFIO2.TabIndex = 6;
+            // 
+            // tbxFIO3
+            // 
+            this.tbxFIO3.Location = new System.Drawing.Point(107, 162);
+            this.tbxFIO3.Name = "tbxFIO3";
+            this.tbxFIO3.Size = new System.Drawing.Size(100, 20);
+            this.tbxFIO3.TabIndex = 7;
+            // 
+            // tbxFIO4
+            // 
+            this.tbxFIO4.Location = new System.Drawing.Point(107, 188);
+            this.tbxFIO4.Name = "tbxFIO4";
+            this.tbxFIO4.Size = new System.Drawing.Size(100, 20);
+            this.tbxFIO4.TabIndex = 8;
+            // 
+            // tbxFIO5
+            // 
+            this.tbxFIO5.Location = new System.Drawing.Point(107, 214);
+            this.tbxFIO5.Name = "tbxFIO5";
+            this.tbxFIO5.Size = new System.Drawing.Size(100, 20);
+            this.tbxFIO5.TabIndex = 9;
+            // 
+            // tbxFIO6
+            // 
+            this.tbxFIO6.Location = new System.Drawing.Point(107, 240);
+            this.tbxFIO6.Name = "tbxFIO6";
+            this.tbxFIO6.Size = new System.Drawing.Size(100, 20);
+            this.tbxFIO6.TabIndex = 10;
+            // 
+            // tbxFIO7
+            // 
+            this.tbxFIO7.Location = new System.Drawing.Point(107, 266);
+            this.tbxFIO7.Name = "tbxFIO7";
+            this.tbxFIO7.Size = new System.Drawing.Size(100, 20);
+            this.tbxFIO7.TabIndex = 11;
+            // 
+            // lblFIO0
+            // 
+            this.lblFIO0.AutoSize = true;
+            this.lblFIO0.Location = new System.Drawing.Point(62, 87);
+            this.lblFIO0.Name = "lblFIO0";
+            this.lblFIO0.Size = new System.Drawing.Size(30, 13);
+            this.lblFIO0.TabIndex = 12;
+            this.lblFIO0.Text = "FIO0";
+            // 
+            // lblFIO1
+            // 
+            this.lblFIO1.AutoSize = true;
+            this.lblFIO1.Location = new System.Drawing.Point(62, 113);
+            this.lblFIO1.Name = "lblFIO1";
+            this.lblFIO1.Size = new System.Drawing.Size(30, 13);
+            this.lblFIO1.TabIndex = 13;
+            this.lblFIO1.Text = "FIO1";
+            // 
+            // lblFIO2
+            // 
+            this.lblFIO2.AutoSize = true;
+            this.lblFIO2.Location = new System.Drawing.Point(62, 139);
+            this.lblFIO2.Name = "lblFIO2";
+            this.lblFIO2.Size = new System.Drawing.Size(30, 13);
+            this.lblFIO2.TabIndex = 14;
+            this.lblFIO2.Text = "FIO2";
+            // 
+            // lblFIO3
+            // 
+            this.lblFIO3.AutoSize = true;
+            this.lblFIO3.Location = new System.Drawing.Point(62, 165);
+            this.lblFIO3.Name = "lblFIO3";
+            this.lblFIO3.Size = new System.Drawing.Size(30, 13);
+            this.lblFIO3.TabIndex = 15;
+            this.lblFIO3.Text = "FIO3";
+            // 
+            // lblFIO4
+            // 
+            this.lblFIO4.AutoSize = true;
+            this.lblFIO4.Location = new System.Drawing.Point(62, 191);
+            this.lblFIO4.Name = "lblFIO4";
+            this.lblFIO4.Size = new System.Drawing.Size(30, 13);
+            this.lblFIO4.TabIndex = 16;
+            this.lblFIO4.Text = "FIO4";
+            // 
+            // lblFIO5
+            // 
+            this.lblFIO5.AutoSize = true;
+            this.lblFIO5.Location = new System.Drawing.Point(62, 217);
+            this.lblFIO5.Name = "lblFIO5";
+            this.lblFIO5.Size = new System.Drawing.Size(30, 13);
+            this.lblFIO5.TabIndex = 17;
+            this.lblFIO5.Text = "FIO5";
+            // 
+            // lblFIO6
+            // 
+            this.lblFIO6.AutoSize = true;
+            this.lblFIO6.Location = new System.Drawing.Point(62, 243);
+            this.lblFIO6.Name = "lblFIO6";
+            this.lblFIO6.Size = new System.Drawing.Size(30, 13);
+            this.lblFIO6.TabIndex = 18;
+            this.lblFIO6.Text = "FIO6";
+            // 
+            // lblFIO7
+            // 
+            this.lblFIO7.AutoSize = true;
+            this.lblFIO7.Location = new System.Drawing.Point(62, 269);
+            this.lblFIO7.Name = "lblFIO7";
+            this.lblFIO7.Size = new System.Drawing.Size(30, 13);
+            this.lblFIO7.TabIndex = 19;
+            this.lblFIO7.Text = "FIO7";
+            // 
+            // cbxFIO0
+            // 
+            this.cbxFIO0.AutoSize = true;
+            this.cbxFIO0.Checked = true;
+            this.cbxFIO0.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbxFIO0.Location = new System.Drawing.Point(6, 23);
+            this.cbxFIO0.Name = "cbxFIO0";
+            this.cbxFIO0.Size = new System.Drawing.Size(60, 17);
+            this.cbxFIO0.TabIndex = 20;
+            this.cbxFIO0.Text = "aan/uit";
+            this.cbxFIO0.UseVisualStyleBackColor = true;
+            // 
+            // cbxFIO1
+            // 
+            this.cbxFIO1.AutoSize = true;
+            this.cbxFIO1.Location = new System.Drawing.Point(6, 48);
+            this.cbxFIO1.Name = "cbxFIO1";
+            this.cbxFIO1.Size = new System.Drawing.Size(60, 17);
+            this.cbxFIO1.TabIndex = 21;
+            this.cbxFIO1.Text = "aan/uit";
+            this.cbxFIO1.UseVisualStyleBackColor = true;
+            // 
+            // cbxFIO2
+            // 
+            this.cbxFIO2.AutoSize = true;
+            this.cbxFIO2.Location = new System.Drawing.Point(6, 76);
+            this.cbxFIO2.Name = "cbxFIO2";
+            this.cbxFIO2.Size = new System.Drawing.Size(60, 17);
+            this.cbxFIO2.TabIndex = 22;
+            this.cbxFIO2.Text = "aan/uit";
+            this.cbxFIO2.UseVisualStyleBackColor = true;
+            // 
+            // cbxFIO3
+            // 
+            this.cbxFIO3.AutoSize = true;
+            this.cbxFIO3.Location = new System.Drawing.Point(6, 102);
+            this.cbxFIO3.Name = "cbxFIO3";
+            this.cbxFIO3.Size = new System.Drawing.Size(60, 17);
+            this.cbxFIO3.TabIndex = 23;
+            this.cbxFIO3.Text = "aan/uit";
+            this.cbxFIO3.UseVisualStyleBackColor = true;
+            // 
+            // cbxFIO4
+            // 
+            this.cbxFIO4.AutoSize = true;
+            this.cbxFIO4.Location = new System.Drawing.Point(6, 128);
+            this.cbxFIO4.Name = "cbxFIO4";
+            this.cbxFIO4.Size = new System.Drawing.Size(60, 17);
+            this.cbxFIO4.TabIndex = 24;
+            this.cbxFIO4.Text = "aan/uit";
+            this.cbxFIO4.UseVisualStyleBackColor = true;
+            // 
+            // cbxFIO5
+            // 
+            this.cbxFIO5.AutoSize = true;
+            this.cbxFIO5.Location = new System.Drawing.Point(6, 154);
+            this.cbxFIO5.Name = "cbxFIO5";
+            this.cbxFIO5.Size = new System.Drawing.Size(60, 17);
+            this.cbxFIO5.TabIndex = 25;
+            this.cbxFIO5.Text = "aan/uit";
+            this.cbxFIO5.UseVisualStyleBackColor = true;
+            // 
+            // cbxFIO6
+            // 
+            this.cbxFIO6.AutoSize = true;
+            this.cbxFIO6.Location = new System.Drawing.Point(6, 180);
+            this.cbxFIO6.Name = "cbxFIO6";
+            this.cbxFIO6.Size = new System.Drawing.Size(60, 17);
+            this.cbxFIO6.TabIndex = 26;
+            this.cbxFIO6.Text = "aan/uit";
+            this.cbxFIO6.UseVisualStyleBackColor = true;
+            // 
+            // cbxFIO7
+            // 
+            this.cbxFIO7.AutoSize = true;
+            this.cbxFIO7.Location = new System.Drawing.Point(6, 206);
+            this.cbxFIO7.Name = "cbxFIO7";
+            this.cbxFIO7.Size = new System.Drawing.Size(60, 17);
+            this.cbxFIO7.TabIndex = 27;
+            this.cbxFIO7.Text = "aan/uit";
+            this.cbxFIO7.UseVisualStyleBackColor = true;
+            // 
+            // gbxInstellingen
+            // 
+            this.gbxInstellingen.Controls.Add(this.cbxFIO1Digitaal);
+            this.gbxInstellingen.Controls.Add(this.cbxFIO7Digitaal);
+            this.gbxInstellingen.Controls.Add(this.cbxFIO0Digitaal);
+            this.gbxInstellingen.Controls.Add(this.cbxFIO6Digitaal);
+            this.gbxInstellingen.Controls.Add(this.cbxFIO2Digitaal);
+            this.gbxInstellingen.Controls.Add(this.cbxFIO5Digitaal);
+            this.gbxInstellingen.Controls.Add(this.cbxFIO3Digitaal);
+            this.gbxInstellingen.Controls.Add(this.cbxFIO4Digitaal);
+            this.gbxInstellingen.Controls.Add(this.cbxFIO1);
+            this.gbxInstellingen.Controls.Add(this.cbxFIO7);
+            this.gbxInstellingen.Controls.Add(this.cbxFIO0);
+            this.gbxInstellingen.Controls.Add(this.cbxFIO6);
+            this.gbxInstellingen.Controls.Add(this.cbxFIO2);
+            this.gbxInstellingen.Controls.Add(this.cbxFIO5);
+            this.gbxInstellingen.Controls.Add(this.cbxFIO3);
+            this.gbxInstellingen.Controls.Add(this.cbxFIO4);
+            this.gbxInstellingen.Location = new System.Drawing.Point(213, 65);
+            this.gbxInstellingen.Name = "gbxInstellingen";
+            this.gbxInstellingen.Size = new System.Drawing.Size(136, 229);
+            this.gbxInstellingen.TabIndex = 28;
+            this.gbxInstellingen.TabStop = false;
+            this.gbxInstellingen.Text = "Instellingen";
+            // 
+            // cbxFIO1Digitaal
+            // 
+            this.cbxFIO1Digitaal.AutoSize = true;
+            this.cbxFIO1Digitaal.Location = new System.Drawing.Point(72, 48);
+            this.cbxFIO1Digitaal.Name = "cbxFIO1Digitaal";
+            this.cbxFIO1Digitaal.Size = new System.Drawing.Size(59, 17);
+            this.cbxFIO1Digitaal.TabIndex = 29;
+            this.cbxFIO1Digitaal.Text = "digitaal";
+            this.cbxFIO1Digitaal.UseVisualStyleBackColor = true;
+            // 
+            // cbxFIO7Digitaal
+            // 
+            this.cbxFIO7Digitaal.AutoSize = true;
+            this.cbxFIO7Digitaal.Location = new System.Drawing.Point(72, 206);
+            this.cbxFIO7Digitaal.Name = "cbxFIO7Digitaal";
+            this.cbxFIO7Digitaal.Size = new System.Drawing.Size(59, 17);
+            this.cbxFIO7Digitaal.TabIndex = 35;
+            this.cbxFIO7Digitaal.Text = "digitaal";
+            this.cbxFIO7Digitaal.UseVisualStyleBackColor = true;
+            // 
+            // cbxFIO0Digitaal
+            // 
+            this.cbxFIO0Digitaal.AutoSize = true;
+            this.cbxFIO0Digitaal.Location = new System.Drawing.Point(72, 23);
+            this.cbxFIO0Digitaal.Name = "cbxFIO0Digitaal";
+            this.cbxFIO0Digitaal.Size = new System.Drawing.Size(59, 17);
+            this.cbxFIO0Digitaal.TabIndex = 28;
+            this.cbxFIO0Digitaal.Text = "digitaal";
+            this.cbxFIO0Digitaal.UseVisualStyleBackColor = true;
+            // 
+            // cbxFIO6Digitaal
+            // 
+            this.cbxFIO6Digitaal.AutoSize = true;
+            this.cbxFIO6Digitaal.Location = new System.Drawing.Point(72, 180);
+            this.cbxFIO6Digitaal.Name = "cbxFIO6Digitaal";
+            this.cbxFIO6Digitaal.Size = new System.Drawing.Size(59, 17);
+            this.cbxFIO6Digitaal.TabIndex = 34;
+            this.cbxFIO6Digitaal.Text = "digitaal";
+            this.cbxFIO6Digitaal.UseVisualStyleBackColor = true;
+            // 
+            // cbxFIO2Digitaal
+            // 
+            this.cbxFIO2Digitaal.AutoSize = true;
+            this.cbxFIO2Digitaal.Location = new System.Drawing.Point(72, 76);
+            this.cbxFIO2Digitaal.Name = "cbxFIO2Digitaal";
+            this.cbxFIO2Digitaal.Size = new System.Drawing.Size(59, 17);
+            this.cbxFIO2Digitaal.TabIndex = 30;
+            this.cbxFIO2Digitaal.Text = "digitaal";
+            this.cbxFIO2Digitaal.UseVisualStyleBackColor = true;
+            // 
+            // cbxFIO5Digitaal
+            // 
+            this.cbxFIO5Digitaal.AutoSize = true;
+            this.cbxFIO5Digitaal.Location = new System.Drawing.Point(72, 154);
+            this.cbxFIO5Digitaal.Name = "cbxFIO5Digitaal";
+            this.cbxFIO5Digitaal.Size = new System.Drawing.Size(59, 17);
+            this.cbxFIO5Digitaal.TabIndex = 33;
+            this.cbxFIO5Digitaal.Text = "digitaal";
+            this.cbxFIO5Digitaal.UseVisualStyleBackColor = true;
+            // 
+            // cbxFIO3Digitaal
+            // 
+            this.cbxFIO3Digitaal.AutoSize = true;
+            this.cbxFIO3Digitaal.Location = new System.Drawing.Point(72, 102);
+            this.cbxFIO3Digitaal.Name = "cbxFIO3Digitaal";
+            this.cbxFIO3Digitaal.Size = new System.Drawing.Size(59, 17);
+            this.cbxFIO3Digitaal.TabIndex = 31;
+            this.cbxFIO3Digitaal.Text = "digitaal";
+            this.cbxFIO3Digitaal.UseVisualStyleBackColor = true;
+            // 
+            // cbxFIO4Digitaal
+            // 
+            this.cbxFIO4Digitaal.AutoSize = true;
+            this.cbxFIO4Digitaal.Location = new System.Drawing.Point(72, 128);
+            this.cbxFIO4Digitaal.Name = "cbxFIO4Digitaal";
+            this.cbxFIO4Digitaal.Size = new System.Drawing.Size(59, 17);
+            this.cbxFIO4Digitaal.TabIndex = 32;
+            this.cbxFIO4Digitaal.Text = "digitaal";
+            this.cbxFIO4Digitaal.UseVisualStyleBackColor = true;
+            // 
+            // Form1
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(486, 463);
+            this.Controls.Add(this.gbxInstellingen);
+            this.Controls.Add(this.lblFIO7);
+            this.Controls.Add(this.lblFIO6);
+            this.Controls.Add(this.lblFIO5);
+            this.Controls.Add(this.lblFIO4);
+            this.Controls.Add(this.lblFIO3);
+            this.Controls.Add(this.lblFIO2);
+            this.Controls.Add(this.lblFIO1);
+            this.Controls.Add(this.lblFIO0);
+            this.Controls.Add(this.tbxFIO7);
+            this.Controls.Add(this.tbxFIO6);
+            this.Controls.Add(this.tbxFIO5);
+            this.Controls.Add(this.tbxFIO4);
+            this.Controls.Add(this.tbxFIO3);
+            this.Controls.Add(this.tbxFIO2);
+            this.Controls.Add(this.tbxFIO1);
+            this.Controls.Add(this.statusStrip1);
+            this.Controls.Add(this.tbxFIO0);
+            this.Controls.Add(this.btnStartStop);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
+            this.Name = "Form1";
+            this.Text = "BT Labjack Stream";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
+            this.Load += new System.EventHandler(this.Form1_Load);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
+            this.gbxInstellingen.ResumeLayout(false);
+            this.gbxInstellingen.PerformLayout();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem labjackToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem resetToolStripMenuItem;
+        private System.Windows.Forms.Button btnStartStop;
+        private System.Windows.Forms.TextBox tbxFIO0;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel tsslbl_Error;
+        private System.Windows.Forms.ToolStripMenuItem firmwareVersieToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem instellingenToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem creditzToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripStatusLabel tsslbl_Status;
+        private System.Windows.Forms.ToolStripMenuItem serienummerToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem hardwareVersieToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripComboBox tscbxSampleFrequentie;
+        private System.Windows.Forms.ToolStripTextBox toolStripTextBox1;
+        private System.Windows.Forms.TextBox tbxFIO1;
+        private System.Windows.Forms.TextBox tbxFIO2;
+        private System.Windows.Forms.TextBox tbxFIO3;
+        private System.Windows.Forms.TextBox tbxFIO4;
+        private System.Windows.Forms.TextBox tbxFIO5;
+        private System.Windows.Forms.TextBox tbxFIO6;
+        private System.Windows.Forms.TextBox tbxFIO7;
+        private System.Windows.Forms.Label lblFIO0;
+        private System.Windows.Forms.Label lblFIO1;
+        private System.Windows.Forms.Label lblFIO2;
+        private System.Windows.Forms.Label lblFIO3;
+        private System.Windows.Forms.Label lblFIO4;
+        private System.Windows.Forms.Label lblFIO5;
+        private System.Windows.Forms.Label lblFIO6;
+        private System.Windows.Forms.Label lblFIO7;
+        private System.Windows.Forms.CheckBox cbxFIO0;
+        private System.Windows.Forms.CheckBox cbxFIO1;
+        private System.Windows.Forms.CheckBox cbxFIO2;
+        private System.Windows.Forms.CheckBox cbxFIO3;
+        private System.Windows.Forms.CheckBox cbxFIO4;
+        private System.Windows.Forms.CheckBox cbxFIO5;
+        private System.Windows.Forms.CheckBox cbxFIO6;
+        private System.Windows.Forms.CheckBox cbxFIO7;
+        private System.Windows.Forms.GroupBox gbxInstellingen;
+        private System.Windows.Forms.CheckBox cbxFIO1Digitaal;
+        private System.Windows.Forms.CheckBox cbxFIO7Digitaal;
+        private System.Windows.Forms.CheckBox cbxFIO0Digitaal;
+        private System.Windows.Forms.CheckBox cbxFIO6Digitaal;
+        private System.Windows.Forms.CheckBox cbxFIO2Digitaal;
+        private System.Windows.Forms.CheckBox cbxFIO5Digitaal;
+        private System.Windows.Forms.CheckBox cbxFIO3Digitaal;
+        private System.Windows.Forms.CheckBox cbxFIO4Digitaal;
+        private System.Windows.Forms.ToolStripMenuItem beeldToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem instellingenAanuitToolStripMenuItem;
+    }
+}
+
