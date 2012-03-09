@@ -34,7 +34,7 @@ namespace BT_Labjack_Stream
         private const int aantalKanalen = 8;
         private Int16 aantalGeselecteerdeKanalen = 0;
         private bool[] blIsHetKanaalGeselecteerd = new bool[aantalKanalen];
-        private List<float>[] dataChannel = null; //plek voor data
+        private List<double>[] dataChannel = null; //plek voor data
 
         // Create thread delegate
         delegate void BacklogParameterDelegate(double udBacklog, double commBacklog);
@@ -146,7 +146,7 @@ namespace BT_Labjack_Stream
                 //Toevoegen van channels
                 LJUD.AddRequest(u3.ljhandle, LJUD.IO.CLEAR_STREAM_CHANNELS, 0, 0, 0, 0);
 
-                for (int i = 0; i < aantalKanalen; i++ )
+                for (int i = 0; i < aantalKanalen; i++)
                 {
                     if (blIsHetKanaalGeselecteerd[i])
                     {
@@ -235,6 +235,7 @@ namespace BT_Labjack_Stream
                     numScansRequested = numScans;
                     LJUD.eGet(u3.ljhandle, LJUD.IO.GET_STREAM_DATA, LJUD.CHANNEL.ALL_CHANNELS, ref numScansRequested, adblData);
                     ShowReadings(adblData);
+                    saveDataInLists(adblData);
 
                     //Retrieve the current backlog.  The UD driver retrieves stream data from
                     //the U3 in the background, but if the computer is too slow for some reason
@@ -304,8 +305,7 @@ namespace BT_Labjack_Stream
                 BeginInvoke(new ReadingsParameterDelegate(ShowReadings), new object[] { readings });
             else
             {
-                // Put in values. 
-                // The second half should be 9999 because of the padding set up earlier in the program.
+                //Schrijf waardes naar form
                 int i = 0;
                 if (blIsHetKanaalGeselecteerd[0] && i < aantalGeselecteerdeKanalen)
                 {
@@ -378,7 +378,7 @@ namespace BT_Labjack_Stream
 
             if (u3 != null)
             {
-                LJUD.ResetLabJack(u3.ljhandle);       
+                LJUD.ResetLabJack(u3.ljhandle);
                 MessageBox.Show("Even geduld...");
                 Thread.Sleep(5000);
 
@@ -489,11 +489,10 @@ namespace BT_Labjack_Stream
             //instellingen
             numScans = (2 * scanRate * delayms) / 1000;
             adblData = new double[aantalGeselecteerdeKanalen * (Int16)numScans * 2];
-            dataChannel = new List<float>[aantalGeselecteerdeKanalen];
+            dataChannel = new List<double>[aantalGeselecteerdeKanalen];
             for (int i = 0; i < aantalGeselecteerdeKanalen; i++) //prepareer juiste datalijsten
             {
-                if (blIsHetKanaalGeselecteerd[i])
-                    dataChannel[i] = new List<float>(120 * (int)scanRate * 2);
+                    dataChannel[i] = new List<double>(120 * (int)scanRate * 2);
             }
         }
 
@@ -518,6 +517,83 @@ namespace BT_Labjack_Stream
             {
             }
         }
+
+        private void AlleKanalenAanUit_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            cbxFIO0.Checked = AlleKanalenAanUit_ToolStripMenuItem.Checked;
+            cbxFIO1.Checked = AlleKanalenAanUit_ToolStripMenuItem.Checked;
+            cbxFIO2.Checked = AlleKanalenAanUit_ToolStripMenuItem.Checked;
+            cbxFIO3.Checked = AlleKanalenAanUit_ToolStripMenuItem.Checked;
+            cbxFIO4.Checked = AlleKanalenAanUit_ToolStripMenuItem.Checked;
+            cbxFIO5.Checked = AlleKanalenAanUit_ToolStripMenuItem.Checked;
+            cbxFIO6.Checked = AlleKanalenAanUit_ToolStripMenuItem.Checked;
+            cbxFIO7.Checked = AlleKanalenAanUit_ToolStripMenuItem.Checked;
+        }
+
+        private void GeselecteerdeKanalenOpslaan_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            cbxOpslaanFIO0.Checked = cbxFIO0.Checked;
+            cbxOpslaanFIO1.Checked = cbxFIO1.Checked;
+            cbxOpslaanFIO2.Checked = cbxFIO2.Checked;
+            cbxOpslaanFIO3.Checked = cbxFIO3.Checked;
+            cbxOpslaanFIO4.Checked = cbxFIO4.Checked;
+            cbxOpslaanFIO5.Checked = cbxFIO5.Checked;
+            cbxOpslaanFIO6.Checked = cbxFIO6.Checked;
+            cbxOpslaanFIO7.Checked = cbxFIO7.Checked;
+        }
+
+        private void saveDataInLists(double[] data)
+        {
+            //Schrijf waardes naar form
+            for (int i = 0; i < (aantalGeselecteerdeKanalen*scanRate); i=i+aantalGeselecteerdeKanalen)
+            {
+                int j = 0;
+                if (blIsHetKanaalGeselecteerd[0] && j < aantalGeselecteerdeKanalen)
+                {
+                    dataChannel[0].Add(data[i]);
+                    j++;
+                }
+                if (blIsHetKanaalGeselecteerd[1] && j < aantalGeselecteerdeKanalen)
+                {
+                    dataChannel[j].Add(data[i + j]);
+                    j++;
+                }
+                if (blIsHetKanaalGeselecteerd[2] && j < aantalGeselecteerdeKanalen)
+                {
+                    dataChannel[j].Add(data[i + j]);
+                    j++;
+                }
+                if (blIsHetKanaalGeselecteerd[3] && j < aantalGeselecteerdeKanalen)
+                {
+                    dataChannel[j].Add(data[i + j]);
+                    j++;
+                }
+                if (blIsHetKanaalGeselecteerd[4] && j < aantalGeselecteerdeKanalen)
+                {
+                    dataChannel[j].Add(data[i + j]);
+                    j++;
+                }
+                if (blIsHetKanaalGeselecteerd[5] && j < aantalGeselecteerdeKanalen)
+                {
+                    dataChannel[j].Add(data[i + j]);
+                    j++;
+                }
+                if (blIsHetKanaalGeselecteerd[6] && j < aantalGeselecteerdeKanalen)
+                {
+                    dataChannel[j].Add(data[i + j]);
+                    j++;
+                }
+                if (blIsHetKanaalGeselecteerd[7] && j < aantalGeselecteerdeKanalen)
+                {
+                    dataChannel[j].Add(data[i + j]);
+                    j++;
+                }
+
+
+            }
+
+        }
+
 
 
         //EINDE KLASSE
