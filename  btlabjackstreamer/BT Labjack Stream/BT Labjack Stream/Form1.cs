@@ -51,8 +51,7 @@ namespace BT_Labjack_Stream
         public Form1()
         {
             InitializeComponent();
-            refreshSettings();
-
+            
             //set INFO struct
             metingInfo.instellingAnalogeKanalen = 3;
             metingInfo.sampleFrequentie = 500;
@@ -60,6 +59,8 @@ namespace BT_Labjack_Stream
             metingInfo.aantalGeselecteerdeKanalen = 0;
             metingInfo.blIsHetKanaalGeselecteerd = new bool[aantalKanalen];
             metingInfo.delayms = 1000;
+
+            refreshSettings();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -450,6 +451,7 @@ namespace BT_Labjack_Stream
 
             metingInfo.blIsHetKanaalGeselecteerd = new bool[aantalKanalen];
             metingInfo.aantalGeselecteerdeKanalen = 0;
+            metingInfo.instellingAnalogeKanalen = 0;
 
             if (cbxFIO0.Checked)
             {
@@ -502,12 +504,23 @@ namespace BT_Labjack_Stream
 
             //instellingen
             numScans = (2 * metingInfo.sampleFrequentie * metingInfo.delayms) / 1000;
+            metingInfo.sampleFrequentie = Convert.ToInt16(tscbxSampleFrequentie.Text);
             adblData = new double[metingInfo.aantalGeselecteerdeKanalen * (Int16)numScans * 2];
             dataChannel = new List<double>[metingInfo.aantalGeselecteerdeKanalen];
             for (int i = 0; i < metingInfo.aantalGeselecteerdeKanalen; i++) //prepareer juiste datalijsten
             {
                 dataChannel[i] = new List<double>(120 * (int)metingInfo.sampleFrequentie * 2); //size 
             }
+
+            //refresh form
+            tbxFIO0.Clear();
+            tbxFIO1.Clear();
+            tbxFIO2.Clear();
+            tbxFIO3.Clear();
+            tbxFIO4.Clear();
+            tbxFIO5.Clear();
+            tbxFIO6.Clear();
+            tbxFIO7.Clear();
         }
 
         private void instellingenAanuitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -527,13 +540,14 @@ namespace BT_Labjack_Stream
             {
                 LJUD.Close();
             }
-            catch (Exception)
+            catch (LabJackUDException ee)
             {
             }
         }
 
         private void AlleKanalenAanUit_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            AlleKanalenAanUit_ToolStripMenuItem.Checked = !AlleKanalenAanUit_ToolStripMenuItem.Checked;
             cbxFIO0.Checked = AlleKanalenAanUit_ToolStripMenuItem.Checked;
             cbxFIO1.Checked = AlleKanalenAanUit_ToolStripMenuItem.Checked;
             cbxFIO2.Checked = AlleKanalenAanUit_ToolStripMenuItem.Checked;
@@ -620,6 +634,55 @@ namespace BT_Labjack_Stream
             fh.Export();
         }
 
+        #region CHECKBOXES
+        private void cbxFIO0_CheckedChanged(object sender, EventArgs e)
+        {          
+           cbxFIO0Digitaal.Enabled = cbxFIO0.Checked;
+           cbxOpslaanFIO0.Enabled = cbxFIO0.Checked; 
+        }
+
+        private void cbxFIO1_CheckedChanged(object sender, EventArgs e)
+        {
+            cbxFIO1Digitaal.Enabled = cbxFIO1.Checked;
+            cbxOpslaanFIO1.Enabled = cbxFIO1.Checked; 
+        }
+
+        private void cbxFIO2_CheckedChanged(object sender, EventArgs e)
+        {
+            cbxFIO2Digitaal.Enabled = cbxFIO2.Checked;
+            cbxOpslaanFIO2.Enabled = cbxFIO2.Checked; 
+        }
+
+        private void cbxFIO3_CheckedChanged(object sender, EventArgs e)
+        {
+            cbxFIO3Digitaal.Enabled = cbxFIO3.Checked;
+            cbxOpslaanFIO3.Enabled = cbxFIO3.Checked; 
+        }
+
+        private void cbxFIO4_CheckedChanged(object sender, EventArgs e)
+        {
+            cbxFIO4Digitaal.Enabled = cbxFIO4.Checked;
+            cbxOpslaanFIO4.Enabled = cbxFIO4.Checked; 
+        }
+
+        private void cbxFIO5_CheckedChanged(object sender, EventArgs e)
+        {
+            cbxFIO5Digitaal.Enabled = cbxFIO5.Checked;
+            cbxOpslaanFIO5.Enabled = cbxFIO5.Checked; 
+        }
+
+        private void cbxFIO6_CheckedChanged(object sender, EventArgs e)
+        {
+            cbxFIO6Digitaal.Enabled = cbxFIO6.Checked;
+            cbxOpslaanFIO6.Enabled = cbxFIO6.Checked; 
+        }
+
+        private void cbxFIO7_CheckedChanged(object sender, EventArgs e)
+        {
+            cbxFIO7Digitaal.Enabled = cbxFIO7.Checked;
+            cbxOpslaanFIO7.Enabled = cbxFIO7.Checked; 
+        }
+        #endregion
 
 
         //EINDE KLASSE
