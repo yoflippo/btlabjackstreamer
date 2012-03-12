@@ -253,7 +253,7 @@
             // creditzToolStripMenuItem
             // 
             this.creditzToolStripMenuItem.Name = "creditzToolStripMenuItem";
-            this.creditzToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.creditzToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
             this.creditzToolStripMenuItem.Text = "Creditz";
             this.creditzToolStripMenuItem.Click += new System.EventHandler(this.creditzToolStripMenuItem_Click);
             // 
@@ -678,7 +678,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
-            this.Text = "BT Labjack Stream";
+            this.Text = "BT Labjack Streamer";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
