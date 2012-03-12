@@ -30,6 +30,7 @@
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.metingOpslaanAlsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.beeldToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.instellingenAanuitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.labjackToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -67,34 +68,38 @@
             this.lblFIO5 = new System.Windows.Forms.Label();
             this.lblFIO6 = new System.Windows.Forms.Label();
             this.lblFIO7 = new System.Windows.Forms.Label();
-            this.cbxFIO0 = new System.Windows.Forms.CheckBox();
+            this.gbxInstellingen = new System.Windows.Forms.GroupBox();
+            this.gbxFIO0_3 = new System.Windows.Forms.GroupBox();
+            this.cbxOpslaanFIO1 = new System.Windows.Forms.CheckBox();
+            this.cbxOpslaanFIO0 = new System.Windows.Forms.CheckBox();
+            this.cbxOpslaanFIO2 = new System.Windows.Forms.CheckBox();
+            this.cbxOpslaanFIO3 = new System.Windows.Forms.CheckBox();
+            this.cbxFIO1Digitaal = new System.Windows.Forms.CheckBox();
+            this.cbxFIO0Digitaal = new System.Windows.Forms.CheckBox();
+            this.cbxFIO2Digitaal = new System.Windows.Forms.CheckBox();
+            this.cbxFIO3Digitaal = new System.Windows.Forms.CheckBox();
             this.cbxFIO1 = new System.Windows.Forms.CheckBox();
+            this.cbxFIO0 = new System.Windows.Forms.CheckBox();
             this.cbxFIO2 = new System.Windows.Forms.CheckBox();
             this.cbxFIO3 = new System.Windows.Forms.CheckBox();
-            this.cbxFIO4 = new System.Windows.Forms.CheckBox();
-            this.cbxFIO5 = new System.Windows.Forms.CheckBox();
-            this.cbxFIO6 = new System.Windows.Forms.CheckBox();
-            this.cbxFIO7 = new System.Windows.Forms.CheckBox();
-            this.gbxInstellingen = new System.Windows.Forms.GroupBox();
-            this.cbxOpslaanFIO1 = new System.Windows.Forms.CheckBox();
+            this.gbxFIO4_7 = new System.Windows.Forms.GroupBox();
             this.cbxOpslaanFIO7 = new System.Windows.Forms.CheckBox();
-            this.cbxOpslaanFIO0 = new System.Windows.Forms.CheckBox();
             this.cbxOpslaanFIO6 = new System.Windows.Forms.CheckBox();
-            this.cbxOpslaanFIO2 = new System.Windows.Forms.CheckBox();
             this.cbxOpslaanFIO5 = new System.Windows.Forms.CheckBox();
-            this.cbxOpslaanFIO3 = new System.Windows.Forms.CheckBox();
             this.cbxOpslaanFIO4 = new System.Windows.Forms.CheckBox();
-            this.cbxFIO1Digitaal = new System.Windows.Forms.CheckBox();
             this.cbxFIO7Digitaal = new System.Windows.Forms.CheckBox();
-            this.cbxFIO0Digitaal = new System.Windows.Forms.CheckBox();
             this.cbxFIO6Digitaal = new System.Windows.Forms.CheckBox();
-            this.cbxFIO2Digitaal = new System.Windows.Forms.CheckBox();
             this.cbxFIO5Digitaal = new System.Windows.Forms.CheckBox();
-            this.cbxFIO3Digitaal = new System.Windows.Forms.CheckBox();
             this.cbxFIO4Digitaal = new System.Windows.Forms.CheckBox();
+            this.cbxFIO7 = new System.Windows.Forms.CheckBox();
+            this.cbxFIO6 = new System.Windows.Forms.CheckBox();
+            this.cbxFIO5 = new System.Windows.Forms.CheckBox();
+            this.cbxFIO4 = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.gbxInstellingen.SuspendLayout();
+            this.gbxFIO0_3.SuspendLayout();
+            this.gbxFIO4_7.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -113,9 +118,18 @@
             // 
             // fileToolStripMenuItem
             // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.metingOpslaanAlsToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
             this.fileToolStripMenuItem.Text = "Bestand";
+            // 
+            // metingOpslaanAlsToolStripMenuItem
+            // 
+            this.metingOpslaanAlsToolStripMenuItem.Name = "metingOpslaanAlsToolStripMenuItem";
+            this.metingOpslaanAlsToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.metingOpslaanAlsToolStripMenuItem.Text = "Meting opslaan als";
+            this.metingOpslaanAlsToolStripMenuItem.Click += new System.EventHandler(this.metingOpslaanAlsToolStripMenuItem_Click);
             // 
             // beeldToolStripMenuItem
             // 
@@ -252,7 +266,7 @@
             // btnStartStop
             // 
             this.btnStartStop.BackColor = System.Drawing.Color.Silver;
-            this.btnStartStop.Location = new System.Drawing.Point(77, 318);
+            this.btnStartStop.Location = new System.Drawing.Point(55, 347);
             this.btnStartStop.Name = "btnStartStop";
             this.btnStartStop.Size = new System.Drawing.Size(75, 23);
             this.btnStartStop.TabIndex = 2;
@@ -312,28 +326,28 @@
             // 
             // tbxFIO4
             // 
-            this.tbxFIO4.Location = new System.Drawing.Point(119, 188);
+            this.tbxFIO4.Location = new System.Drawing.Point(119, 209);
             this.tbxFIO4.Name = "tbxFIO4";
             this.tbxFIO4.Size = new System.Drawing.Size(100, 20);
             this.tbxFIO4.TabIndex = 8;
             // 
             // tbxFIO5
             // 
-            this.tbxFIO5.Location = new System.Drawing.Point(119, 214);
+            this.tbxFIO5.Location = new System.Drawing.Point(119, 235);
             this.tbxFIO5.Name = "tbxFIO5";
             this.tbxFIO5.Size = new System.Drawing.Size(100, 20);
             this.tbxFIO5.TabIndex = 9;
             // 
             // tbxFIO6
             // 
-            this.tbxFIO6.Location = new System.Drawing.Point(119, 240);
+            this.tbxFIO6.Location = new System.Drawing.Point(119, 261);
             this.tbxFIO6.Name = "tbxFIO6";
             this.tbxFIO6.Size = new System.Drawing.Size(100, 20);
             this.tbxFIO6.TabIndex = 10;
             // 
             // tbxFIO7
             // 
-            this.tbxFIO7.Location = new System.Drawing.Point(119, 266);
+            this.tbxFIO7.Location = new System.Drawing.Point(119, 287);
             this.tbxFIO7.Name = "tbxFIO7";
             this.tbxFIO7.Size = new System.Drawing.Size(100, 20);
             this.tbxFIO7.TabIndex = 11;
@@ -382,7 +396,7 @@
             // 
             this.lblFIO4.AutoSize = true;
             this.lblFIO4.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.lblFIO4.Location = new System.Drawing.Point(74, 191);
+            this.lblFIO4.Location = new System.Drawing.Point(74, 212);
             this.lblFIO4.Name = "lblFIO4";
             this.lblFIO4.Size = new System.Drawing.Size(30, 13);
             this.lblFIO4.TabIndex = 16;
@@ -392,7 +406,7 @@
             // 
             this.lblFIO5.AutoSize = true;
             this.lblFIO5.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.lblFIO5.Location = new System.Drawing.Point(74, 217);
+            this.lblFIO5.Location = new System.Drawing.Point(74, 238);
             this.lblFIO5.Name = "lblFIO5";
             this.lblFIO5.Size = new System.Drawing.Size(30, 13);
             this.lblFIO5.TabIndex = 17;
@@ -402,7 +416,7 @@
             // 
             this.lblFIO6.AutoSize = true;
             this.lblFIO6.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.lblFIO6.Location = new System.Drawing.Point(74, 243);
+            this.lblFIO6.Location = new System.Drawing.Point(74, 264);
             this.lblFIO6.Name = "lblFIO6";
             this.lblFIO6.Size = new System.Drawing.Size(30, 13);
             this.lblFIO6.TabIndex = 18;
@@ -412,287 +426,307 @@
             // 
             this.lblFIO7.AutoSize = true;
             this.lblFIO7.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.lblFIO7.Location = new System.Drawing.Point(74, 269);
+            this.lblFIO7.Location = new System.Drawing.Point(74, 290);
             this.lblFIO7.Name = "lblFIO7";
             this.lblFIO7.Size = new System.Drawing.Size(30, 13);
             this.lblFIO7.TabIndex = 19;
             this.lblFIO7.Text = "FIO7";
+            // 
+            // gbxInstellingen
+            // 
+            this.gbxInstellingen.Controls.Add(this.gbxFIO0_3);
+            this.gbxInstellingen.Controls.Add(this.gbxFIO4_7);
+            this.gbxInstellingen.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.gbxInstellingen.Location = new System.Drawing.Point(225, 52);
+            this.gbxInstellingen.Name = "gbxInstellingen";
+            this.gbxInstellingen.Size = new System.Drawing.Size(218, 272);
+            this.gbxInstellingen.TabIndex = 28;
+            this.gbxInstellingen.TabStop = false;
+            this.gbxInstellingen.Text = "Instellingen";
+            // 
+            // gbxFIO0_3
+            // 
+            this.gbxFIO0_3.Controls.Add(this.cbxOpslaanFIO1);
+            this.gbxFIO0_3.Controls.Add(this.cbxOpslaanFIO0);
+            this.gbxFIO0_3.Controls.Add(this.cbxOpslaanFIO2);
+            this.gbxFIO0_3.Controls.Add(this.cbxOpslaanFIO3);
+            this.gbxFIO0_3.Controls.Add(this.cbxFIO1Digitaal);
+            this.gbxFIO0_3.Controls.Add(this.cbxFIO0Digitaal);
+            this.gbxFIO0_3.Controls.Add(this.cbxFIO2Digitaal);
+            this.gbxFIO0_3.Controls.Add(this.cbxFIO3Digitaal);
+            this.gbxFIO0_3.Controls.Add(this.cbxFIO1);
+            this.gbxFIO0_3.Controls.Add(this.cbxFIO0);
+            this.gbxFIO0_3.Controls.Add(this.cbxFIO2);
+            this.gbxFIO0_3.Controls.Add(this.cbxFIO3);
+            this.gbxFIO0_3.Location = new System.Drawing.Point(6, 18);
+            this.gbxFIO0_3.Name = "gbxFIO0_3";
+            this.gbxFIO0_3.Size = new System.Drawing.Size(205, 121);
+            this.gbxFIO0_3.TabIndex = 45;
+            this.gbxFIO0_3.TabStop = false;
+            this.gbxFIO0_3.Text = "0-10 Volt";
+            // 
+            // cbxOpslaanFIO1
+            // 
+            this.cbxOpslaanFIO1.AutoSize = true;
+            this.cbxOpslaanFIO1.Location = new System.Drawing.Point(137, 44);
+            this.cbxOpslaanFIO1.Name = "cbxOpslaanFIO1";
+            this.cbxOpslaanFIO1.Size = new System.Drawing.Size(63, 17);
+            this.cbxOpslaanFIO1.TabIndex = 49;
+            this.cbxOpslaanFIO1.Text = "opslaan";
+            this.cbxOpslaanFIO1.UseVisualStyleBackColor = true;
+            // 
+            // cbxOpslaanFIO0
+            // 
+            this.cbxOpslaanFIO0.AutoSize = true;
+            this.cbxOpslaanFIO0.Location = new System.Drawing.Point(137, 19);
+            this.cbxOpslaanFIO0.Name = "cbxOpslaanFIO0";
+            this.cbxOpslaanFIO0.Size = new System.Drawing.Size(63, 17);
+            this.cbxOpslaanFIO0.TabIndex = 48;
+            this.cbxOpslaanFIO0.Text = "opslaan";
+            this.cbxOpslaanFIO0.UseVisualStyleBackColor = true;
+            // 
+            // cbxOpslaanFIO2
+            // 
+            this.cbxOpslaanFIO2.AutoSize = true;
+            this.cbxOpslaanFIO2.Location = new System.Drawing.Point(137, 72);
+            this.cbxOpslaanFIO2.Name = "cbxOpslaanFIO2";
+            this.cbxOpslaanFIO2.Size = new System.Drawing.Size(63, 17);
+            this.cbxOpslaanFIO2.TabIndex = 50;
+            this.cbxOpslaanFIO2.Text = "opslaan";
+            this.cbxOpslaanFIO2.UseVisualStyleBackColor = true;
+            // 
+            // cbxOpslaanFIO3
+            // 
+            this.cbxOpslaanFIO3.AutoSize = true;
+            this.cbxOpslaanFIO3.Location = new System.Drawing.Point(137, 98);
+            this.cbxOpslaanFIO3.Name = "cbxOpslaanFIO3";
+            this.cbxOpslaanFIO3.Size = new System.Drawing.Size(63, 17);
+            this.cbxOpslaanFIO3.TabIndex = 51;
+            this.cbxOpslaanFIO3.Text = "opslaan";
+            this.cbxOpslaanFIO3.UseVisualStyleBackColor = true;
+            // 
+            // cbxFIO1Digitaal
+            // 
+            this.cbxFIO1Digitaal.AutoSize = true;
+            this.cbxFIO1Digitaal.Location = new System.Drawing.Point(72, 44);
+            this.cbxFIO1Digitaal.Name = "cbxFIO1Digitaal";
+            this.cbxFIO1Digitaal.Size = new System.Drawing.Size(59, 17);
+            this.cbxFIO1Digitaal.TabIndex = 45;
+            this.cbxFIO1Digitaal.Text = "digitaal";
+            this.cbxFIO1Digitaal.UseVisualStyleBackColor = true;
+            // 
+            // cbxFIO0Digitaal
+            // 
+            this.cbxFIO0Digitaal.AutoSize = true;
+            this.cbxFIO0Digitaal.Location = new System.Drawing.Point(72, 19);
+            this.cbxFIO0Digitaal.Name = "cbxFIO0Digitaal";
+            this.cbxFIO0Digitaal.Size = new System.Drawing.Size(59, 17);
+            this.cbxFIO0Digitaal.TabIndex = 44;
+            this.cbxFIO0Digitaal.Text = "digitaal";
+            this.cbxFIO0Digitaal.UseVisualStyleBackColor = true;
+            // 
+            // cbxFIO2Digitaal
+            // 
+            this.cbxFIO2Digitaal.AutoSize = true;
+            this.cbxFIO2Digitaal.Location = new System.Drawing.Point(72, 72);
+            this.cbxFIO2Digitaal.Name = "cbxFIO2Digitaal";
+            this.cbxFIO2Digitaal.Size = new System.Drawing.Size(59, 17);
+            this.cbxFIO2Digitaal.TabIndex = 46;
+            this.cbxFIO2Digitaal.Text = "digitaal";
+            this.cbxFIO2Digitaal.UseVisualStyleBackColor = true;
+            // 
+            // cbxFIO3Digitaal
+            // 
+            this.cbxFIO3Digitaal.AutoSize = true;
+            this.cbxFIO3Digitaal.Location = new System.Drawing.Point(72, 98);
+            this.cbxFIO3Digitaal.Name = "cbxFIO3Digitaal";
+            this.cbxFIO3Digitaal.Size = new System.Drawing.Size(59, 17);
+            this.cbxFIO3Digitaal.TabIndex = 47;
+            this.cbxFIO3Digitaal.Text = "digitaal";
+            this.cbxFIO3Digitaal.UseVisualStyleBackColor = true;
+            // 
+            // cbxFIO1
+            // 
+            this.cbxFIO1.AutoSize = true;
+            this.cbxFIO1.Location = new System.Drawing.Point(6, 44);
+            this.cbxFIO1.Name = "cbxFIO1";
+            this.cbxFIO1.Size = new System.Drawing.Size(60, 17);
+            this.cbxFIO1.TabIndex = 41;
+            this.cbxFIO1.Text = "aan/uit";
+            this.cbxFIO1.UseVisualStyleBackColor = true;
             // 
             // cbxFIO0
             // 
             this.cbxFIO0.AutoSize = true;
             this.cbxFIO0.Checked = true;
             this.cbxFIO0.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbxFIO0.Location = new System.Drawing.Point(6, 23);
+            this.cbxFIO0.Location = new System.Drawing.Point(6, 19);
             this.cbxFIO0.Name = "cbxFIO0";
             this.cbxFIO0.Size = new System.Drawing.Size(60, 17);
-            this.cbxFIO0.TabIndex = 20;
+            this.cbxFIO0.TabIndex = 40;
             this.cbxFIO0.Text = "aan/uit";
             this.cbxFIO0.UseVisualStyleBackColor = true;
-            // 
-            // cbxFIO1
-            // 
-            this.cbxFIO1.AutoSize = true;
-            this.cbxFIO1.Location = new System.Drawing.Point(6, 48);
-            this.cbxFIO1.Name = "cbxFIO1";
-            this.cbxFIO1.Size = new System.Drawing.Size(60, 17);
-            this.cbxFIO1.TabIndex = 21;
-            this.cbxFIO1.Text = "aan/uit";
-            this.cbxFIO1.UseVisualStyleBackColor = true;
             // 
             // cbxFIO2
             // 
             this.cbxFIO2.AutoSize = true;
-            this.cbxFIO2.Location = new System.Drawing.Point(6, 76);
+            this.cbxFIO2.Location = new System.Drawing.Point(6, 72);
             this.cbxFIO2.Name = "cbxFIO2";
             this.cbxFIO2.Size = new System.Drawing.Size(60, 17);
-            this.cbxFIO2.TabIndex = 22;
+            this.cbxFIO2.TabIndex = 42;
             this.cbxFIO2.Text = "aan/uit";
             this.cbxFIO2.UseVisualStyleBackColor = true;
             // 
             // cbxFIO3
             // 
             this.cbxFIO3.AutoSize = true;
-            this.cbxFIO3.Location = new System.Drawing.Point(6, 102);
+            this.cbxFIO3.Location = new System.Drawing.Point(6, 98);
             this.cbxFIO3.Name = "cbxFIO3";
             this.cbxFIO3.Size = new System.Drawing.Size(60, 17);
-            this.cbxFIO3.TabIndex = 23;
+            this.cbxFIO3.TabIndex = 43;
             this.cbxFIO3.Text = "aan/uit";
             this.cbxFIO3.UseVisualStyleBackColor = true;
             // 
-            // cbxFIO4
+            // gbxFIO4_7
             // 
-            this.cbxFIO4.AutoSize = true;
-            this.cbxFIO4.Location = new System.Drawing.Point(6, 128);
-            this.cbxFIO4.Name = "cbxFIO4";
-            this.cbxFIO4.Size = new System.Drawing.Size(60, 17);
-            this.cbxFIO4.TabIndex = 24;
-            this.cbxFIO4.Text = "aan/uit";
-            this.cbxFIO4.UseVisualStyleBackColor = true;
-            // 
-            // cbxFIO5
-            // 
-            this.cbxFIO5.AutoSize = true;
-            this.cbxFIO5.Location = new System.Drawing.Point(6, 154);
-            this.cbxFIO5.Name = "cbxFIO5";
-            this.cbxFIO5.Size = new System.Drawing.Size(60, 17);
-            this.cbxFIO5.TabIndex = 25;
-            this.cbxFIO5.Text = "aan/uit";
-            this.cbxFIO5.UseVisualStyleBackColor = true;
-            // 
-            // cbxFIO6
-            // 
-            this.cbxFIO6.AutoSize = true;
-            this.cbxFIO6.Location = new System.Drawing.Point(6, 180);
-            this.cbxFIO6.Name = "cbxFIO6";
-            this.cbxFIO6.Size = new System.Drawing.Size(60, 17);
-            this.cbxFIO6.TabIndex = 26;
-            this.cbxFIO6.Text = "aan/uit";
-            this.cbxFIO6.UseVisualStyleBackColor = true;
-            // 
-            // cbxFIO7
-            // 
-            this.cbxFIO7.AutoSize = true;
-            this.cbxFIO7.Location = new System.Drawing.Point(6, 206);
-            this.cbxFIO7.Name = "cbxFIO7";
-            this.cbxFIO7.Size = new System.Drawing.Size(60, 17);
-            this.cbxFIO7.TabIndex = 27;
-            this.cbxFIO7.Text = "aan/uit";
-            this.cbxFIO7.UseVisualStyleBackColor = true;
-            // 
-            // gbxInstellingen
-            // 
-            this.gbxInstellingen.Controls.Add(this.cbxOpslaanFIO1);
-            this.gbxInstellingen.Controls.Add(this.cbxOpslaanFIO7);
-            this.gbxInstellingen.Controls.Add(this.cbxOpslaanFIO0);
-            this.gbxInstellingen.Controls.Add(this.cbxOpslaanFIO6);
-            this.gbxInstellingen.Controls.Add(this.cbxOpslaanFIO2);
-            this.gbxInstellingen.Controls.Add(this.cbxOpslaanFIO5);
-            this.gbxInstellingen.Controls.Add(this.cbxOpslaanFIO3);
-            this.gbxInstellingen.Controls.Add(this.cbxOpslaanFIO4);
-            this.gbxInstellingen.Controls.Add(this.cbxFIO1Digitaal);
-            this.gbxInstellingen.Controls.Add(this.cbxFIO7Digitaal);
-            this.gbxInstellingen.Controls.Add(this.cbxFIO0Digitaal);
-            this.gbxInstellingen.Controls.Add(this.cbxFIO6Digitaal);
-            this.gbxInstellingen.Controls.Add(this.cbxFIO2Digitaal);
-            this.gbxInstellingen.Controls.Add(this.cbxFIO5Digitaal);
-            this.gbxInstellingen.Controls.Add(this.cbxFIO3Digitaal);
-            this.gbxInstellingen.Controls.Add(this.cbxFIO4Digitaal);
-            this.gbxInstellingen.Controls.Add(this.cbxFIO1);
-            this.gbxInstellingen.Controls.Add(this.cbxFIO7);
-            this.gbxInstellingen.Controls.Add(this.cbxFIO0);
-            this.gbxInstellingen.Controls.Add(this.cbxFIO6);
-            this.gbxInstellingen.Controls.Add(this.cbxFIO2);
-            this.gbxInstellingen.Controls.Add(this.cbxFIO5);
-            this.gbxInstellingen.Controls.Add(this.cbxFIO3);
-            this.gbxInstellingen.Controls.Add(this.cbxFIO4);
-            this.gbxInstellingen.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.gbxInstellingen.Location = new System.Drawing.Point(225, 65);
-            this.gbxInstellingen.Name = "gbxInstellingen";
-            this.gbxInstellingen.Size = new System.Drawing.Size(206, 229);
-            this.gbxInstellingen.TabIndex = 28;
-            this.gbxInstellingen.TabStop = false;
-            this.gbxInstellingen.Text = "Instellingen";
-            // 
-            // cbxOpslaanFIO1
-            // 
-            this.cbxOpslaanFIO1.AutoSize = true;
-            this.cbxOpslaanFIO1.Location = new System.Drawing.Point(137, 48);
-            this.cbxOpslaanFIO1.Name = "cbxOpslaanFIO1";
-            this.cbxOpslaanFIO1.Size = new System.Drawing.Size(63, 17);
-            this.cbxOpslaanFIO1.TabIndex = 37;
-            this.cbxOpslaanFIO1.Text = "opslaan";
-            this.cbxOpslaanFIO1.UseVisualStyleBackColor = true;
+            this.gbxFIO4_7.Controls.Add(this.cbxOpslaanFIO7);
+            this.gbxFIO4_7.Controls.Add(this.cbxOpslaanFIO6);
+            this.gbxFIO4_7.Controls.Add(this.cbxOpslaanFIO5);
+            this.gbxFIO4_7.Controls.Add(this.cbxOpslaanFIO4);
+            this.gbxFIO4_7.Controls.Add(this.cbxFIO7Digitaal);
+            this.gbxFIO4_7.Controls.Add(this.cbxFIO6Digitaal);
+            this.gbxFIO4_7.Controls.Add(this.cbxFIO5Digitaal);
+            this.gbxFIO4_7.Controls.Add(this.cbxFIO4Digitaal);
+            this.gbxFIO4_7.Controls.Add(this.cbxFIO7);
+            this.gbxFIO4_7.Controls.Add(this.cbxFIO6);
+            this.gbxFIO4_7.Controls.Add(this.cbxFIO5);
+            this.gbxFIO4_7.Controls.Add(this.cbxFIO4);
+            this.gbxFIO4_7.Location = new System.Drawing.Point(6, 145);
+            this.gbxFIO4_7.Name = "gbxFIO4_7";
+            this.gbxFIO4_7.Size = new System.Drawing.Size(205, 122);
+            this.gbxFIO4_7.TabIndex = 44;
+            this.gbxFIO4_7.TabStop = false;
+            this.gbxFIO4_7.Text = "0-2,4 Volt";
             // 
             // cbxOpslaanFIO7
             // 
             this.cbxOpslaanFIO7.AutoSize = true;
-            this.cbxOpslaanFIO7.Location = new System.Drawing.Point(137, 206);
+            this.cbxOpslaanFIO7.Location = new System.Drawing.Point(137, 97);
             this.cbxOpslaanFIO7.Name = "cbxOpslaanFIO7";
             this.cbxOpslaanFIO7.Size = new System.Drawing.Size(63, 17);
-            this.cbxOpslaanFIO7.TabIndex = 43;
+            this.cbxOpslaanFIO7.TabIndex = 55;
             this.cbxOpslaanFIO7.Text = "opslaan";
             this.cbxOpslaanFIO7.UseVisualStyleBackColor = true;
-            // 
-            // cbxOpslaanFIO0
-            // 
-            this.cbxOpslaanFIO0.AutoSize = true;
-            this.cbxOpslaanFIO0.Location = new System.Drawing.Point(137, 23);
-            this.cbxOpslaanFIO0.Name = "cbxOpslaanFIO0";
-            this.cbxOpslaanFIO0.Size = new System.Drawing.Size(63, 17);
-            this.cbxOpslaanFIO0.TabIndex = 36;
-            this.cbxOpslaanFIO0.Text = "opslaan";
-            this.cbxOpslaanFIO0.UseVisualStyleBackColor = true;
             // 
             // cbxOpslaanFIO6
             // 
             this.cbxOpslaanFIO6.AutoSize = true;
-            this.cbxOpslaanFIO6.Location = new System.Drawing.Point(137, 180);
+            this.cbxOpslaanFIO6.Location = new System.Drawing.Point(137, 71);
             this.cbxOpslaanFIO6.Name = "cbxOpslaanFIO6";
             this.cbxOpslaanFIO6.Size = new System.Drawing.Size(63, 17);
-            this.cbxOpslaanFIO6.TabIndex = 42;
+            this.cbxOpslaanFIO6.TabIndex = 54;
             this.cbxOpslaanFIO6.Text = "opslaan";
             this.cbxOpslaanFIO6.UseVisualStyleBackColor = true;
-            // 
-            // cbxOpslaanFIO2
-            // 
-            this.cbxOpslaanFIO2.AutoSize = true;
-            this.cbxOpslaanFIO2.Location = new System.Drawing.Point(137, 76);
-            this.cbxOpslaanFIO2.Name = "cbxOpslaanFIO2";
-            this.cbxOpslaanFIO2.Size = new System.Drawing.Size(63, 17);
-            this.cbxOpslaanFIO2.TabIndex = 38;
-            this.cbxOpslaanFIO2.Text = "opslaan";
-            this.cbxOpslaanFIO2.UseVisualStyleBackColor = true;
             // 
             // cbxOpslaanFIO5
             // 
             this.cbxOpslaanFIO5.AutoSize = true;
-            this.cbxOpslaanFIO5.Location = new System.Drawing.Point(137, 154);
+            this.cbxOpslaanFIO5.Location = new System.Drawing.Point(137, 45);
             this.cbxOpslaanFIO5.Name = "cbxOpslaanFIO5";
             this.cbxOpslaanFIO5.Size = new System.Drawing.Size(63, 17);
-            this.cbxOpslaanFIO5.TabIndex = 41;
+            this.cbxOpslaanFIO5.TabIndex = 53;
             this.cbxOpslaanFIO5.Text = "opslaan";
             this.cbxOpslaanFIO5.UseVisualStyleBackColor = true;
-            // 
-            // cbxOpslaanFIO3
-            // 
-            this.cbxOpslaanFIO3.AutoSize = true;
-            this.cbxOpslaanFIO3.Location = new System.Drawing.Point(137, 102);
-            this.cbxOpslaanFIO3.Name = "cbxOpslaanFIO3";
-            this.cbxOpslaanFIO3.Size = new System.Drawing.Size(63, 17);
-            this.cbxOpslaanFIO3.TabIndex = 39;
-            this.cbxOpslaanFIO3.Text = "opslaan";
-            this.cbxOpslaanFIO3.UseVisualStyleBackColor = true;
             // 
             // cbxOpslaanFIO4
             // 
             this.cbxOpslaanFIO4.AutoSize = true;
-            this.cbxOpslaanFIO4.Location = new System.Drawing.Point(137, 128);
+            this.cbxOpslaanFIO4.Location = new System.Drawing.Point(137, 19);
             this.cbxOpslaanFIO4.Name = "cbxOpslaanFIO4";
             this.cbxOpslaanFIO4.Size = new System.Drawing.Size(63, 17);
-            this.cbxOpslaanFIO4.TabIndex = 40;
+            this.cbxOpslaanFIO4.TabIndex = 52;
             this.cbxOpslaanFIO4.Text = "opslaan";
             this.cbxOpslaanFIO4.UseVisualStyleBackColor = true;
-            // 
-            // cbxFIO1Digitaal
-            // 
-            this.cbxFIO1Digitaal.AutoSize = true;
-            this.cbxFIO1Digitaal.Location = new System.Drawing.Point(72, 48);
-            this.cbxFIO1Digitaal.Name = "cbxFIO1Digitaal";
-            this.cbxFIO1Digitaal.Size = new System.Drawing.Size(59, 17);
-            this.cbxFIO1Digitaal.TabIndex = 29;
-            this.cbxFIO1Digitaal.Text = "digitaal";
-            this.cbxFIO1Digitaal.UseVisualStyleBackColor = true;
             // 
             // cbxFIO7Digitaal
             // 
             this.cbxFIO7Digitaal.AutoSize = true;
-            this.cbxFIO7Digitaal.Location = new System.Drawing.Point(72, 206);
+            this.cbxFIO7Digitaal.Location = new System.Drawing.Point(72, 97);
             this.cbxFIO7Digitaal.Name = "cbxFIO7Digitaal";
             this.cbxFIO7Digitaal.Size = new System.Drawing.Size(59, 17);
-            this.cbxFIO7Digitaal.TabIndex = 35;
+            this.cbxFIO7Digitaal.TabIndex = 51;
             this.cbxFIO7Digitaal.Text = "digitaal";
             this.cbxFIO7Digitaal.UseVisualStyleBackColor = true;
-            // 
-            // cbxFIO0Digitaal
-            // 
-            this.cbxFIO0Digitaal.AutoSize = true;
-            this.cbxFIO0Digitaal.Location = new System.Drawing.Point(72, 23);
-            this.cbxFIO0Digitaal.Name = "cbxFIO0Digitaal";
-            this.cbxFIO0Digitaal.Size = new System.Drawing.Size(59, 17);
-            this.cbxFIO0Digitaal.TabIndex = 28;
-            this.cbxFIO0Digitaal.Text = "digitaal";
-            this.cbxFIO0Digitaal.UseVisualStyleBackColor = true;
             // 
             // cbxFIO6Digitaal
             // 
             this.cbxFIO6Digitaal.AutoSize = true;
-            this.cbxFIO6Digitaal.Location = new System.Drawing.Point(72, 180);
+            this.cbxFIO6Digitaal.Location = new System.Drawing.Point(72, 71);
             this.cbxFIO6Digitaal.Name = "cbxFIO6Digitaal";
             this.cbxFIO6Digitaal.Size = new System.Drawing.Size(59, 17);
-            this.cbxFIO6Digitaal.TabIndex = 34;
+            this.cbxFIO6Digitaal.TabIndex = 50;
             this.cbxFIO6Digitaal.Text = "digitaal";
             this.cbxFIO6Digitaal.UseVisualStyleBackColor = true;
-            // 
-            // cbxFIO2Digitaal
-            // 
-            this.cbxFIO2Digitaal.AutoSize = true;
-            this.cbxFIO2Digitaal.Location = new System.Drawing.Point(72, 76);
-            this.cbxFIO2Digitaal.Name = "cbxFIO2Digitaal";
-            this.cbxFIO2Digitaal.Size = new System.Drawing.Size(59, 17);
-            this.cbxFIO2Digitaal.TabIndex = 30;
-            this.cbxFIO2Digitaal.Text = "digitaal";
-            this.cbxFIO2Digitaal.UseVisualStyleBackColor = true;
             // 
             // cbxFIO5Digitaal
             // 
             this.cbxFIO5Digitaal.AutoSize = true;
-            this.cbxFIO5Digitaal.Location = new System.Drawing.Point(72, 154);
+            this.cbxFIO5Digitaal.Location = new System.Drawing.Point(72, 45);
             this.cbxFIO5Digitaal.Name = "cbxFIO5Digitaal";
             this.cbxFIO5Digitaal.Size = new System.Drawing.Size(59, 17);
-            this.cbxFIO5Digitaal.TabIndex = 33;
+            this.cbxFIO5Digitaal.TabIndex = 49;
             this.cbxFIO5Digitaal.Text = "digitaal";
             this.cbxFIO5Digitaal.UseVisualStyleBackColor = true;
-            // 
-            // cbxFIO3Digitaal
-            // 
-            this.cbxFIO3Digitaal.AutoSize = true;
-            this.cbxFIO3Digitaal.Location = new System.Drawing.Point(72, 102);
-            this.cbxFIO3Digitaal.Name = "cbxFIO3Digitaal";
-            this.cbxFIO3Digitaal.Size = new System.Drawing.Size(59, 17);
-            this.cbxFIO3Digitaal.TabIndex = 31;
-            this.cbxFIO3Digitaal.Text = "digitaal";
-            this.cbxFIO3Digitaal.UseVisualStyleBackColor = true;
             // 
             // cbxFIO4Digitaal
             // 
             this.cbxFIO4Digitaal.AutoSize = true;
-            this.cbxFIO4Digitaal.Location = new System.Drawing.Point(72, 128);
+            this.cbxFIO4Digitaal.Location = new System.Drawing.Point(72, 19);
             this.cbxFIO4Digitaal.Name = "cbxFIO4Digitaal";
             this.cbxFIO4Digitaal.Size = new System.Drawing.Size(59, 17);
-            this.cbxFIO4Digitaal.TabIndex = 32;
+            this.cbxFIO4Digitaal.TabIndex = 48;
             this.cbxFIO4Digitaal.Text = "digitaal";
             this.cbxFIO4Digitaal.UseVisualStyleBackColor = true;
+            // 
+            // cbxFIO7
+            // 
+            this.cbxFIO7.AutoSize = true;
+            this.cbxFIO7.Location = new System.Drawing.Point(6, 97);
+            this.cbxFIO7.Name = "cbxFIO7";
+            this.cbxFIO7.Size = new System.Drawing.Size(60, 17);
+            this.cbxFIO7.TabIndex = 47;
+            this.cbxFIO7.Text = "aan/uit";
+            this.cbxFIO7.UseVisualStyleBackColor = true;
+            // 
+            // cbxFIO6
+            // 
+            this.cbxFIO6.AutoSize = true;
+            this.cbxFIO6.Location = new System.Drawing.Point(6, 71);
+            this.cbxFIO6.Name = "cbxFIO6";
+            this.cbxFIO6.Size = new System.Drawing.Size(60, 17);
+            this.cbxFIO6.TabIndex = 46;
+            this.cbxFIO6.Text = "aan/uit";
+            this.cbxFIO6.UseVisualStyleBackColor = true;
+            // 
+            // cbxFIO5
+            // 
+            this.cbxFIO5.AutoSize = true;
+            this.cbxFIO5.Location = new System.Drawing.Point(6, 45);
+            this.cbxFIO5.Name = "cbxFIO5";
+            this.cbxFIO5.Size = new System.Drawing.Size(60, 17);
+            this.cbxFIO5.TabIndex = 45;
+            this.cbxFIO5.Text = "aan/uit";
+            this.cbxFIO5.UseVisualStyleBackColor = true;
+            // 
+            // cbxFIO4
+            // 
+            this.cbxFIO4.AutoSize = true;
+            this.cbxFIO4.Location = new System.Drawing.Point(6, 19);
+            this.cbxFIO4.Name = "cbxFIO4";
+            this.cbxFIO4.Size = new System.Drawing.Size(60, 17);
+            this.cbxFIO4.TabIndex = 44;
+            this.cbxFIO4.Text = "aan/uit";
+            this.cbxFIO4.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -730,7 +764,10 @@
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.gbxInstellingen.ResumeLayout(false);
-            this.gbxInstellingen.PerformLayout();
+            this.gbxFIO0_3.ResumeLayout(false);
+            this.gbxFIO0_3.PerformLayout();
+            this.gbxFIO4_7.ResumeLayout(false);
+            this.gbxFIO4_7.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -772,36 +809,39 @@
         private System.Windows.Forms.Label lblFIO5;
         private System.Windows.Forms.Label lblFIO6;
         private System.Windows.Forms.Label lblFIO7;
-        private System.Windows.Forms.CheckBox cbxFIO0;
-        private System.Windows.Forms.CheckBox cbxFIO1;
-        private System.Windows.Forms.CheckBox cbxFIO2;
-        private System.Windows.Forms.CheckBox cbxFIO3;
-        private System.Windows.Forms.CheckBox cbxFIO4;
-        private System.Windows.Forms.CheckBox cbxFIO5;
-        private System.Windows.Forms.CheckBox cbxFIO6;
-        private System.Windows.Forms.CheckBox cbxFIO7;
         private System.Windows.Forms.GroupBox gbxInstellingen;
-        private System.Windows.Forms.CheckBox cbxFIO1Digitaal;
-        private System.Windows.Forms.CheckBox cbxFIO7Digitaal;
-        private System.Windows.Forms.CheckBox cbxFIO0Digitaal;
-        private System.Windows.Forms.CheckBox cbxFIO6Digitaal;
-        private System.Windows.Forms.CheckBox cbxFIO2Digitaal;
-        private System.Windows.Forms.CheckBox cbxFIO5Digitaal;
-        private System.Windows.Forms.CheckBox cbxFIO3Digitaal;
-        private System.Windows.Forms.CheckBox cbxFIO4Digitaal;
         private System.Windows.Forms.ToolStripMenuItem beeldToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem instellingenAanuitToolStripMenuItem;
-        private System.Windows.Forms.CheckBox cbxOpslaanFIO1;
-        private System.Windows.Forms.CheckBox cbxOpslaanFIO7;
-        private System.Windows.Forms.CheckBox cbxOpslaanFIO0;
-        private System.Windows.Forms.CheckBox cbxOpslaanFIO6;
-        private System.Windows.Forms.CheckBox cbxOpslaanFIO2;
-        private System.Windows.Forms.CheckBox cbxOpslaanFIO5;
-        private System.Windows.Forms.CheckBox cbxOpslaanFIO3;
-        private System.Windows.Forms.CheckBox cbxOpslaanFIO4;
         private System.Windows.Forms.ToolStripMenuItem toolStripTextBox1;
         private System.Windows.Forms.ToolStripMenuItem AlleKanalenAanUit_ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem GeselecteerdeKanalenOpslaan_ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem metingOpslaanAlsToolStripMenuItem;
+        private System.Windows.Forms.GroupBox gbxFIO0_3;
+        private System.Windows.Forms.GroupBox gbxFIO4_7;
+        private System.Windows.Forms.CheckBox cbxOpslaanFIO7;
+        private System.Windows.Forms.CheckBox cbxOpslaanFIO6;
+        private System.Windows.Forms.CheckBox cbxOpslaanFIO5;
+        private System.Windows.Forms.CheckBox cbxOpslaanFIO4;
+        private System.Windows.Forms.CheckBox cbxFIO7Digitaal;
+        private System.Windows.Forms.CheckBox cbxFIO6Digitaal;
+        private System.Windows.Forms.CheckBox cbxFIO5Digitaal;
+        private System.Windows.Forms.CheckBox cbxFIO4Digitaal;
+        private System.Windows.Forms.CheckBox cbxFIO7;
+        private System.Windows.Forms.CheckBox cbxFIO6;
+        private System.Windows.Forms.CheckBox cbxFIO5;
+        private System.Windows.Forms.CheckBox cbxFIO4;
+        private System.Windows.Forms.CheckBox cbxOpslaanFIO1;
+        private System.Windows.Forms.CheckBox cbxOpslaanFIO0;
+        private System.Windows.Forms.CheckBox cbxOpslaanFIO2;
+        private System.Windows.Forms.CheckBox cbxOpslaanFIO3;
+        private System.Windows.Forms.CheckBox cbxFIO1Digitaal;
+        private System.Windows.Forms.CheckBox cbxFIO0Digitaal;
+        private System.Windows.Forms.CheckBox cbxFIO2Digitaal;
+        private System.Windows.Forms.CheckBox cbxFIO3Digitaal;
+        private System.Windows.Forms.CheckBox cbxFIO1;
+        private System.Windows.Forms.CheckBox cbxFIO0;
+        private System.Windows.Forms.CheckBox cbxFIO2;
+        private System.Windows.Forms.CheckBox cbxFIO3;
     }
 }
 
