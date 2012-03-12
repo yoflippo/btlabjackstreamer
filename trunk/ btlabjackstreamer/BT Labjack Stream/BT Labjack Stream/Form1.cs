@@ -145,6 +145,7 @@ namespace BT_Labjack_Stream
                 //will start from channel 0 and update all 16 flexible bits.  We will
                 //pass a value of b0000000000000011 or d3.
                 LJUD.ePut(u3.ljhandle, LJUD.IO.PUT_ANALOG_ENABLE_PORT, 0, metingInfo.instellingAnalogeKanalen, 16);
+                LJUD.ePut(u3.ljhandle, LJUD.IO.PUT_DIGITAL_PORT, 0, 255-metingInfo.instellingAnalogeKanalen, 16);
 
                 //Configure the stream:
                 //Set the scan rate.
@@ -637,52 +638,58 @@ namespace BT_Labjack_Stream
         #region CHECKBOXES
         private void cbxFIO0_CheckedChanged(object sender, EventArgs e)
         {          
-           cbxFIO0Digitaal.Enabled = cbxFIO0.Checked;
+           //cbxFIO0Digitaal.Enabled = cbxFIO0.Checked;
            cbxOpslaanFIO0.Enabled = cbxFIO0.Checked; 
         }
 
         private void cbxFIO1_CheckedChanged(object sender, EventArgs e)
         {
-            cbxFIO1Digitaal.Enabled = cbxFIO1.Checked;
+            //cbxFIO1Digitaal.Enabled = cbxFIO1.Checked;
             cbxOpslaanFIO1.Enabled = cbxFIO1.Checked; 
         }
 
         private void cbxFIO2_CheckedChanged(object sender, EventArgs e)
         {
-            cbxFIO2Digitaal.Enabled = cbxFIO2.Checked;
+            //cbxFIO2Digitaal.Enabled = cbxFIO2.Checked;
             cbxOpslaanFIO2.Enabled = cbxFIO2.Checked; 
         }
 
         private void cbxFIO3_CheckedChanged(object sender, EventArgs e)
         {
-            cbxFIO3Digitaal.Enabled = cbxFIO3.Checked;
+            //cbxFIO3Digitaal.Enabled = cbxFIO3.Checked;
             cbxOpslaanFIO3.Enabled = cbxFIO3.Checked; 
         }
 
         private void cbxFIO4_CheckedChanged(object sender, EventArgs e)
         {
-            cbxFIO4Digitaal.Enabled = cbxFIO4.Checked;
+            //cbxFIO4Digitaal.Enabled = cbxFIO4.Checked;
             cbxOpslaanFIO4.Enabled = cbxFIO4.Checked; 
         }
 
         private void cbxFIO5_CheckedChanged(object sender, EventArgs e)
         {
-            cbxFIO5Digitaal.Enabled = cbxFIO5.Checked;
+            //cbxFIO5Digitaal.Enabled = cbxFIO5.Checked;
             cbxOpslaanFIO5.Enabled = cbxFIO5.Checked; 
         }
 
         private void cbxFIO6_CheckedChanged(object sender, EventArgs e)
         {
-            cbxFIO6Digitaal.Enabled = cbxFIO6.Checked;
+            //cbxFIO6Digitaal.Enabled = cbxFIO6.Checked;
             cbxOpslaanFIO6.Enabled = cbxFIO6.Checked; 
         }
 
         private void cbxFIO7_CheckedChanged(object sender, EventArgs e)
         {
-            cbxFIO7Digitaal.Enabled = cbxFIO7.Checked;
+            //cbxFIO7Digitaal.Enabled = cbxFIO7.Checked;
             cbxOpslaanFIO7.Enabled = cbxFIO7.Checked; 
         }
         #endregion
+
+        private void creditzToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AboutBox1 ab = new AboutBox1();
+            ab.Show();
+        }
 
 
         //EINDE KLASSE

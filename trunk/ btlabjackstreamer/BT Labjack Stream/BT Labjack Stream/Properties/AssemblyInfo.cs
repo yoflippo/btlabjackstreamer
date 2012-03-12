@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("BT Labjack Stream")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Een programma om de Labjack U3 uit te lezen en data te loggen. Vragen of opmerkingen: stuur een e-mail naar M.J.A.J.Schrauwen@hhs.nl")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Microsoft")]
+[assembly: AssemblyCompany("Haagse Hogeschool, opleiding Bewegingstechnologie")]
 [assembly: AssemblyProduct("BT Labjack Stream")]
-[assembly: AssemblyCopyright("Copyright © Microsoft 2012")]
+[assembly: AssemblyCopyright("2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
