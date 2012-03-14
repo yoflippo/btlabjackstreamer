@@ -1,5 +1,0 @@
-D:\PROJECTEN\LABJACK\DotNet_LJUD\DotNet_LJUD\Examples\C#\U3_SimpleStream\bin\x86\Debug\U3_SimpleStream.exe
-D:\PROJECTEN\LABJACK\DotNet_LJUD\DotNet_LJUD\Examples\C#\U3_SimpleStream\bin\x86\Debug\U3_SimpleStream.pdb
-D:\PROJECTEN\LABJACK\DotNet_LJUD\DotNet_LJUD\Examples\C#\U3_SimpleStream\obj\x86\Debug\ResolveAssemblyReference.cache
-D:\PROJECTEN\LABJACK\DotNet_LJUD\DotNet_LJUD\Examples\C#\U3_SimpleStream\obj\x86\Debug\U3_SimpleStream.exe
-D:\PROJECTEN\LABJACK\DotNet_LJUD\DotNet_LJUD\Examples\C#\U3_SimpleStream\obj\x86\Debug\U3_SimpleStream.pdb
