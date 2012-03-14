@@ -29,15 +29,18 @@ namespace BT_Labjack_Stream
         private const int aantalKanalen = 8;
         private List<double>[] dataChannel = null; //plek voor data
         private ExportData fh = null;
-        private static frmExpertSettings frm_expertSettings = null;
-
+        private static frmExpertSettings frmExpert = null;
+        private string[] textBoxesMain = null;
         public struct metingInformatie
         {
             public int instellingAnalogeKanalen;
+            public int instellingDigitaleKanalen;
             public int sampleFrequentie;
             public bool blMarker;
-            public Int16 aantalGeselecteerdeKanalen;
-            public bool[] blIsHetKanaalGeselecteerd;
+            public Int16 aantalGeselecteerdeAnalogeKanalen;
+            public bool[] blIsHetAnalogeKanaalGeselecteerd;
+            public Int16 aantalGeselecteerdeDigitaleKanalen;
+            public bool[] blIsHetDigitaleKanaalGeselecteerd;
             public int delayms;
         };
         private metingInformatie metingInfo;
@@ -54,18 +57,23 @@ namespace BT_Labjack_Stream
             
             //set INFO struct
             metingInfo.instellingAnalogeKanalen = 3;
+            metingInfo.instellingDigitaleKanalen = 0;
             metingInfo.sampleFrequentie = 500;
             metingInfo.blMarker = false;
-            metingInfo.aantalGeselecteerdeKanalen = 0;
-            metingInfo.blIsHetKanaalGeselecteerd = new bool[aantalKanalen];
+            metingInfo.aantalGeselecteerdeAnalogeKanalen = 0;
+            metingInfo.blIsHetAnalogeKanaalGeselecteerd = new bool[aantalKanalen];
             metingInfo.delayms = 1000;
+            metingInfo.aantalGeselecteerdeDigitaleKanalen = 0;
+            metingInfo.blIsHetDigitaleKanaalGeselecteerd = new bool[aantalKanalen];
 
+            //
             refreshSettings();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             connectToLabjack();
+            frmExpert = new frmExpertSettings(expertSettingsToolStripMenuItem);
         }
 
         private void btnStartStop_Click(object sender, EventArgs e)
@@ -76,7 +84,7 @@ namespace BT_Labjack_Stream
                 gbxInstellingen.Enabled = true;
                 // Tell the user that we are busy because
                 // we have to wait for the thread to close
-                btnStartStop.Text = "Please wait...";
+                btnStartStop.Text = "Wachten...";
                 btnStartStop.Enabled = false;
                 Update();
 
@@ -152,7 +160,7 @@ namespace BT_Labjack_Stream
                 LJUD.AddRequest(u3.ljhandle, LJUD.IO.PUT_CONFIG, LJUD.CHANNEL.STREAM_SCAN_FREQUENCY, metingInfo.sampleFrequentie, 0, 0);
 
                 //Give the driver a 5 second buffer (metingInfo.sampleFrequentie * 2 channels * 5 seconds).
-                LJUD.AddRequest(u3.ljhandle, LJUD.IO.PUT_CONFIG, LJUD.CHANNEL.STREAM_BUFFER_SIZE, metingInfo.sampleFrequentie * metingInfo.aantalGeselecteerdeKanalen * 5, 0, 0);
+                LJUD.AddRequest(u3.ljhandle, LJUD.IO.PUT_CONFIG, LJUD.CHANNEL.STREAM_BUFFER_SIZE, metingInfo.sampleFrequentie * metingInfo.aantalGeselecteerdeAnalogeKanalen * 5, 0, 0);
 
                 //Configure reads to retrieve whatever data is available without waiting (wait mode LJUD.STREAMWAITMODES.NONE).
                 //See comments below to change this program to use LJUD.STREAMWAITMODES.SLEEP mode.
@@ -163,10 +171,16 @@ namespace BT_Labjack_Stream
 
                 for (int i = 0; i < aantalKanalen; i++)
                 {
-                    if (metingInfo.blIsHetKanaalGeselecteerd[i])
+                    if (metingInfo.blIsHetAnalogeKanaalGeselecteerd[i] & !metingInfo.blIsHetDigitaleKanaalGeselecteerd[i])
                     {
                         LJUD.AddRequest(u3.ljhandle, LJUD.IO.ADD_STREAM_CHANNEL, i, 0, 0, 0);
                     }
+                }
+
+                //Expert settings
+                if (expertSettingsToolStripMenuItem.Checked)
+                {
+                    LJUD.AddRequest(u3.ljhandle, LJUD.IO.ADD_STREAM_CHANNEL, 193, 0, 0, 0); //193, digitaal kanaal
                 }
 
                 //Execute the list of requests.
@@ -320,48 +334,39 @@ namespace BT_Labjack_Stream
                 BeginInvoke(new ReadingsParameterDelegate(ShowReadings), new object[] { readings });
             else
             {
-                //Schrijf waardes naar form
-                int i = 0;
-                if (metingInfo.blIsHetKanaalGeselecteerd[0] && i < metingInfo.aantalGeselecteerdeKanalen)
+                //stop alle waardes/tekst in textBoxesMain en schrijf onderaan alles naar textBoxes
+                textBoxesMain = new string[aantalKanalen];
+
+                int tellerReading = 0;
+                for (int i = 0; i < aantalKanalen; i++) //lees readings uit
                 {
-                    tbxFIO0.Text = readings[i].ToString();
-                    i++;
+                    if (metingInfo.blIsHetAnalogeKanaalGeselecteerd[i] && tellerReading < metingInfo.aantalGeselecteerdeAnalogeKanalen)
+                    {
+                        textBoxesMain[i] = readings[tellerReading].ToString();
+                        tellerReading++;
+                    }
                 }
-                if (metingInfo.blIsHetKanaalGeselecteerd[1] && i < metingInfo.aantalGeselecteerdeKanalen)
-                {
-                    tbxFIO1.Text = readings[i].ToString();
-                    i++;
-                }
-                if (metingInfo.blIsHetKanaalGeselecteerd[2] && i < metingInfo.aantalGeselecteerdeKanalen)
-                {
-                    tbxFIO2.Text = readings[i].ToString();
-                    i++;
-                }
-                if (metingInfo.blIsHetKanaalGeselecteerd[3] && i < metingInfo.aantalGeselecteerdeKanalen)
-                {
-                    tbxFIO3.Text = readings[i].ToString();
-                    i++;
-                }
-                if (metingInfo.blIsHetKanaalGeselecteerd[4] && i < metingInfo.aantalGeselecteerdeKanalen)
-                {
-                    tbxFIO4.Text = readings[i].ToString();
-                    i++;
-                }
-                if (metingInfo.blIsHetKanaalGeselecteerd[5] && i < metingInfo.aantalGeselecteerdeKanalen)
-                {
-                    tbxFIO5.Text = readings[i].ToString();
-                    i++;
-                }
-                if (metingInfo.blIsHetKanaalGeselecteerd[6] && i < metingInfo.aantalGeselecteerdeKanalen)
-                {
-                    tbxFIO6.Text = readings[i].ToString();
-                    i++;
-                }
-                if (metingInfo.blIsHetKanaalGeselecteerd[7] && i < metingInfo.aantalGeselecteerdeKanalen)
-                {
-                    tbxFIO7.Text = readings[i].ToString();
-                    i++;
-                }
+
+                ////////////////////////////////////////////////////////////////////////////////////////////////// HIER VERDER ///////////////////////////////////////////////////////////
+                //if(expertSettingsToolStripMenuItem.Checked
+
+                ////na analoge kanalen komt het digitale kanaal
+                //int i = 0;
+                //if (metingInfo.blIsHetDigitaleKanaalGeselecteerd[0] && i < metingInfo.aantalGeselecteerdeDigitaleKanalen)
+                //{
+                //    tbxFIO0.Text = readings[i].ToString();
+                //    i++;
+                //}
+
+                //update tekst
+                tbxFIO0.Text = textBoxesMain[0];
+                tbxFIO1.Text = textBoxesMain[1];
+                tbxFIO2.Text = textBoxesMain[2];
+                tbxFIO3.Text = textBoxesMain[3];
+                tbxFIO4.Text = textBoxesMain[4];
+                tbxFIO5.Text = textBoxesMain[5];
+                tbxFIO6.Text = textBoxesMain[6];
+                tbxFIO7.Text = textBoxesMain[7];
             }
         }
 
@@ -385,6 +390,137 @@ namespace BT_Labjack_Stream
             gbxInstellingen.Enabled = true;
         }
 
+        private void instellingenAanuitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            instellingenAanuitToolStripMenuItem.Checked = !instellingenAanuitToolStripMenuItem.Checked;
+            gbxInstellingen.Visible = instellingenAanuitToolStripMenuItem.Checked;
+        }
+
+        private void tscbxSampleFrequentie_TextChanged(object sender, EventArgs e)
+        {
+            metingInfo.sampleFrequentie = Convert.ToInt16(tscbxSampleFrequentie.Text);
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            try
+            {
+                LJUD.Close();
+            }
+            catch (LabJackUDException)
+            {
+            }
+        }
+
+        private void AlleKanalenAanUit_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AlleKanalenAanUit_ToolStripMenuItem.Checked = !AlleKanalenAanUit_ToolStripMenuItem.Checked;
+            cbxFIO0.Checked = AlleKanalenAanUit_ToolStripMenuItem.Checked;
+            cbxFIO1.Checked = AlleKanalenAanUit_ToolStripMenuItem.Checked;
+            cbxFIO2.Checked = AlleKanalenAanUit_ToolStripMenuItem.Checked;
+            cbxFIO3.Checked = AlleKanalenAanUit_ToolStripMenuItem.Checked;
+            cbxFIO4.Checked = AlleKanalenAanUit_ToolStripMenuItem.Checked;
+            cbxFIO5.Checked = AlleKanalenAanUit_ToolStripMenuItem.Checked;
+            cbxFIO6.Checked = AlleKanalenAanUit_ToolStripMenuItem.Checked;
+            cbxFIO7.Checked = AlleKanalenAanUit_ToolStripMenuItem.Checked;
+        }
+
+        private void GeselecteerdeKanalenOpslaan_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            cbxOpslaanFIO0.Checked = cbxFIO0.Checked;
+            cbxOpslaanFIO1.Checked = cbxFIO1.Checked;
+            cbxOpslaanFIO2.Checked = cbxFIO2.Checked;
+            cbxOpslaanFIO3.Checked = cbxFIO3.Checked;
+            cbxOpslaanFIO4.Checked = cbxFIO4.Checked;
+            cbxOpslaanFIO5.Checked = cbxFIO5.Checked;
+            cbxOpslaanFIO6.Checked = cbxFIO6.Checked;
+            cbxOpslaanFIO7.Checked = cbxFIO7.Checked;
+        }
+
+        private void saveDataInLists(double[] data)
+        {
+            //Schrijf waardes naar form
+            for (int i = 0; i < (metingInfo.aantalGeselecteerdeAnalogeKanalen * metingInfo.sampleFrequentie); i = i + metingInfo.aantalGeselecteerdeAnalogeKanalen)
+            {
+                int j = 0;
+                if (metingInfo.blIsHetAnalogeKanaalGeselecteerd[0] && j < metingInfo.aantalGeselecteerdeAnalogeKanalen && cbxOpslaanFIO0.Checked)
+                {
+                    dataChannel[0].Add(data[i]);
+                    j++;
+                }
+                if (metingInfo.blIsHetAnalogeKanaalGeselecteerd[1] && j < metingInfo.aantalGeselecteerdeAnalogeKanalen && cbxOpslaanFIO1.Checked)
+                {
+                    dataChannel[j].Add(data[i + j]);
+                    j++;
+                }
+                if (metingInfo.blIsHetAnalogeKanaalGeselecteerd[2] && j < metingInfo.aantalGeselecteerdeAnalogeKanalen && cbxOpslaanFIO2.Checked)
+                {
+                    dataChannel[j].Add(data[i + j]);
+                    j++;
+                }
+                if (metingInfo.blIsHetAnalogeKanaalGeselecteerd[3] && j < metingInfo.aantalGeselecteerdeAnalogeKanalen && cbxOpslaanFIO3.Checked)
+                {
+                    dataChannel[j].Add(data[i + j]);
+                    j++;
+                }
+                if (metingInfo.blIsHetAnalogeKanaalGeselecteerd[4] && j < metingInfo.aantalGeselecteerdeAnalogeKanalen && cbxOpslaanFIO4.Checked)
+                {
+                    dataChannel[j].Add(data[i + j]);
+                    j++;
+                }
+                if (metingInfo.blIsHetAnalogeKanaalGeselecteerd[5] && j < metingInfo.aantalGeselecteerdeAnalogeKanalen && cbxOpslaanFIO5.Checked)
+                {
+                    dataChannel[j].Add(data[i + j]);
+                    j++;
+                }
+                if (metingInfo.blIsHetAnalogeKanaalGeselecteerd[6] && j < metingInfo.aantalGeselecteerdeAnalogeKanalen && cbxOpslaanFIO6.Checked)
+                {
+                    dataChannel[j].Add(data[i + j]);
+                    j++;
+                }
+                if (metingInfo.blIsHetAnalogeKanaalGeselecteerd[7] && j < metingInfo.aantalGeselecteerdeAnalogeKanalen && cbxOpslaanFIO7.Checked)
+                {
+                    dataChannel[j].Add(data[i + j]);
+                    j++;
+                }
+            }
+        }
+
+        private void metingOpslaanAlsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (fh == null)
+                fh = new ExportData("BT Labjack Streamer");
+            fh.SaveFile();
+
+            ////geef benodigde data aan ExportData
+            fh.AantalGeselecteerdeKanalen = metingInfo.aantalGeselecteerdeAnalogeKanalen;
+            fh.IsHetKanaalGeselecteerd = metingInfo.blIsHetAnalogeKanaalGeselecteerd;
+            fh.SampleFrequentie = metingInfo.sampleFrequentie;
+            fh.LabjackID = serienummerToolStripMenuItem1.Text;
+
+            fh.Export(dataChannel);
+        }
+
+        private void creditzToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AboutBox ab = new AboutBox();
+            ab.Show();
+        }
+
+        private void expertSettingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            expertSettingsToolStripMenuItem.Checked = !expertSettingsToolStripMenuItem.Checked;
+            if (expertSettingsToolStripMenuItem.Checked) //AAN
+            {
+                frmExpert.Show();
+                refreshSettings();
+            }
+            else //UIT
+            {
+                frmExpert.Hide();
+            }
+        }
+
         private void resetLabjack()
         {
             tsslbl_Error.Text = "";
@@ -392,7 +528,7 @@ namespace BT_Labjack_Stream
             if (u3 != null)
             {
                 LJUD.ResetLabJack(u3.ljhandle);
-                MessageBox.Show("Even geduld...");
+                MessageBox.Show("Wacht a.u.b. op het bericht:" + " Verbonden met de Labjack ");
                 Thread.Sleep(5000);
 
                 u3 = null;
@@ -449,71 +585,169 @@ namespace BT_Labjack_Stream
         private void refreshSettings()
         {
             //instelling te meten kanalen
-
-            metingInfo.blIsHetKanaalGeselecteerd = new bool[aantalKanalen];
-            metingInfo.aantalGeselecteerdeKanalen = 0;
+            metingInfo.blIsHetAnalogeKanaalGeselecteerd = new bool[aantalKanalen];
+            metingInfo.blIsHetDigitaleKanaalGeselecteerd = new bool[aantalKanalen];
+            metingInfo.aantalGeselecteerdeAnalogeKanalen = 0;
+            metingInfo.aantalGeselecteerdeDigitaleKanalen = 0;
             metingInfo.instellingAnalogeKanalen = 0;
+            metingInfo.instellingDigitaleKanalen = 0;
 
+            //instellen Expert settings
+            if (expertSettingsToolStripMenuItem.Checked)
+            {
+                frmExpert.EnableFIO0 = cbxFIO0.Checked;
+                frmExpert.EnableFIO1 = cbxFIO1.Checked;
+                frmExpert.EnableFIO2 = cbxFIO2.Checked;
+                frmExpert.EnableFIO3 = cbxFIO3.Checked;
+                frmExpert.EnableFIO4 = cbxFIO4.Checked;
+                frmExpert.EnableFIO5 = cbxFIO5.Checked;
+                frmExpert.EnableFIO6 = cbxFIO6.Checked;
+                frmExpert.EnableFIO7 = cbxFIO7.Checked;
+            }
+
+            //Loop alle instellingen door en pas daarbij de later benodigde variabelen aan
+            #region INSTELLINGEN
             if (cbxFIO0.Checked)
             {
-                metingInfo.instellingAnalogeKanalen += 1;
-                metingInfo.blIsHetKanaalGeselecteerd[0] = true; //
-                metingInfo.aantalGeselecteerdeKanalen++;
+                if (expertSettingsToolStripMenuItem.Checked && frmExpert.cbx_Digitaal_FIO0) //digitaal
+                {
+                    metingInfo.instellingDigitaleKanalen += 1;
+                    metingInfo.blIsHetDigitaleKanaalGeselecteerd[0] = true; //
+                    metingInfo.aantalGeselecteerdeDigitaleKanalen++;
+                }
+                else //analoog
+                {
+                    metingInfo.instellingAnalogeKanalen += 1;
+                    metingInfo.blIsHetAnalogeKanaalGeselecteerd[0] = true; //
+                    metingInfo.aantalGeselecteerdeAnalogeKanalen++;
+                }
             }
+
             if (cbxFIO1.Checked)
             {
-                metingInfo.instellingAnalogeKanalen += 2;
-                metingInfo.blIsHetKanaalGeselecteerd[1] = true; //
-                metingInfo.aantalGeselecteerdeKanalen++;
+                if (expertSettingsToolStripMenuItem.Checked && frmExpert.cbx_Digitaal_FIO1) //digitaal
+                {
+                    metingInfo.instellingDigitaleKanalen += 2;
+                    metingInfo.blIsHetDigitaleKanaalGeselecteerd[1] = true; //
+                    metingInfo.aantalGeselecteerdeDigitaleKanalen++;
+                }
+                else //analoog
+                {
+                    metingInfo.instellingAnalogeKanalen += 2;
+                    metingInfo.blIsHetAnalogeKanaalGeselecteerd[1] = true; //
+                    metingInfo.aantalGeselecteerdeAnalogeKanalen++;
+                }
             }
+
             if (cbxFIO2.Checked)
             {
-                metingInfo.instellingAnalogeKanalen += 4;
-                metingInfo.blIsHetKanaalGeselecteerd[2] = true; //
-                metingInfo.aantalGeselecteerdeKanalen++;
+                if (expertSettingsToolStripMenuItem.Checked && frmExpert.cbx_Digitaal_FIO2) //digitaal
+                {
+                    metingInfo.instellingDigitaleKanalen += 4;
+                    metingInfo.blIsHetDigitaleKanaalGeselecteerd[2] = true; //
+                    metingInfo.aantalGeselecteerdeDigitaleKanalen++;
+                }
+                else //analoog
+                {
+                    metingInfo.instellingAnalogeKanalen += 4;
+                    metingInfo.blIsHetAnalogeKanaalGeselecteerd[2] = true; //
+                    metingInfo.aantalGeselecteerdeAnalogeKanalen++;
+                }
             }
+
             if (cbxFIO3.Checked)
             {
-                metingInfo.instellingAnalogeKanalen += 8;
-                metingInfo.blIsHetKanaalGeselecteerd[3] = true; //
-                metingInfo.aantalGeselecteerdeKanalen++;
+                if (expertSettingsToolStripMenuItem.Checked && frmExpert.cbx_Digitaal_FIO3) //digitaal
+                {
+                    metingInfo.instellingDigitaleKanalen += 8;
+                    metingInfo.blIsHetDigitaleKanaalGeselecteerd[3] = true; //
+                    metingInfo.aantalGeselecteerdeDigitaleKanalen++;
+                }
+                else //analoog
+                {
+                    metingInfo.instellingAnalogeKanalen += 8;
+                    metingInfo.blIsHetAnalogeKanaalGeselecteerd[3] = true; //
+                    metingInfo.aantalGeselecteerdeAnalogeKanalen++;
+                }
             }
+
             if (cbxFIO4.Checked)
             {
-                metingInfo.instellingAnalogeKanalen += 16;
-                metingInfo.blIsHetKanaalGeselecteerd[4] = true; //
-                metingInfo.aantalGeselecteerdeKanalen++;
+                if (expertSettingsToolStripMenuItem.Checked && frmExpert.cbx_Digitaal_FIO4) //digitaal
+                {
+                    metingInfo.instellingDigitaleKanalen += 16;
+                    metingInfo.blIsHetDigitaleKanaalGeselecteerd[4] = true; //
+                    metingInfo.aantalGeselecteerdeDigitaleKanalen++;
+                }
+                else //analoog
+                {
+                    metingInfo.instellingAnalogeKanalen += 16;
+                    metingInfo.blIsHetAnalogeKanaalGeselecteerd[4] = true; //
+                    metingInfo.aantalGeselecteerdeAnalogeKanalen++;
+                }
             }
+
             if (cbxFIO5.Checked)
             {
-                metingInfo.instellingAnalogeKanalen += 32;
-                metingInfo.blIsHetKanaalGeselecteerd[5] = true; //
-                metingInfo.aantalGeselecteerdeKanalen++;
+                if (expertSettingsToolStripMenuItem.Checked && frmExpert.cbx_Digitaal_FIO5) //digitaal
+                {
+                    metingInfo.instellingDigitaleKanalen += 32;
+                    metingInfo.blIsHetDigitaleKanaalGeselecteerd[5] = true; //
+                    metingInfo.aantalGeselecteerdeDigitaleKanalen++;
+                }
+                else //analoog
+                {
+                    metingInfo.instellingAnalogeKanalen += 32;
+                    metingInfo.blIsHetAnalogeKanaalGeselecteerd[5] = true; //
+                    metingInfo.aantalGeselecteerdeAnalogeKanalen++;
+                }
             }
+
             if (cbxFIO6.Checked)
             {
-                metingInfo.instellingAnalogeKanalen += 64;
-                metingInfo.blIsHetKanaalGeselecteerd[6] = true; //
-                metingInfo.aantalGeselecteerdeKanalen++;
+                if (expertSettingsToolStripMenuItem.Checked && frmExpert.cbx_Digitaal_FIO6) //digitaal
+                {
+                    metingInfo.instellingDigitaleKanalen += 64;
+                    metingInfo.blIsHetDigitaleKanaalGeselecteerd[6] = true; //
+                    metingInfo.aantalGeselecteerdeDigitaleKanalen++;
+                }
+                else //analoog
+                {
+                    metingInfo.instellingAnalogeKanalen += 64;
+                    metingInfo.blIsHetAnalogeKanaalGeselecteerd[6] = true; //
+                    metingInfo.aantalGeselecteerdeAnalogeKanalen++;
+                }
             }
+
             if (cbxFIO7.Checked)
             {
-                metingInfo.instellingAnalogeKanalen += 128;
-                metingInfo.blIsHetKanaalGeselecteerd[7] = true; //
-                metingInfo.aantalGeselecteerdeKanalen++;
+                if (expertSettingsToolStripMenuItem.Checked && frmExpert.cbx_Digitaal_FIO7) //digitaal
+                {
+                    metingInfo.instellingDigitaleKanalen += 128;
+                    metingInfo.blIsHetDigitaleKanaalGeselecteerd[7] = true; //
+                    metingInfo.aantalGeselecteerdeDigitaleKanalen++;
+                }
+                else //analoog
+                {
+                    metingInfo.instellingAnalogeKanalen += 128;
+                    metingInfo.blIsHetAnalogeKanaalGeselecteerd[7] = true; //
+                    metingInfo.aantalGeselecteerdeAnalogeKanalen++;
+                }
             }
+            #endregion
 
             //instellingen
             numScans = (2 * metingInfo.sampleFrequentie * metingInfo.delayms) / 1000;
             metingInfo.sampleFrequentie = Convert.ToInt16(tscbxSampleFrequentie.Text);
-            adblData = new double[metingInfo.aantalGeselecteerdeKanalen * (Int16)numScans * 2];
-            dataChannel = new List<double>[metingInfo.aantalGeselecteerdeKanalen];
-            for (int i = 0; i < metingInfo.aantalGeselecteerdeKanalen; i++) //prepareer juiste datalijsten
+            adblData = new double[metingInfo.aantalGeselecteerdeAnalogeKanalen * (Int16)numScans * 2];
+            dataChannel = new List<double>[metingInfo.aantalGeselecteerdeAnalogeKanalen];
+
+            for (int i = 0; i < metingInfo.aantalGeselecteerdeAnalogeKanalen; i++) //prepareer juiste datalijsten
             {
                 dataChannel[i] = new List<double>(120 * (int)metingInfo.sampleFrequentie * 2); //size 
             }
 
-            //refresh form
+            //clear texboxes
             tbxFIO0.Clear();
             tbxFIO1.Clear();
             tbxFIO2.Clear();
@@ -522,190 +756,60 @@ namespace BT_Labjack_Stream
             tbxFIO5.Clear();
             tbxFIO6.Clear();
             tbxFIO7.Clear();
-        }
 
-        private void instellingenAanuitToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            instellingenAanuitToolStripMenuItem.Checked = !instellingenAanuitToolStripMenuItem.Checked;
-            gbxInstellingen.Visible = instellingenAanuitToolStripMenuItem.Checked;
-        }
 
-        private void tscbxSampleFrequentie_TextChanged(object sender, EventArgs e)
-        {
-            metingInfo.sampleFrequentie = Convert.ToInt16(tscbxSampleFrequentie.Text);
-        }
 
-        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            try
-            {
-                LJUD.Close();
-            }
-            catch (LabJackUDException ee)
-            {
-            }
-        }
-
-        private void AlleKanalenAanUit_ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            AlleKanalenAanUit_ToolStripMenuItem.Checked = !AlleKanalenAanUit_ToolStripMenuItem.Checked;
-            cbxFIO0.Checked = AlleKanalenAanUit_ToolStripMenuItem.Checked;
-            cbxFIO1.Checked = AlleKanalenAanUit_ToolStripMenuItem.Checked;
-            cbxFIO2.Checked = AlleKanalenAanUit_ToolStripMenuItem.Checked;
-            cbxFIO3.Checked = AlleKanalenAanUit_ToolStripMenuItem.Checked;
-            cbxFIO4.Checked = AlleKanalenAanUit_ToolStripMenuItem.Checked;
-            cbxFIO5.Checked = AlleKanalenAanUit_ToolStripMenuItem.Checked;
-            cbxFIO6.Checked = AlleKanalenAanUit_ToolStripMenuItem.Checked;
-            cbxFIO7.Checked = AlleKanalenAanUit_ToolStripMenuItem.Checked;
-        }
-
-        private void GeselecteerdeKanalenOpslaan_ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            cbxOpslaanFIO0.Checked = cbxFIO0.Checked;
-            cbxOpslaanFIO1.Checked = cbxFIO1.Checked;
-            cbxOpslaanFIO2.Checked = cbxFIO2.Checked;
-            cbxOpslaanFIO3.Checked = cbxFIO3.Checked;
-            cbxOpslaanFIO4.Checked = cbxFIO4.Checked;
-            cbxOpslaanFIO5.Checked = cbxFIO5.Checked;
-            cbxOpslaanFIO6.Checked = cbxFIO6.Checked;
-            cbxOpslaanFIO7.Checked = cbxFIO7.Checked;
-        }
-
-        private void saveDataInLists(double[] data)
-        {
-            //Schrijf waardes naar form
-            for (int i = 0; i < (metingInfo.aantalGeselecteerdeKanalen * metingInfo.sampleFrequentie); i = i + metingInfo.aantalGeselecteerdeKanalen)
-            {
-                int j = 0;
-                if (metingInfo.blIsHetKanaalGeselecteerd[0] && j < metingInfo.aantalGeselecteerdeKanalen && cbxOpslaanFIO0.Checked)
-                {
-                    dataChannel[0].Add(data[i]);
-                    j++;
-                }
-                if (metingInfo.blIsHetKanaalGeselecteerd[1] && j < metingInfo.aantalGeselecteerdeKanalen && cbxOpslaanFIO1.Checked)
-                {
-                    dataChannel[j].Add(data[i + j]);
-                    j++;
-                }
-                if (metingInfo.blIsHetKanaalGeselecteerd[2] && j < metingInfo.aantalGeselecteerdeKanalen && cbxOpslaanFIO2.Checked)
-                {
-                    dataChannel[j].Add(data[i + j]);
-                    j++;
-                }
-                if (metingInfo.blIsHetKanaalGeselecteerd[3] && j < metingInfo.aantalGeselecteerdeKanalen && cbxOpslaanFIO3.Checked)
-                {
-                    dataChannel[j].Add(data[i + j]);
-                    j++;
-                }
-                if (metingInfo.blIsHetKanaalGeselecteerd[4] && j < metingInfo.aantalGeselecteerdeKanalen && cbxOpslaanFIO4.Checked)
-                {
-                    dataChannel[j].Add(data[i + j]);
-                    j++;
-                }
-                if (metingInfo.blIsHetKanaalGeselecteerd[5] && j < metingInfo.aantalGeselecteerdeKanalen && cbxOpslaanFIO5.Checked)
-                {
-                    dataChannel[j].Add(data[i + j]);
-                    j++;
-                }
-                if (metingInfo.blIsHetKanaalGeselecteerd[6] && j < metingInfo.aantalGeselecteerdeKanalen && cbxOpslaanFIO6.Checked)
-                {
-                    dataChannel[j].Add(data[i + j]);
-                    j++;
-                }
-                if (metingInfo.blIsHetKanaalGeselecteerd[7] && j < metingInfo.aantalGeselecteerdeKanalen && cbxOpslaanFIO7.Checked)
-                {
-                    dataChannel[j].Add(data[i + j]);
-                    j++;
-                }
-            }
-        }
-
-        private void metingOpslaanAlsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (fh == null)
-                fh = new ExportData("BT Labjack Streamer");
-            fh.SaveFile();
-
-            ////geef benodigde data aan ExportData
-            fh.AantalGeselecteerdeKanalen = metingInfo.aantalGeselecteerdeKanalen;
-            fh.IsHetKanaalGeselecteerd = metingInfo.blIsHetKanaalGeselecteerd;
-            fh.SampleFrequentie = metingInfo.sampleFrequentie;
-            fh.LabjackID = serienummerToolStripMenuItem1.Text;
-
-            fh.Export(dataChannel);
         }
 
         #region CHECKBOXES
         private void cbxFIO0_CheckedChanged(object sender, EventArgs e)
-        {          
-           //cbxFIO0Digitaal.Enabled = cbxFIO0.Checked;
-           cbxOpslaanFIO0.Enabled = cbxFIO0.Checked; 
+        {
+            cbxOpslaanFIO0.Enabled = cbxFIO0.Checked;
+            frmExpert.EnableFIO0 = cbxFIO0.Checked;
         }
 
         private void cbxFIO1_CheckedChanged(object sender, EventArgs e)
         {
-            //cbxFIO1Digitaal.Enabled = cbxFIO1.Checked;
-            cbxOpslaanFIO1.Enabled = cbxFIO1.Checked; 
+            cbxOpslaanFIO1.Enabled = cbxFIO1.Checked;
+            frmExpert.EnableFIO1 = cbxFIO1.Checked;
         }
 
         private void cbxFIO2_CheckedChanged(object sender, EventArgs e)
         {
-            //cbxFIO2Digitaal.Enabled = cbxFIO2.Checked;
-            cbxOpslaanFIO2.Enabled = cbxFIO2.Checked; 
+            cbxOpslaanFIO2.Enabled = cbxFIO2.Checked;
+            frmExpert.EnableFIO2 = cbxFIO2.Checked;
         }
 
         private void cbxFIO3_CheckedChanged(object sender, EventArgs e)
         {
-            //cbxFIO3Digitaal.Enabled = cbxFIO3.Checked;
-            cbxOpslaanFIO3.Enabled = cbxFIO3.Checked; 
+            cbxOpslaanFIO3.Enabled = cbxFIO3.Checked;
+            frmExpert.EnableFIO3 = cbxFIO3.Checked;
         }
 
         private void cbxFIO4_CheckedChanged(object sender, EventArgs e)
         {
-            //cbxFIO4Digitaal.Enabled = cbxFIO4.Checked;
-            cbxOpslaanFIO4.Enabled = cbxFIO4.Checked; 
+            cbxOpslaanFIO4.Enabled = cbxFIO4.Checked;
+            frmExpert.EnableFIO4 = cbxFIO4.Checked;
         }
 
         private void cbxFIO5_CheckedChanged(object sender, EventArgs e)
         {
-            //cbxFIO5Digitaal.Enabled = cbxFIO5.Checked;
-            cbxOpslaanFIO5.Enabled = cbxFIO5.Checked; 
+            cbxOpslaanFIO5.Enabled = cbxFIO5.Checked;
+            frmExpert.EnableFIO5 = cbxFIO5.Checked;
         }
 
         private void cbxFIO6_CheckedChanged(object sender, EventArgs e)
         {
-            //cbxFIO6Digitaal.Enabled = cbxFIO6.Checked;
-            cbxOpslaanFIO6.Enabled = cbxFIO6.Checked; 
+            cbxOpslaanFIO6.Enabled = cbxFIO6.Checked;
+            frmExpert.EnableFIO6 = cbxFIO6.Checked;
         }
 
         private void cbxFIO7_CheckedChanged(object sender, EventArgs e)
         {
-            //cbxFIO7Digitaal.Enabled = cbxFIO7.Checked;
-            cbxOpslaanFIO7.Enabled = cbxFIO7.Checked; 
+            cbxOpslaanFIO7.Enabled = cbxFIO7.Checked;
+            frmExpert.EnableFIO7 = cbxFIO7.Checked;
         }
         #endregion
-
-        private void creditzToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            AboutBox ab = new AboutBox();
-            ab.Show();
-        }
-
-        private void expertSettingsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            expertSettingsToolStripMenuItem.Checked = !expertSettingsToolStripMenuItem.Checked;
-            if(expertSettingsToolStripMenuItem.Checked)
-            {
-                if(frm_expertSettings==null)
-                    frm_expertSettings = new frmExpertSettings(expertSettingsToolStripMenuItem);
-                frm_expertSettings.Show();
-
-
-
-            }
-        }
-
-
         //EINDE KLASSE
     }
 }
