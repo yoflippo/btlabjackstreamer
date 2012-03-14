@@ -7,7 +7,7 @@ using System.Windows.Forms;
 using System.IO;
 
 
-namespace BTKinect
+namespace BT_Labjack_Stream
 {
     class FileHandling
     {
@@ -15,11 +15,9 @@ namespace BTKinect
         private string fileLocation = null;
         private string fileLocationAndFileName = null;
         private bool _blFileFound = false;
-        private SaveFileDialog saveFileDialog;
-        private OpenFileDialog openFileDialog;
-        public const string StringHeaderRaw = "**Tijd \t Marker \t HoofdX \t HoofdY \t HoofdZ \t NekX \t NekY \t NekZ \t LinkerSchouderX \t LinkerSchouderY \t LinkerSchouderZ \t LinkerElleboogX \t LinkerElleboogY \t LinkerElleboogZ \t LinkerHandX \t LinkerHandY \t LinkerHandZ \t RechterSchouderX \t RechterSchouderY \t RechterSchouderZ \t RechterElleboogX \t RechterElleboogY \t RechterElleboogZ \t RechterHandX \t RechterHandY \t RechterHandZ \t TorsoX \t TorsoY \t TorsoZ \t LinkerHeupX \t LinkerHeupY \t LinkerHeupZ \t LinkerKnieY \t LinkerKnieY \t LinkerKnieZ \t LinkerVoetX \t LinkerVoetY \t LinkerVoetZ \t RechterHeupX \t RechterHeupY \t RechterHeupZ \t RechterKnieX \t RechterKnieY \t RechterKnieZ \t RechterVoetX \t RechterVoetY \t RechterVoetZ";
-        public const string StringHeaderRawMarker = "**Tijd \t HoofdX \t HoofdY \t HoofdZ \t NekX \t NekY \t NekZ \t LinkerSchouderX \t LinkerSchouderY \t LinkerSchouderZ \t LinkerElleboogX \t LinkerElleboogY \t LinkerElleboogZ \t LinkerHandX \t LinkerHandY \t LinkerHandZ \t RechterSchouderX \t RechterSchouderY \t RechterSchouderZ \t RechterElleboogX \t RechterElleboogY \t RechterElleboogZ \t RechterHandX \t RechterHandY \t RechterHandZ \t TorsoX \t TorsoY \t TorsoZ \t LinkerHeupX \t LinkerHeupY \t LinkerHeupZ \t LinkerKnieY \t LinkerKnieY \t LinkerKnieZ \t LinkerVoetX \t LinkerVoetY \t LinkerVoetZ \t RechterHeupX \t RechterHeupY \t RechterHeupZ \t RechterKnieX \t RechterKnieY \t RechterKnieZ \t RechterVoetX \t RechterVoetY \t RechterVoetZ";
-
+        private SaveFileDialog saveFileDialog = null;
+        private OpenFileDialog openFileDialog = null;
+       
         private void handleDialog(FileDialog fileDialog)
         {
             // Default file extension
