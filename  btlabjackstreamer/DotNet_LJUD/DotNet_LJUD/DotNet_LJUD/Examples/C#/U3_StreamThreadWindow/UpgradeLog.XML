@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="U3_StreamWindowed">
+</Property><Property Name="Solution File" Value="D:\PROJECTEN\LABJACK\DotNet_LJUD\DotNet_LJUD\Examples\C#\U3_StreamThreadWindow\U3_StreamWindowed.sln">
+</Property><Property Name="User Options File" Value="D:\PROJECTEN\LABJACK\DotNet_LJUD\DotNet_LJUD\Examples\C#\U3_StreamThreadWindow\U3_StreamWindowed.suo">
+</Property><Property Name="Date" Value="donderdag 8 maart 2012">
+</Property><Property Name="Time" Value="14:22">
+</Property></Properties><Event ErrorLevel="0" Project="" Source="U3_StreamWindowed.sln" Description="File successfully backed up as D:\PROJECTEN\LABJACK\DotNet_LJUD\DotNet_LJUD\Examples\C#\U3_StreamThreadWindow\Backup\U3_StreamWindowed.sln">
+</Event><Event ErrorLevel="0" Project="" Source="U3_StreamWindowed.suo" Description="File successfully backed up as D:\PROJECTEN\LABJACK\DotNet_LJUD\DotNet_LJUD\Examples\C#\U3_StreamThreadWindow\Backup\U3_StreamWindowed.suo">
+</Event><Event ErrorLevel="0" Project="U3_StreamWindowed" Source="U3_StreamWindowed.csproj" Description="Project file successfully backed up as D:\PROJECTEN\LABJACK\DotNet_LJUD\DotNet_LJUD\Examples\C#\U3_StreamThreadWindow\Backup\U3_StreamWindowed.csproj">
+</Event><Event ErrorLevel="0" Project="U3_StreamWindowed" Source="U3_StreamWindowed.csproj.user" Description="Project user file successfully backed up as D:\PROJECTEN\LABJACK\DotNet_LJUD\DotNet_LJUD\Examples\C#\U3_StreamThreadWindow\Backup\U3_StreamWindowed.csproj.user">
+</Event><Event ErrorLevel="0" Project="U3_StreamWindowed" Source="AssemblyInfo.cs" Description="File successfully backed up as D:\PROJECTEN\LABJACK\DotNet_LJUD\DotNet_LJUD\Examples\C#\U3_StreamThreadWindow\Backup\AssemblyInfo.cs">
+</Event><Event ErrorLevel="0" Project="U3_StreamWindowed" Source="StreamWindowed.cs" Description="File successfully backed up as D:\PROJECTEN\LABJACK\DotNet_LJUD\DotNet_LJUD\Examples\C#\U3_StreamThreadWindow\Backup\StreamWindowed.cs">
+</Event><Event ErrorLevel="0" Project="U3_StreamWindowed" Source="App.ico" Description="File successfully backed up as D:\PROJECTEN\LABJACK\DotNet_LJUD\DotNet_LJUD\Examples\C#\U3_StreamThreadWindow\Backup\App.ico">
+</Event><Event ErrorLevel="0" Project="U3_StreamWindowed" Source="StreamWindowed.resx" Description="File successfully backed up as D:\PROJECTEN\LABJACK\DotNet_LJUD\DotNet_LJUD\Examples\C#\U3_StreamThreadWindow\Backup\StreamWindowed.resx">
+</Event><Event ErrorLevel="0" Project="U3_StreamWindowed" Source="U3_StreamWindowed.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="U3_StreamWindowed" Source="U3_StreamWindowed.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="U3_StreamWindowed.sln" Description="Solution converted successfully">
+</Event><Event ErrorLevel="3" Project="" Source="U3_StreamWindowed.sln" Description="Converted">
+</Event><Event ErrorLevel="0" Project="U3_StreamWindowed" Source="U3_StreamWindowed.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event></UpgradeLog>

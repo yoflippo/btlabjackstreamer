@@ -355,6 +355,7 @@ namespace BT_Labjack_Stream
         }
         #endregion
 
+
         #endregion 
         //EINDE KLASSE
     }

@@ -31,6 +31,9 @@ namespace BT_Labjack_Stream
         private ExportData fh = null;
         private static frmExpertSettings frmExpert = null;
         private string[] textBoxesMain = null;
+        private const double msec = 1000.0;
+
+        #region STRUCTS
         public struct metingInformatie
         {
             public int instellingAnalogeKanalen;
@@ -43,7 +46,15 @@ namespace BT_Labjack_Stream
             public bool[] blIsHetDigitaleKanaalGeselecteerd;
             public int delayms;
         };
+        public struct expertInformatie
+        {
+            public bool[] cbxDifferentiaal;
+            public bool[] cbxDigitaal;
+            public int[] diffChannel;
+        }
+        private expertInformatie expertInfo;
         private metingInformatie metingInfo;
+        #endregion
 
         // Create thread delegate
         delegate void BacklogParameterDelegate(double udBacklog, double commBacklog);
@@ -54,26 +65,24 @@ namespace BT_Labjack_Stream
         public frmMain()
         {
             InitializeComponent();
-            
-            //set INFO struct
+
+            //set INFO meting struct
             metingInfo.instellingAnalogeKanalen = 3;
             metingInfo.instellingDigitaleKanalen = 0;
             metingInfo.sampleFrequentie = 500;
             metingInfo.blMarker = false;
             metingInfo.aantalGeselecteerdeAnalogeKanalen = 0;
             metingInfo.blIsHetAnalogeKanaalGeselecteerd = new bool[aantalKanalen];
-            metingInfo.delayms = 1000;
+            metingInfo.delayms = 500;
             metingInfo.aantalGeselecteerdeDigitaleKanalen = 0;
             metingInfo.blIsHetDigitaleKanaalGeselecteerd = new bool[aantalKanalen];
-
-            //
-            refreshSettings();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             connectToLabjack();
             frmExpert = new frmExpertSettings(expertSettingsToolStripMenuItem);
+            refreshSettings();
         }
 
         private void btnStartStop_Click(object sender, EventArgs e)
@@ -153,7 +162,7 @@ namespace BT_Labjack_Stream
                 //will start from channel 0 and update all 16 flexible bits.  We will
                 //pass a value of b0000000000000011 or d3.
                 LJUD.ePut(u3.ljhandle, LJUD.IO.PUT_ANALOG_ENABLE_PORT, 0, metingInfo.instellingAnalogeKanalen, 16);
-                LJUD.ePut(u3.ljhandle, LJUD.IO.PUT_DIGITAL_PORT, 0, 255-metingInfo.instellingAnalogeKanalen, 16);
+                LJUD.ePut(u3.ljhandle, LJUD.IO.PUT_DIGITAL_PORT, 0, 255 - metingInfo.instellingAnalogeKanalen, 16);
 
                 //Configure the stream:
                 //Set the scan rate.
@@ -166,22 +175,31 @@ namespace BT_Labjack_Stream
                 //See comments below to change this program to use LJUD.STREAMWAITMODES.SLEEP mode.
                 LJUD.AddRequest(u3.ljhandle, LJUD.IO.PUT_CONFIG, LJUD.CHANNEL.STREAM_WAIT_MODE, (double)LJUD.STREAMWAITMODES.NONE, 0, 0);
 
-                //Toevoegen van channels
+                ///Toevoegen van channels
                 LJUD.AddRequest(u3.ljhandle, LJUD.IO.CLEAR_STREAM_CHANNELS, 0, 0, 0, 0);
 
-                for (int i = 0; i < aantalKanalen; i++)
+                #region KANALEN_INSTELLEN
+                for (int i = 0; i < aantalKanalen; i++)//De analoge kanalen instellen
                 {
-                    if (metingInfo.blIsHetAnalogeKanaalGeselecteerd[i] & !metingInfo.blIsHetDigitaleKanaalGeselecteerd[i])
+                    if (metingInfo.blIsHetAnalogeKanaalGeselecteerd[i] && !metingInfo.blIsHetDigitaleKanaalGeselecteerd[i]
+                        && !expertInfo.cbxDigitaal[i] && !expertInfo.cbxDifferentiaal[i]) //alleen analoog als niet (digitaal & diff)
                     {
                         LJUD.AddRequest(u3.ljhandle, LJUD.IO.ADD_STREAM_CHANNEL, i, 0, 0, 0);
                     }
                 }
 
-                //Expert settings
-                if (expertSettingsToolStripMenuItem.Checked)
+                if (expertSettingsToolStripMenuItem.Checked) 
                 {
+                    //digitaal kanalen instellen (sowieso als expert settings is ingesteld)
                     LJUD.AddRequest(u3.ljhandle, LJUD.IO.ADD_STREAM_CHANNEL, 193, 0, 0, 0); //193, digitaal kanaal
+
+                    for (int i = 0; i < aantalKanalen; i++)//differentiele kanalen instellen
+                    {
+                        if (expertInfo.cbxDifferentiaal[i])
+                            LJUD.AddRequest(u3.ljhandle, LJUD.IO.ADD_STREAM_CHANNEL_DIFF, i, 0, expertInfo.diffChannel[i], 0);
+                    } 
                 }
+                #endregion
 
                 //Execute the list of requests.
                 LJUD.GoOne(u3.ljhandle);
@@ -439,8 +457,9 @@ namespace BT_Labjack_Stream
 
         private void saveDataInLists(double[] data)
         {
-            //Schrijf waardes naar form
-            for (int i = 0; i < (metingInfo.aantalGeselecteerdeAnalogeKanalen * metingInfo.sampleFrequentie); i = i + metingInfo.aantalGeselecteerdeAnalogeKanalen)
+            //Schrijf waardes in Lists
+            for (int i = 0; i < (metingInfo.aantalGeselecteerdeAnalogeKanalen * metingInfo.sampleFrequentie
+                * (metingInfo.delayms / msec)); i = i + metingInfo.aantalGeselecteerdeAnalogeKanalen)
             {
                 int j = 0;
                 if (metingInfo.blIsHetAnalogeKanaalGeselecteerd[0] && j < metingInfo.aantalGeselecteerdeAnalogeKanalen && cbxOpslaanFIO0.Checked)
@@ -507,20 +526,6 @@ namespace BT_Labjack_Stream
             ab.Show();
         }
 
-        private void expertSettingsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            expertSettingsToolStripMenuItem.Checked = !expertSettingsToolStripMenuItem.Checked;
-            if (expertSettingsToolStripMenuItem.Checked) //AAN
-            {
-                frmExpert.Show();
-                refreshSettings();
-            }
-            else //UIT
-            {
-                frmExpert.Hide();
-            }
-        }
-
         private void resetLabjack()
         {
             tsslbl_Error.Text = "";
@@ -584,6 +589,8 @@ namespace BT_Labjack_Stream
 
         private void refreshSettings()
         {
+            if (streamRunning)
+                return;
             //instelling te meten kanalen
             metingInfo.blIsHetAnalogeKanaalGeselecteerd = new bool[aantalKanalen];
             metingInfo.blIsHetDigitaleKanaalGeselecteerd = new bool[aantalKanalen];
@@ -604,6 +611,36 @@ namespace BT_Labjack_Stream
                 frmExpert.EnableFIO6 = cbxFIO6.Checked;
                 frmExpert.EnableFIO7 = cbxFIO7.Checked;
             }
+
+            //set INFO meting struct
+            expertInfo.cbxDifferentiaal = new bool[aantalKanalen];
+            expertInfo.cbxDigitaal = new bool[aantalKanalen];
+            expertInfo.diffChannel = new int[aantalKanalen];
+
+            expertInfo.cbxDifferentiaal[0] = frmExpert.cbx_Differentiaal_FIO0;  //diff
+            expertInfo.cbxDifferentiaal[1] = frmExpert.cbx_Differentiaal_FIO1;
+            expertInfo.cbxDifferentiaal[2] = frmExpert.cbx_Differentiaal_FIO2;
+            expertInfo.cbxDifferentiaal[3] = frmExpert.cbx_Differentiaal_FIO3;
+            expertInfo.cbxDifferentiaal[4] = frmExpert.cbx_Differentiaal_FIO4;
+            expertInfo.cbxDifferentiaal[5] = frmExpert.cbx_Differentiaal_FIO5;
+            expertInfo.cbxDifferentiaal[6] = frmExpert.cbx_Differentiaal_FIO6;
+            expertInfo.cbxDifferentiaal[7] = frmExpert.cbx_Differentiaal_FIO7;
+            expertInfo.cbxDigitaal[0] = frmExpert.cbx_Digitaal_FIO0;            //digitaal
+            expertInfo.cbxDigitaal[1] = frmExpert.cbx_Digitaal_FIO1;
+            expertInfo.cbxDigitaal[2] = frmExpert.cbx_Digitaal_FIO2;
+            expertInfo.cbxDigitaal[3] = frmExpert.cbx_Digitaal_FIO3;
+            expertInfo.cbxDigitaal[4] = frmExpert.cbx_Digitaal_FIO4;
+            expertInfo.cbxDigitaal[5] = frmExpert.cbx_Digitaal_FIO5;
+            expertInfo.cbxDigitaal[6] = frmExpert.cbx_Digitaal_FIO6;
+            expertInfo.cbxDigitaal[7] = frmExpert.cbx_Digitaal_FIO7;
+            expertInfo.diffChannel[0] = Convert.ToInt16(frmExpert.combxFIO0);   //kanaal
+            expertInfo.diffChannel[1] = Convert.ToInt16(frmExpert.combxFIO1);
+            expertInfo.diffChannel[2] = Convert.ToInt16(frmExpert.combxFIO2);
+            expertInfo.diffChannel[3] = Convert.ToInt16(frmExpert.combxFIO3);
+            expertInfo.diffChannel[4] = Convert.ToInt16(frmExpert.combxFIO4);
+            expertInfo.diffChannel[5] = Convert.ToInt16(frmExpert.combxFIO5);
+            expertInfo.diffChannel[6] = Convert.ToInt16(frmExpert.combxFIO6);
+            expertInfo.diffChannel[7] = Convert.ToInt16(frmExpert.combxFIO7);
 
             //Loop alle instellingen door en pas daarbij de later benodigde variabelen aan
             #region INSTELLINGEN
@@ -737,7 +774,7 @@ namespace BT_Labjack_Stream
             #endregion
 
             //instellingen
-            numScans = (2 * metingInfo.sampleFrequentie * metingInfo.delayms) / 1000;
+            numScans = (2 * metingInfo.sampleFrequentie * metingInfo.delayms) / msec;
             metingInfo.sampleFrequentie = Convert.ToInt16(tscbxSampleFrequentie.Text);
             adblData = new double[metingInfo.aantalGeselecteerdeAnalogeKanalen * (Int16)numScans * 2];
             dataChannel = new List<double>[metingInfo.aantalGeselecteerdeAnalogeKanalen];
@@ -757,7 +794,8 @@ namespace BT_Labjack_Stream
             tbxFIO6.Clear();
             tbxFIO7.Clear();
 
-
+            //set buffer grootte
+            metingInfo.delayms = Convert.ToInt16(tscb_BufferGrootte.Text);
 
         }
 
@@ -810,6 +848,30 @@ namespace BT_Labjack_Stream
             frmExpert.EnableFIO7 = cbxFIO7.Checked;
         }
         #endregion
+
+        private void expertSettingsToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            expertSettingsToolStripMenuItem.Checked = !expertSettingsToolStripMenuItem.Checked;
+            if (expertSettingsToolStripMenuItem.Checked) //AAN
+            {
+                frmExpert.Show();
+                refreshSettings();
+            }
+            else //UIT
+            {
+                frmExpert.Hide();
+            }
+        }
+
+        private void expertSettingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripComboBox1_TextChanged(object sender, EventArgs e)
+        {
+            refreshSettings();
+        }
         //EINDE KLASSE
     }
 }
