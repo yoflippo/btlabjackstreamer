@@ -32,7 +32,7 @@ namespace BT_Labjack_Stream
         private static frmExpertSettings frmExpert = null;
         private string[] textBoxesMain = null;
         private const double msec = 1000.0;
-
+        private byte bDigitaleKanalen = 0;
         #region STRUCTS
         public struct metingInformatie
         {
@@ -44,6 +44,7 @@ namespace BT_Labjack_Stream
             public bool[] blIsHetAnalogeKanaalGeselecteerd;
             public Int16 aantalGeselecteerdeDigitaleKanalen;
             public bool[] blIsHetDigitaleKanaalGeselecteerd;
+            public bool[] IsHetKanaalGeselecteerd;
             public int delayms;
         };
         public struct expertInformatie
@@ -158,12 +159,6 @@ namespace BT_Labjack_Stream
                 //pin assignments are in the factory default condition.
                 LJUD.ePut(u3.ljhandle, LJUD.IO.PIN_CONFIGURATION_RESET, 0, 0, 0);
 
-                //Configure FIO0 and FIO1 as analog, all else as digital.  That means we
-                //will start from channel 0 and update all 16 flexible bits.  We will
-                //pass a value of b0000000000000011 or d3.
-                LJUD.ePut(u3.ljhandle, LJUD.IO.PUT_ANALOG_ENABLE_PORT, 0, metingInfo.instellingAnalogeKanalen, 16);
-                LJUD.ePut(u3.ljhandle, LJUD.IO.PUT_DIGITAL_PORT, 0, 255 - metingInfo.instellingAnalogeKanalen, 16);
-
                 //Configure the stream:
                 //Set the scan rate.
                 LJUD.AddRequest(u3.ljhandle, LJUD.IO.PUT_CONFIG, LJUD.CHANNEL.STREAM_SCAN_FREQUENCY, metingInfo.sampleFrequentie, 0, 0);
@@ -179,28 +174,32 @@ namespace BT_Labjack_Stream
                 LJUD.AddRequest(u3.ljhandle, LJUD.IO.CLEAR_STREAM_CHANNELS, 0, 0, 0, 0);
 
                 #region KANALEN_INSTELLEN
-                for (int i = 0; i < aantalKanalen; i++)//De analoge kanalen instellen
+                for (int i = 0; i < aantalKanalen; i++)
                 {
-                    if (metingInfo.blIsHetAnalogeKanaalGeselecteerd[i] && !metingInfo.blIsHetDigitaleKanaalGeselecteerd[i]
+                    //De analoge kanalen instellen
+                    if (metingInfo.blIsHetAnalogeKanaalGeselecteerd[i]
                         && !expertInfo.cbxDigitaal[i] && !expertInfo.cbxDifferentiaal[i]) //alleen analoog als niet (digitaal & diff)
                     {
                         LJUD.AddRequest(u3.ljhandle, LJUD.IO.ADD_STREAM_CHANNEL, i, 0, 0, 0);
                     }
-                }
 
-                if (expertSettingsToolStripMenuItem.Checked) 
-                {
-                    //digitaal kanalen instellen (sowieso als expert settings is ingesteld)
-                    LJUD.AddRequest(u3.ljhandle, LJUD.IO.ADD_STREAM_CHANNEL, 193, 0, 0, 0); //193, digitaal kanaal
-
-                    for (int i = 0; i < aantalKanalen; i++)//differentiele kanalen instellen
+                    if (expertSettingsToolStripMenuItem.Checked)
                     {
+                        //De digitale kanalen instellen
+                        if (metingInfo.blIsHetDigitaleKanaalGeselecteerd[i] && !expertInfo.cbxDifferentiaal[i])
+                            LJUD.AddRequest(u3.ljhandle, LJUD.IO.GET_DIGITAL_BIT, i, 0, 0, 0);
+
+                        //differentieel kanalen
                         if (expertInfo.cbxDifferentiaal[i])
                             LJUD.AddRequest(u3.ljhandle, LJUD.IO.ADD_STREAM_CHANNEL_DIFF, i, 0, expertInfo.diffChannel[i], 0);
-                    } 
-                }
-                #endregion
+               
+                        ////digitaal kanalen instellen (sowieso als expert settings is ingesteld)
+                        //LJUD.AddRequest(u3.ljhandle, LJUD.IO.ADD_STREAM_CHANNEL, 193, 0, 0, 0); //193, digitaal 
+                    }
+                 }
 
+          
+                #endregion
                 //Execute the list of requests.
                 LJUD.GoOne(u3.ljhandle);
             }
@@ -355,26 +354,18 @@ namespace BT_Labjack_Stream
                 //stop alle waardes/tekst in textBoxesMain en schrijf onderaan alles naar textBoxes
                 textBoxesMain = new string[aantalKanalen];
 
+
                 int tellerReading = 0;
-                for (int i = 0; i < aantalKanalen; i++) //lees readings uit
+                for (int i = 0; i < aantalKanalen; i++)
                 {
-                    if (metingInfo.blIsHetAnalogeKanaalGeselecteerd[i] && tellerReading < metingInfo.aantalGeselecteerdeAnalogeKanalen)
+                    //analoge kanalen
+                    if (metingInfo.IsHetKanaalGeselecteerd[i])
                     {
                         textBoxesMain[i] = readings[tellerReading].ToString();
                         tellerReading++;
                     }
                 }
 
-                ////////////////////////////////////////////////////////////////////////////////////////////////// HIER VERDER ///////////////////////////////////////////////////////////
-                //if(expertSettingsToolStripMenuItem.Checked
-
-                ////na analoge kanalen komt het digitale kanaal
-                //int i = 0;
-                //if (metingInfo.blIsHetDigitaleKanaalGeselecteerd[0] && i < metingInfo.aantalGeselecteerdeDigitaleKanalen)
-                //{
-                //    tbxFIO0.Text = readings[i].ToString();
-                //    i++;
-                //}
 
                 //update tekst
                 tbxFIO0.Text = textBoxesMain[0];
@@ -594,6 +585,7 @@ namespace BT_Labjack_Stream
             //instelling te meten kanalen
             metingInfo.blIsHetAnalogeKanaalGeselecteerd = new bool[aantalKanalen];
             metingInfo.blIsHetDigitaleKanaalGeselecteerd = new bool[aantalKanalen];
+            metingInfo.IsHetKanaalGeselecteerd = new bool[aantalKanalen];
             metingInfo.aantalGeselecteerdeAnalogeKanalen = 0;
             metingInfo.aantalGeselecteerdeDigitaleKanalen = 0;
             metingInfo.instellingAnalogeKanalen = 0;
@@ -658,6 +650,7 @@ namespace BT_Labjack_Stream
                     metingInfo.blIsHetAnalogeKanaalGeselecteerd[0] = true; //
                     metingInfo.aantalGeselecteerdeAnalogeKanalen++;
                 }
+                metingInfo.IsHetKanaalGeselecteerd[0] = true;
             }
 
             if (cbxFIO1.Checked)
@@ -674,6 +667,7 @@ namespace BT_Labjack_Stream
                     metingInfo.blIsHetAnalogeKanaalGeselecteerd[1] = true; //
                     metingInfo.aantalGeselecteerdeAnalogeKanalen++;
                 }
+                metingInfo.IsHetKanaalGeselecteerd[1] = true;
             }
 
             if (cbxFIO2.Checked)
@@ -690,6 +684,7 @@ namespace BT_Labjack_Stream
                     metingInfo.blIsHetAnalogeKanaalGeselecteerd[2] = true; //
                     metingInfo.aantalGeselecteerdeAnalogeKanalen++;
                 }
+                metingInfo.IsHetKanaalGeselecteerd[2] = true;
             }
 
             if (cbxFIO3.Checked)
@@ -706,6 +701,7 @@ namespace BT_Labjack_Stream
                     metingInfo.blIsHetAnalogeKanaalGeselecteerd[3] = true; //
                     metingInfo.aantalGeselecteerdeAnalogeKanalen++;
                 }
+                metingInfo.IsHetKanaalGeselecteerd[3] = true;
             }
 
             if (cbxFIO4.Checked)
@@ -722,6 +718,7 @@ namespace BT_Labjack_Stream
                     metingInfo.blIsHetAnalogeKanaalGeselecteerd[4] = true; //
                     metingInfo.aantalGeselecteerdeAnalogeKanalen++;
                 }
+                metingInfo.IsHetKanaalGeselecteerd[4] = true;
             }
 
             if (cbxFIO5.Checked)
@@ -738,6 +735,7 @@ namespace BT_Labjack_Stream
                     metingInfo.blIsHetAnalogeKanaalGeselecteerd[5] = true; //
                     metingInfo.aantalGeselecteerdeAnalogeKanalen++;
                 }
+                metingInfo.IsHetKanaalGeselecteerd[5] = true;
             }
 
             if (cbxFIO6.Checked)
@@ -754,6 +752,7 @@ namespace BT_Labjack_Stream
                     metingInfo.blIsHetAnalogeKanaalGeselecteerd[6] = true; //
                     metingInfo.aantalGeselecteerdeAnalogeKanalen++;
                 }
+                metingInfo.IsHetKanaalGeselecteerd[6] = true;
             }
 
             if (cbxFIO7.Checked)
@@ -770,6 +769,7 @@ namespace BT_Labjack_Stream
                     metingInfo.blIsHetAnalogeKanaalGeselecteerd[7] = true; //
                     metingInfo.aantalGeselecteerdeAnalogeKanalen++;
                 }
+                metingInfo.IsHetKanaalGeselecteerd[7] = true;
             }
             #endregion
 
@@ -796,7 +796,6 @@ namespace BT_Labjack_Stream
 
             //set buffer grootte
             metingInfo.delayms = Convert.ToInt16(tscb_BufferGrootte.Text);
-
         }
 
         #region CHECKBOXES
