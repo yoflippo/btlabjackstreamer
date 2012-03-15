@@ -41,6 +41,7 @@ namespace BT_Labjack_Stream
             public int sampleFrequentie;
             public bool blMarker;
             public Int16 aantalGeselecteerdeAnalogeKanalen;
+            public Int16 aantalGeselecteerdeKanalen;
             public bool[] blIsHetAnalogeKanaalGeselecteerd;
             public Int16 aantalGeselecteerdeDigitaleKanalen;
             public bool[] blIsHetDigitaleKanaalGeselecteerd;
@@ -169,7 +170,7 @@ namespace BT_Labjack_Stream
                 LJUD.AddRequest(u3.ljhandle, LJUD.IO.PUT_CONFIG, LJUD.CHANNEL.STREAM_SCAN_FREQUENCY, metingInfo.sampleFrequentie, 0, 0);
 
                 //Give the driver a 5 second buffer (metingInfo.sampleFrequentie * 2 channels * 5 seconds).
-                LJUD.AddRequest(u3.ljhandle, LJUD.IO.PUT_CONFIG, LJUD.CHANNEL.STREAM_BUFFER_SIZE, metingInfo.sampleFrequentie * metingInfo.aantalGeselecteerdeAnalogeKanalen * 5, 0, 0);
+                LJUD.AddRequest(u3.ljhandle, LJUD.IO.PUT_CONFIG, LJUD.CHANNEL.STREAM_BUFFER_SIZE, metingInfo.sampleFrequentie * metingInfo.aantalGeselecteerdeKanalen * 5, 0, 0);
 
                 //Configure reads to retrieve whatever data is available without waiting (wait mode LJUD.STREAMWAITMODES.NONE).
                 //See comments below to change this program to use LJUD.STREAMWAITMODES.SLEEP mode.
@@ -358,8 +359,7 @@ namespace BT_Labjack_Stream
                 textBoxesMain = new string[aantalKanalen];
 
 
-                int tellerReading = 0;
-
+                int tellerReading = 0;              
                 for (int i = 0; i < aantalKanalen; i++)
                 {
                     //analoge kanalen en differentiele kanalen
@@ -368,12 +368,15 @@ namespace BT_Labjack_Stream
                         textBoxesMain[i] = readings[tellerReading].ToString();
                         tellerReading++;
                     }
-
                 }
-                textBoxesMain[7] = readings[tellerReading].ToString();
-                textBoxesMain[6] = verkrijgBits(readings[tellerReading]).ToString();
-                textBoxesMain[5] = verkrijgBits(readings[tellerReading]).ToString();
-                textBoxesMain[4] = verkrijgBits(readings[tellerReading]).ToString();
+
+                //digitale kanalen verwerken
+                int[] digKanTemp = verkrijgBits(readings[tellerReading]);
+                for (int i = 0; i < aantalKanalen; i++)
+                {
+                    if (metingInfo.blIsHetDigitaleKanaalGeselecteerd[i])
+                        textBoxesMain[i] = digKanTemp[i].ToString();
+                }
 
                 //update tekst
                 tbxFIO0.Text = textBoxesMain[0];
@@ -391,49 +394,26 @@ namespace BT_Labjack_Stream
         {
             //Schrijf waardes in Lists
             for (int i = 0; i < (metingInfo.aantalGeselecteerdeAnalogeKanalen * metingInfo.sampleFrequentie
-                * (metingInfo.delayms / msec)); i = i + metingInfo.aantalGeselecteerdeAnalogeKanalen)
+                * (metingInfo.delayms / msec)); i = i + metingInfo.aantalGeselecteerdeAnalogeKanalen+1) //+1 voor digitale kanalen
             {
                 int j = 0;
-                if (metingInfo.blIsHetAnalogeKanaalGeselecteerd[0] && j < metingInfo.aantalGeselecteerdeAnalogeKanalen && cbxOpslaanFIO0.Checked)
+                for (int k = 0; k < aantalKanalen; k++) //analoog
                 {
-                    dataChannel[0].Add(data[i]);
-                    j++;
+                    if (metingInfo.blIsHetAnalogeKanaalGeselecteerd[k])
+                    {
+                        dataChannel[k].Add(data[i + j]);
+                        j++;
+                    }
                 }
-                if (metingInfo.blIsHetAnalogeKanaalGeselecteerd[1] && j < metingInfo.aantalGeselecteerdeAnalogeKanalen && cbxOpslaanFIO1.Checked)
+
+                //digitale kanalen verwerken
+                int[] digKanTemp = verkrijgBits(data[i + j]);
+                for (int k = 0; k < aantalKanalen; k++)
                 {
-                    dataChannel[j].Add(data[i + j]);
-                    j++;
+                    if (metingInfo.blIsHetDigitaleKanaalGeselecteerd[k])
+                        dataChannel[k].Add(digKanTemp[k]);
                 }
-                if (metingInfo.blIsHetAnalogeKanaalGeselecteerd[2] && j < metingInfo.aantalGeselecteerdeAnalogeKanalen && cbxOpslaanFIO2.Checked)
-                {
-                    dataChannel[j].Add(data[i + j]);
-                    j++;
-                }
-                if (metingInfo.blIsHetAnalogeKanaalGeselecteerd[3] && j < metingInfo.aantalGeselecteerdeAnalogeKanalen && cbxOpslaanFIO3.Checked)
-                {
-                    dataChannel[j].Add(data[i + j]);
-                    j++;
-                }
-                if (metingInfo.blIsHetAnalogeKanaalGeselecteerd[4] && j < metingInfo.aantalGeselecteerdeAnalogeKanalen && cbxOpslaanFIO4.Checked)
-                {
-                    dataChannel[j].Add(data[i + j]);
-                    j++;
-                }
-                if (metingInfo.blIsHetAnalogeKanaalGeselecteerd[5] && j < metingInfo.aantalGeselecteerdeAnalogeKanalen && cbxOpslaanFIO5.Checked)
-                {
-                    dataChannel[j].Add(data[i + j]);
-                    j++;
-                }
-                if (metingInfo.blIsHetAnalogeKanaalGeselecteerd[6] && j < metingInfo.aantalGeselecteerdeAnalogeKanalen && cbxOpslaanFIO6.Checked)
-                {
-                    dataChannel[j].Add(data[i + j]);
-                    j++;
-                }
-                if (metingInfo.blIsHetAnalogeKanaalGeselecteerd[7] && j < metingInfo.aantalGeselecteerdeAnalogeKanalen && cbxOpslaanFIO7.Checked)
-                {
-                    dataChannel[j].Add(data[i + j]);
-                    j++;
-                }
+                
             }
         }
 
@@ -508,6 +488,7 @@ namespace BT_Labjack_Stream
             metingInfo.IsHetKanaalGeselecteerd = new bool[aantalKanalen];
             metingInfo.aantalGeselecteerdeAnalogeKanalen = 0;
             metingInfo.aantalGeselecteerdeDigitaleKanalen = 0;
+            metingInfo.aantalGeselecteerdeKanalen = 0;
             metingInfo.instellingAnalogeKanalen = 0;
             metingInfo.instellingDigitaleKanalen = 0;
 
@@ -537,10 +518,10 @@ namespace BT_Labjack_Stream
             expertInfo.cbxDifferentiaal[5] = frmExpert.cbx_Differentiaal_FIO5;
             expertInfo.cbxDifferentiaal[6] = frmExpert.cbx_Differentiaal_FIO6;
             expertInfo.cbxDifferentiaal[7] = frmExpert.cbx_Differentiaal_FIO7;
-            //expertInfo.cbxDigitaal[0] = frmExpert.cbx_Digitaal_FIO0;            //digitaal, eerste vier kanalen kunnen niet digitaal worden gebruikt
-            //expertInfo.cbxDigitaal[1] = frmExpert.cbx_Digitaal_FIO1;
-            //expertInfo.cbxDigitaal[2] = frmExpert.cbx_Digitaal_FIO2;
-            //expertInfo.cbxDigitaal[3] = frmExpert.cbx_Digitaal_FIO3;
+            expertInfo.cbxDigitaal[0] = frmExpert.cbx_Digitaal_FIO0;            //digitaal, eerste vier kanalen kunnen niet digitaal worden gebruikt
+            expertInfo.cbxDigitaal[1] = frmExpert.cbx_Digitaal_FIO1;
+            expertInfo.cbxDigitaal[2] = frmExpert.cbx_Digitaal_FIO2;
+            expertInfo.cbxDigitaal[3] = frmExpert.cbx_Digitaal_FIO3;
             expertInfo.cbxDigitaal[4] = frmExpert.cbx_Digitaal_FIO4;
             expertInfo.cbxDigitaal[5] = frmExpert.cbx_Digitaal_FIO5;
             expertInfo.cbxDigitaal[6] = frmExpert.cbx_Digitaal_FIO6;
@@ -571,6 +552,7 @@ namespace BT_Labjack_Stream
                     metingInfo.aantalGeselecteerdeAnalogeKanalen++;
                 }
                 metingInfo.IsHetKanaalGeselecteerd[0] = true;
+                metingInfo.aantalGeselecteerdeKanalen++;
             }
 
             if (cbxFIO1.Checked)
@@ -588,6 +570,7 @@ namespace BT_Labjack_Stream
                     metingInfo.aantalGeselecteerdeAnalogeKanalen++;
                 }
                 metingInfo.IsHetKanaalGeselecteerd[1] = true;
+                metingInfo.aantalGeselecteerdeKanalen++;
             }
 
             if (cbxFIO2.Checked)
@@ -605,6 +588,7 @@ namespace BT_Labjack_Stream
                     metingInfo.aantalGeselecteerdeAnalogeKanalen++;
                 }
                 metingInfo.IsHetKanaalGeselecteerd[2] = true;
+                metingInfo.aantalGeselecteerdeKanalen++;
             }
 
             if (cbxFIO3.Checked)
@@ -622,6 +606,7 @@ namespace BT_Labjack_Stream
                     metingInfo.aantalGeselecteerdeAnalogeKanalen++;
                 }
                 metingInfo.IsHetKanaalGeselecteerd[3] = true;
+                metingInfo.aantalGeselecteerdeKanalen++;
             }
 
             if (cbxFIO4.Checked)
@@ -639,6 +624,7 @@ namespace BT_Labjack_Stream
                     metingInfo.aantalGeselecteerdeAnalogeKanalen++;
                 }
                 metingInfo.IsHetKanaalGeselecteerd[4] = true;
+                metingInfo.aantalGeselecteerdeKanalen++;
             }
 
             if (cbxFIO5.Checked)
@@ -656,6 +642,7 @@ namespace BT_Labjack_Stream
                     metingInfo.aantalGeselecteerdeAnalogeKanalen++;
                 }
                 metingInfo.IsHetKanaalGeselecteerd[5] = true;
+                metingInfo.aantalGeselecteerdeKanalen++;
             }
 
             if (cbxFIO6.Checked)
@@ -673,6 +660,7 @@ namespace BT_Labjack_Stream
                     metingInfo.aantalGeselecteerdeAnalogeKanalen++;
                 }
                 metingInfo.IsHetKanaalGeselecteerd[6] = true;
+                metingInfo.aantalGeselecteerdeKanalen++;
             }
 
             if (cbxFIO7.Checked)
@@ -690,16 +678,17 @@ namespace BT_Labjack_Stream
                     metingInfo.aantalGeselecteerdeAnalogeKanalen++;
                 }
                 metingInfo.IsHetKanaalGeselecteerd[7] = true;
+                metingInfo.aantalGeselecteerdeKanalen++;
             }
             #endregion
 
             //instellingen
             numScans = (2 * metingInfo.sampleFrequentie * metingInfo.delayms) / msec;
             metingInfo.sampleFrequentie = Convert.ToInt16(tscbxSampleFrequentie.Text);
-            adblData = new double[metingInfo.aantalGeselecteerdeAnalogeKanalen * (Int16)numScans * 2];
-            dataChannel = new List<double>[metingInfo.aantalGeselecteerdeAnalogeKanalen];
+            adblData = new double[metingInfo.aantalGeselecteerdeKanalen * (Int16)numScans * 2];
+            dataChannel = new List<double>[metingInfo.aantalGeselecteerdeKanalen];
 
-            for (int i = 0; i < metingInfo.aantalGeselecteerdeAnalogeKanalen; i++) //prepareer juiste datalijsten
+            for (int i = 0; i < metingInfo.aantalGeselecteerdeKanalen; i++) //prepareer juiste datalijsten
             {
                 dataChannel[i] = new List<double>(120 * (int)metingInfo.sampleFrequentie * 2); //size 
             }
@@ -799,8 +788,8 @@ namespace BT_Labjack_Stream
             fh.SaveFile();
 
             ////geef benodigde data aan ExportData
-            fh.AantalGeselecteerdeKanalen = metingInfo.aantalGeselecteerdeAnalogeKanalen;
-            fh.IsHetKanaalGeselecteerd = metingInfo.blIsHetAnalogeKanaalGeselecteerd;
+            fh.AantalGeselecteerdeKanalen = metingInfo.aantalGeselecteerdeKanalen;
+            fh.IsHetKanaalGeselecteerd = metingInfo.IsHetKanaalGeselecteerd;
             fh.SampleFrequentie = metingInfo.sampleFrequentie;
             fh.LabjackID = serienummerToolStripMenuItem1.Text;
 
@@ -880,11 +869,22 @@ namespace BT_Labjack_Stream
             cbxOpslaanFIO7.Checked = cbxFIO7.Checked;
         }
 
-        private string verkrijgBits(double waarde)
+        private int[] verkrijgBits(double waarde)
         {
-            byte[] b = BitConverter.GetBytes(waarde);
-            //BitArray byt = new BitArray(b);
-            return Convert.ToString(b[4]);
+            double w = waarde - 65280; //eerste byte hebben we niets aan
+            int[] b = new int[aantalKanalen];
+            for (int i = 7; 0 < i ; i--)
+            {
+                double temp = Math.Pow(2,i);
+                if (w >= temp) //groter dan zit ie er in
+                {
+                    b[i] = 1;
+                    w -= temp;
+                }
+                else
+                    b[i] = 0;
+            }
+            return b;
         }
         //EINDE KLASSE
     }
