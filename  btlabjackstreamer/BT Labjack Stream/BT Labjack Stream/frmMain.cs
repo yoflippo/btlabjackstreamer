@@ -159,6 +159,11 @@ namespace BT_Labjack_Stream
                 //pin assignments are in the factory default condition.
                 LJUD.ePut(u3.ljhandle, LJUD.IO.PIN_CONFIGURATION_RESET, 0, 0, 0);
 
+                //Configure FIO0 and FIO1 as analog, all else as digital.  That means we
+                //will start from channel 0 and update all 16 flexible bits.  We will
+                //pass a value of b0000000000000011 or d3.
+                LJUD.ePut(u3.ljhandle, LJUD.IO.PUT_ANALOG_ENABLE_PORT, 0, metingInfo.instellingAnalogeKanalen, 16);
+
                 //Configure the stream:
                 //Set the scan rate.
                 LJUD.AddRequest(u3.ljhandle, LJUD.IO.PUT_CONFIG, LJUD.CHANNEL.STREAM_SCAN_FREQUENCY, metingInfo.sampleFrequentie, 0, 0);
@@ -185,10 +190,6 @@ namespace BT_Labjack_Stream
 
                     if (expertSettingsToolStripMenuItem.Checked)
                     {
-                        //De digitale kanalen instellen
-                        if (metingInfo.blIsHetDigitaleKanaalGeselecteerd[i] && !expertInfo.cbxDifferentiaal[i])
-                            LJUD.AddRequest(u3.ljhandle, LJUD.IO.GET_DIGITAL_BIT, i, 0, 0, 0);
-
                         //differentieel kanalen
                         if (expertInfo.cbxDifferentiaal[i])
                             LJUD.AddRequest(u3.ljhandle, LJUD.IO.ADD_STREAM_CHANNEL_DIFF, i, 0, expertInfo.diffChannel[i], 0);
@@ -197,9 +198,11 @@ namespace BT_Labjack_Stream
                         //LJUD.AddRequest(u3.ljhandle, LJUD.IO.ADD_STREAM_CHANNEL, 193, 0, 0, 0); //193, digitaal 
                     }
                  }
-
+                //De digitale kanalen instellen
+                LJUD.AddRequest(u3.ljhandle, LJUD.IO.ADD_STREAM_CHANNEL, 193, 0, 0, 0);
           
                 #endregion
+
                 //Execute the list of requests.
                 LJUD.GoOne(u3.ljhandle);
             }
@@ -356,16 +359,21 @@ namespace BT_Labjack_Stream
 
 
                 int tellerReading = 0;
+
                 for (int i = 0; i < aantalKanalen; i++)
                 {
-                    //analoge kanalen
-                    if (metingInfo.IsHetKanaalGeselecteerd[i])
+                    //analoge kanalen en differentiele kanalen
+                    if (metingInfo.blIsHetAnalogeKanaalGeselecteerd[i] && !metingInfo.blIsHetDigitaleKanaalGeselecteerd[i])
                     {
                         textBoxesMain[i] = readings[tellerReading].ToString();
                         tellerReading++;
                     }
-                }
 
+                }
+                textBoxesMain[7] = readings[tellerReading].ToString();
+                textBoxesMain[6] = verkrijgBits(readings[tellerReading]).ToString();
+                textBoxesMain[5] = verkrijgBits(readings[tellerReading]).ToString();
+                textBoxesMain[4] = verkrijgBits(readings[tellerReading]).ToString();
 
                 //update tekst
                 tbxFIO0.Text = textBoxesMain[0];
@@ -377,73 +385,6 @@ namespace BT_Labjack_Stream
                 tbxFIO6.Text = textBoxesMain[6];
                 tbxFIO7.Text = textBoxesMain[7];
             }
-        }
-
-        private void StreamForm_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            // If we are streaming, we need to end the thread
-            if (streamRunning)
-            {
-                streamRunning = false; // Get the thread to close
-                StopStreaming();
-                Visible = false; // Hide the window
-                streamThread.Join(); // Wait for the thread to close
-            }
-        }
-
-        private void resetToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            tsslbl_Status.Text = "Geen Labjack aangesloten ";
-            resetLabjack();
-            connectToLabjack();
-            gbxInstellingen.Enabled = true;
-        }
-
-        private void instellingenAanuitToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            instellingenAanuitToolStripMenuItem.Checked = !instellingenAanuitToolStripMenuItem.Checked;
-            gbxInstellingen.Visible = instellingenAanuitToolStripMenuItem.Checked;
-        }
-
-        private void tscbxSampleFrequentie_TextChanged(object sender, EventArgs e)
-        {
-            metingInfo.sampleFrequentie = Convert.ToInt16(tscbxSampleFrequentie.Text);
-        }
-
-        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            try
-            {
-                LJUD.Close();
-            }
-            catch (LabJackUDException)
-            {
-            }
-        }
-
-        private void AlleKanalenAanUit_ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            AlleKanalenAanUit_ToolStripMenuItem.Checked = !AlleKanalenAanUit_ToolStripMenuItem.Checked;
-            cbxFIO0.Checked = AlleKanalenAanUit_ToolStripMenuItem.Checked;
-            cbxFIO1.Checked = AlleKanalenAanUit_ToolStripMenuItem.Checked;
-            cbxFIO2.Checked = AlleKanalenAanUit_ToolStripMenuItem.Checked;
-            cbxFIO3.Checked = AlleKanalenAanUit_ToolStripMenuItem.Checked;
-            cbxFIO4.Checked = AlleKanalenAanUit_ToolStripMenuItem.Checked;
-            cbxFIO5.Checked = AlleKanalenAanUit_ToolStripMenuItem.Checked;
-            cbxFIO6.Checked = AlleKanalenAanUit_ToolStripMenuItem.Checked;
-            cbxFIO7.Checked = AlleKanalenAanUit_ToolStripMenuItem.Checked;
-        }
-
-        private void GeselecteerdeKanalenOpslaan_ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            cbxOpslaanFIO0.Checked = cbxFIO0.Checked;
-            cbxOpslaanFIO1.Checked = cbxFIO1.Checked;
-            cbxOpslaanFIO2.Checked = cbxFIO2.Checked;
-            cbxOpslaanFIO3.Checked = cbxFIO3.Checked;
-            cbxOpslaanFIO4.Checked = cbxFIO4.Checked;
-            cbxOpslaanFIO5.Checked = cbxFIO5.Checked;
-            cbxOpslaanFIO6.Checked = cbxFIO6.Checked;
-            cbxOpslaanFIO7.Checked = cbxFIO7.Checked;
         }
 
         private void saveDataInLists(double[] data)
@@ -494,27 +435,6 @@ namespace BT_Labjack_Stream
                     j++;
                 }
             }
-        }
-
-        private void metingOpslaanAlsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (fh == null)
-                fh = new ExportData("BT Labjack Streamer");
-            fh.SaveFile();
-
-            ////geef benodigde data aan ExportData
-            fh.AantalGeselecteerdeKanalen = metingInfo.aantalGeselecteerdeAnalogeKanalen;
-            fh.IsHetKanaalGeselecteerd = metingInfo.blIsHetAnalogeKanaalGeselecteerd;
-            fh.SampleFrequentie = metingInfo.sampleFrequentie;
-            fh.LabjackID = serienummerToolStripMenuItem1.Text;
-
-            fh.Export(dataChannel);
-        }
-
-        private void creditzToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            AboutBox ab = new AboutBox();
-            ab.Show();
         }
 
         private void resetLabjack()
@@ -617,10 +537,10 @@ namespace BT_Labjack_Stream
             expertInfo.cbxDifferentiaal[5] = frmExpert.cbx_Differentiaal_FIO5;
             expertInfo.cbxDifferentiaal[6] = frmExpert.cbx_Differentiaal_FIO6;
             expertInfo.cbxDifferentiaal[7] = frmExpert.cbx_Differentiaal_FIO7;
-            expertInfo.cbxDigitaal[0] = frmExpert.cbx_Digitaal_FIO0;            //digitaal
-            expertInfo.cbxDigitaal[1] = frmExpert.cbx_Digitaal_FIO1;
-            expertInfo.cbxDigitaal[2] = frmExpert.cbx_Digitaal_FIO2;
-            expertInfo.cbxDigitaal[3] = frmExpert.cbx_Digitaal_FIO3;
+            //expertInfo.cbxDigitaal[0] = frmExpert.cbx_Digitaal_FIO0;            //digitaal, eerste vier kanalen kunnen niet digitaal worden gebruikt
+            //expertInfo.cbxDigitaal[1] = frmExpert.cbx_Digitaal_FIO1;
+            //expertInfo.cbxDigitaal[2] = frmExpert.cbx_Digitaal_FIO2;
+            //expertInfo.cbxDigitaal[3] = frmExpert.cbx_Digitaal_FIO3;
             expertInfo.cbxDigitaal[4] = frmExpert.cbx_Digitaal_FIO4;
             expertInfo.cbxDigitaal[5] = frmExpert.cbx_Digitaal_FIO5;
             expertInfo.cbxDigitaal[6] = frmExpert.cbx_Digitaal_FIO6;
@@ -870,6 +790,101 @@ namespace BT_Labjack_Stream
         private void toolStripComboBox1_TextChanged(object sender, EventArgs e)
         {
             refreshSettings();
+        }
+
+        private void metingOpslaanAlsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (fh == null)
+                fh = new ExportData("BT Labjack Streamer");
+            fh.SaveFile();
+
+            ////geef benodigde data aan ExportData
+            fh.AantalGeselecteerdeKanalen = metingInfo.aantalGeselecteerdeAnalogeKanalen;
+            fh.IsHetKanaalGeselecteerd = metingInfo.blIsHetAnalogeKanaalGeselecteerd;
+            fh.SampleFrequentie = metingInfo.sampleFrequentie;
+            fh.LabjackID = serienummerToolStripMenuItem1.Text;
+
+            fh.Export(dataChannel);
+        }
+
+        private void creditzToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AboutBox ab = new AboutBox();
+            ab.Show();
+        }
+
+        private void StreamForm_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            // If we are streaming, we need to end the thread
+            if (streamRunning)
+            {
+                streamRunning = false; // Get the thread to close
+                StopStreaming();
+                Visible = false; // Hide the window
+                streamThread.Join(); // Wait for the thread to close
+            }
+        }
+
+        private void resetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            tsslbl_Status.Text = "Geen Labjack aangesloten ";
+            resetLabjack();
+            connectToLabjack();
+            gbxInstellingen.Enabled = true;
+        }
+
+        private void instellingenAanuitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            instellingenAanuitToolStripMenuItem.Checked = !instellingenAanuitToolStripMenuItem.Checked;
+            gbxInstellingen.Visible = instellingenAanuitToolStripMenuItem.Checked;
+        }
+
+        private void tscbxSampleFrequentie_TextChanged(object sender, EventArgs e)
+        {
+            metingInfo.sampleFrequentie = Convert.ToInt16(tscbxSampleFrequentie.Text);
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            try
+            {
+                LJUD.Close();
+            }
+            catch (LabJackUDException)
+            {
+            }
+        }
+
+        private void AlleKanalenAanUit_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AlleKanalenAanUit_ToolStripMenuItem.Checked = !AlleKanalenAanUit_ToolStripMenuItem.Checked;
+            cbxFIO0.Checked = AlleKanalenAanUit_ToolStripMenuItem.Checked;
+            cbxFIO1.Checked = AlleKanalenAanUit_ToolStripMenuItem.Checked;
+            cbxFIO2.Checked = AlleKanalenAanUit_ToolStripMenuItem.Checked;
+            cbxFIO3.Checked = AlleKanalenAanUit_ToolStripMenuItem.Checked;
+            cbxFIO4.Checked = AlleKanalenAanUit_ToolStripMenuItem.Checked;
+            cbxFIO5.Checked = AlleKanalenAanUit_ToolStripMenuItem.Checked;
+            cbxFIO6.Checked = AlleKanalenAanUit_ToolStripMenuItem.Checked;
+            cbxFIO7.Checked = AlleKanalenAanUit_ToolStripMenuItem.Checked;
+        }
+
+        private void GeselecteerdeKanalenOpslaan_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            cbxOpslaanFIO0.Checked = cbxFIO0.Checked;
+            cbxOpslaanFIO1.Checked = cbxFIO1.Checked;
+            cbxOpslaanFIO2.Checked = cbxFIO2.Checked;
+            cbxOpslaanFIO3.Checked = cbxFIO3.Checked;
+            cbxOpslaanFIO4.Checked = cbxFIO4.Checked;
+            cbxOpslaanFIO5.Checked = cbxFIO5.Checked;
+            cbxOpslaanFIO6.Checked = cbxFIO6.Checked;
+            cbxOpslaanFIO7.Checked = cbxFIO7.Checked;
+        }
+
+        private string verkrijgBits(double waarde)
+        {
+            byte[] b = BitConverter.GetBytes(waarde);
+            //BitArray byt = new BitArray(b);
+            return Convert.ToString(b[4]);
         }
         //EINDE KLASSE
     }
