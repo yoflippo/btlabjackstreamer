@@ -48,7 +48,6 @@
             this.AlleKanalenAanUit_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.GeselecteerdeKanalenOpslaan_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            this.expertSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.creditzToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnStartStop = new System.Windows.Forms.Button();
@@ -90,6 +89,10 @@
             this.cbxFIO6 = new System.Windows.Forms.CheckBox();
             this.cbxFIO5 = new System.Windows.Forms.CheckBox();
             this.cbxFIO4 = new System.Windows.Forms.CheckBox();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.expertSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bufferGroottemsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tscb_BufferGrootte = new System.Windows.Forms.ToolStripComboBox();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.gbxInstellingen.SuspendLayout();
@@ -129,7 +132,9 @@
             // beeldToolStripMenuItem
             // 
             this.beeldToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.instellingenAanuitToolStripMenuItem});
+            this.instellingenAanuitToolStripMenuItem,
+            this.toolStripSeparator5,
+            this.expertSettingsToolStripMenuItem});
             this.beeldToolStripMenuItem.Name = "beeldToolStripMenuItem";
             this.beeldToolStripMenuItem.Size = new System.Drawing.Size(45, 20);
             this.beeldToolStripMenuItem.Text = "Beeld";
@@ -200,7 +205,8 @@
             this.AlleKanalenAanUit_ToolStripMenuItem,
             this.GeselecteerdeKanalenOpslaan_ToolStripMenuItem,
             this.toolStripSeparator4,
-            this.expertSettingsToolStripMenuItem});
+            this.bufferGroottemsToolStripMenuItem,
+            this.tscb_BufferGrootte});
             this.instellingenToolStripMenuItem.Name = "instellingenToolStripMenuItem";
             this.instellingenToolStripMenuItem.Size = new System.Drawing.Size(74, 20);
             this.instellingenToolStripMenuItem.Text = "Instellingen";
@@ -250,13 +256,6 @@
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
             this.toolStripSeparator4.Size = new System.Drawing.Size(220, 6);
-            // 
-            // expertSettingsToolStripMenuItem
-            // 
-            this.expertSettingsToolStripMenuItem.Name = "expertSettingsToolStripMenuItem";
-            this.expertSettingsToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
-            this.expertSettingsToolStripMenuItem.Text = "Expert settings";
-            this.expertSettingsToolStripMenuItem.Click += new System.EventHandler(this.expertSettingsToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -665,6 +664,41 @@
             this.cbxFIO4.UseVisualStyleBackColor = true;
             this.cbxFIO4.CheckedChanged += new System.EventHandler(this.cbxFIO4_CheckedChanged);
             // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(163, 6);
+            // 
+            // expertSettingsToolStripMenuItem
+            // 
+            this.expertSettingsToolStripMenuItem.Name = "expertSettingsToolStripMenuItem";
+            this.expertSettingsToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.expertSettingsToolStripMenuItem.Text = "Expert settings";
+            this.expertSettingsToolStripMenuItem.Click += new System.EventHandler(this.expertSettingsToolStripMenuItem_Click_1);
+            // 
+            // bufferGroottemsToolStripMenuItem
+            // 
+            this.bufferGroottemsToolStripMenuItem.Name = "bufferGroottemsToolStripMenuItem";
+            this.bufferGroottemsToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
+            this.bufferGroottemsToolStripMenuItem.Text = "Buffer grootte [ms]";
+            // 
+            // tscb_BufferGrootte
+            // 
+            this.tscb_BufferGrootte.Items.AddRange(new object[] {
+            "10",
+            "20",
+            "50",
+            "100",
+            "200",
+            "500",
+            "1000",
+            "2000",
+            "5000"});
+            this.tscb_BufferGrootte.Name = "tscb_BufferGrootte";
+            this.tscb_BufferGrootte.Size = new System.Drawing.Size(121, 21);
+            this.tscb_BufferGrootte.Text = "500";
+            this.tscb_BufferGrootte.TextChanged += new System.EventHandler(this.toolStripComboBox1_TextChanged);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -773,7 +807,10 @@
         private System.Windows.Forms.CheckBox cbxFIO2;
         private System.Windows.Forms.CheckBox cbxFIO3;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripMenuItem expertSettingsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem bufferGroottemsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripComboBox tscb_BufferGrootte;
     }
 }
 

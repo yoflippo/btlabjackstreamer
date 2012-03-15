@@ -25,11 +25,9 @@ C:\Users\yflp\Desktop\ btlabjackstreamer\BT Labjack Stream\BT Labjack Stream\bin
 C:\Users\yflp\Desktop\ btlabjackstreamer\BT Labjack Stream\BT Labjack Stream\bin\Release\BT Labjack Stream.pdb
 C:\Users\yflp\Desktop\ btlabjackstreamer\BT Labjack Stream\BT Labjack Stream\bin\Release\LJUDDotNet.dll
 C:\Users\yflp\Desktop\ btlabjackstreamer\BT Labjack Stream\BT Labjack Stream\obj\x86\Release\ResolveAssemblyReference.cache
-C:\Users\yflp\Desktop\ btlabjackstreamer\BT Labjack Stream\BT Labjack Stream\obj\x86\Release\BT_Labjack_Stream.Form1.resources
 C:\Users\yflp\Desktop\ btlabjackstreamer\BT Labjack Stream\BT Labjack Stream\obj\x86\Release\BT_Labjack_Stream.Properties.Resources.resources
 C:\Users\yflp\Desktop\ btlabjackstreamer\BT Labjack Stream\BT Labjack Stream\obj\x86\Release\GenerateResource.read.1.tlog
 C:\Users\yflp\Desktop\ btlabjackstreamer\BT Labjack Stream\BT Labjack Stream\obj\x86\Release\GenerateResource.write.1.tlog
-C:\Users\yflp\Desktop\ btlabjackstreamer\BT Labjack Stream\BT Labjack Stream\obj\x86\Release\BT_Labjack_Stream.AboutBox1.resources
 C:\Users\mark\Desktop\ btlabjackstreamer\BT Labjack Stream\BT Labjack Stream\obj\x86\Release\BT Labjack Stream.exe
 C:\Users\mark\Desktop\ btlabjackstreamer\BT Labjack Stream\BT Labjack Stream\obj\x86\Release\BT Labjack Stream.pdb
 C:\Users\mark\Desktop\ btlabjackstreamer\BT Labjack Stream\BT Labjack Stream\bin\Release\Program.cs
@@ -43,3 +41,6 @@ C:\Users\mark\Desktop\ btlabjackstreamer\BT Labjack Stream\BT Labjack Stream\obj
 C:\Users\mark\Desktop\ btlabjackstreamer\BT Labjack Stream\BT Labjack Stream\obj\x86\Release\BT_Labjack_Stream.Properties.Resources.resources
 C:\Users\mark\Desktop\ btlabjackstreamer\BT Labjack Stream\BT Labjack Stream\obj\x86\Release\GenerateResource.read.1.tlog
 C:\Users\mark\Desktop\ btlabjackstreamer\BT Labjack Stream\BT Labjack Stream\obj\x86\Release\GenerateResource.write.1.tlog
+C:\Users\yflp\Desktop\ btlabjackstreamer\BT Labjack Stream\BT Labjack Stream\obj\x86\Release\BT_Labjack_Stream.AboutBox.resources
+C:\Users\yflp\Desktop\ btlabjackstreamer\BT Labjack Stream\BT Labjack Stream\obj\x86\Release\BT_Labjack_Stream.frmExpertSettings.resources
+C:\Users\yflp\Desktop\ btlabjackstreamer\BT Labjack Stream\BT Labjack Stream\obj\x86\Release\BT_Labjack_Stream.frmMain.resources

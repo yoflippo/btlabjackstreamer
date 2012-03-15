@@ -1,0 +1,21 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "U3_Asynch", "U3_Asynch.csproj", "{53AD6A12-81F6-464A-AE91-433ABA1E6CD8}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{53AD6A12-81F6-464A-AE91-433ABA1E6CD8}.Debug.ActiveCfg = Debug|.NET
+		{53AD6A12-81F6-464A-AE91-433ABA1E6CD8}.Debug.Build.0 = Debug|.NET
+		{53AD6A12-81F6-464A-AE91-433ABA1E6CD8}.Release.ActiveCfg = Release|.NET
+		{53AD6A12-81F6-464A-AE91-433ABA1E6CD8}.Release.Build.0 = Release|.NET
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

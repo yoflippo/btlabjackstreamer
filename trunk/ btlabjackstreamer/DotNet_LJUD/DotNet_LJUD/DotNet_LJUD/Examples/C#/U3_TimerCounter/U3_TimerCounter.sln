@@ -1,0 +1,21 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "U3_TimerCounter", "U3_TimerCounter.csproj", "{88CB94CC-4BCD-4A0F-8E4F-639EFCCAC78C}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{88CB94CC-4BCD-4A0F-8E4F-639EFCCAC78C}.Debug.ActiveCfg = Debug|.NET
+		{88CB94CC-4BCD-4A0F-8E4F-639EFCCAC78C}.Debug.Build.0 = Debug|.NET
+		{88CB94CC-4BCD-4A0F-8E4F-639EFCCAC78C}.Release.ActiveCfg = Release|.NET
+		{88CB94CC-4BCD-4A0F-8E4F-639EFCCAC78C}.Release.Build.0 = Release|.NET
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

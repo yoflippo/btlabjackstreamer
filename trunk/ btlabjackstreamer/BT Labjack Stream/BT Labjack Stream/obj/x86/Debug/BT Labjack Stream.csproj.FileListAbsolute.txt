@@ -31,7 +31,6 @@ C:\Users\yflp\Desktop\LABJACK - kopie\BT Labjack Stream\BT Labjack Stream\obj\x8
 C:\Users\yflp\Desktop\ btlabjackstreamer\BT Labjack Stream\BT Labjack Stream\obj\x86\Debug\BT Labjack Stream.exe
 C:\Users\yflp\Desktop\ btlabjackstreamer\BT Labjack Stream\BT Labjack Stream\obj\x86\Debug\BT Labjack Stream.pdb
 C:\Users\yflp\Desktop\ btlabjackstreamer\BT Labjack Stream\BT Labjack Stream\obj\x86\Debug\ResolveAssemblyReference.cache
-C:\Users\yflp\Desktop\ btlabjackstreamer\BT Labjack Stream\BT Labjack Stream\obj\x86\Debug\BT_Labjack_Stream.Form1.resources
 C:\Users\yflp\Desktop\ btlabjackstreamer\BT Labjack Stream\BT Labjack Stream\obj\x86\Debug\BT_Labjack_Stream.Properties.Resources.resources
 C:\Users\yflp\Desktop\ btlabjackstreamer\BT Labjack Stream\BT Labjack Stream\obj\x86\Debug\GenerateResource.read.1.tlog
 C:\Users\yflp\Desktop\ btlabjackstreamer\BT Labjack Stream\BT Labjack Stream\obj\x86\Debug\GenerateResource.write.1.tlog
@@ -52,3 +51,6 @@ C:\Users\mark\Desktop\ btlabjackstreamer\BT Labjack Stream\BT Labjack Stream\bin
 C:\Users\mark\Desktop\ btlabjackstreamer\BT Labjack Stream\BT Labjack Stream\bin\Debug\LJUDDotNet.dll
 C:\Users\mark\Desktop\ btlabjackstreamer\BT Labjack Stream\BT Labjack Stream\obj\x86\Debug\BT_Labjack_Stream.frmExpertSettings.resources
 C:\Users\mark\Desktop\ btlabjackstreamer\BT Labjack Stream\BT Labjack Stream\obj\x86\Debug\BT_Labjack_Stream.frmMain.resources
+C:\Users\yflp\Desktop\ btlabjackstreamer\BT Labjack Stream\BT Labjack Stream\obj\x86\Debug\BT_Labjack_Stream.AboutBox.resources
+C:\Users\yflp\Desktop\ btlabjackstreamer\BT Labjack Stream\BT Labjack Stream\obj\x86\Debug\BT_Labjack_Stream.frmExpertSettings.resources
+C:\Users\yflp\Desktop\ btlabjackstreamer\BT Labjack Stream\BT Labjack Stream\obj\x86\Debug\BT_Labjack_Stream.frmMain.resources
