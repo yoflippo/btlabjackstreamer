@@ -42,6 +42,7 @@ namespace BT_Labjack_Stream
                 dataChannels = data;
                 makeHeader();
                 writeData();
+
                 System.Diagnostics.Process.Start("notepad.exe", @FileLocationAndFileName); //open txt-file
             }
             else
@@ -71,6 +72,7 @@ namespace BT_Labjack_Stream
 			        sb.Append("FIO"+ i.ToString() + tab);
 			}
             sw.WriteLine(sb.ToString());
+
         }
 
         /// <summary>
@@ -86,13 +88,14 @@ namespace BT_Labjack_Stream
                 {
                     if (IsHetKanaalGeselecteerd[kanaal] && kanaal < AantalGeselecteerdeKanalen) //testen op kanaal is geselecteerd
                     {
-                        double temp = Math.Round(dataChannels[kanaal][nummer], 5);
+                        double temp = Math.Round(dataChannels[kanaal][nummer], 5); //10*(1/(2^16)) = 0.00000#####
                         sb.Append(temp.ToString() + tab);
                     }
                 }
                 sw.WriteLine(sb.ToString()); //schrijf
+                
             }
-
+            sw.Close();
         }
 
         #endregion

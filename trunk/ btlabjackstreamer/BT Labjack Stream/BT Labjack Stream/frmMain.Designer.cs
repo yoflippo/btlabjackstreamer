@@ -34,6 +34,8 @@
             this.metingOpslaanAlsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.beeldToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.instellingenAanuitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.expertSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.labjackToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
@@ -48,8 +50,11 @@
             this.AlleKanalenAanUit_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.GeselecteerdeKanalenOpslaan_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.bufferGroottemsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tscb_BufferGrootte = new System.Windows.Forms.ToolStripComboBox();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.creditzToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmi_MeerInformatie = new System.Windows.Forms.ToolStripMenuItem();
             this.btnStartStop = new System.Windows.Forms.Button();
             this.tbxFIO0 = new System.Windows.Forms.TextBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -89,10 +94,7 @@
             this.cbxFIO6 = new System.Windows.Forms.CheckBox();
             this.cbxFIO5 = new System.Windows.Forms.CheckBox();
             this.cbxFIO4 = new System.Windows.Forms.CheckBox();
-            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-            this.expertSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.bufferGroottemsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tscb_BufferGrootte = new System.Windows.Forms.ToolStripComboBox();
+            this.tsmi_LabjackHV = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.gbxInstellingen.SuspendLayout();
@@ -148,6 +150,18 @@
             this.instellingenAanuitToolStripMenuItem.Text = "Instellingen aan/uit";
             this.instellingenAanuitToolStripMenuItem.Click += new System.EventHandler(this.instellingenAanuitToolStripMenuItem_Click);
             // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(163, 6);
+            // 
+            // expertSettingsToolStripMenuItem
+            // 
+            this.expertSettingsToolStripMenuItem.Name = "expertSettingsToolStripMenuItem";
+            this.expertSettingsToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.expertSettingsToolStripMenuItem.Text = "Expert settings";
+            this.expertSettingsToolStripMenuItem.Click += new System.EventHandler(this.expertSettingsToolStripMenuItem_Click_1);
+            // 
             // labjackToolStripMenuItem
             // 
             this.labjackToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -156,6 +170,7 @@
             this.firmwareVersieToolStripMenuItem,
             this.serienummerToolStripMenuItem1,
             this.hardwareVersieToolStripMenuItem,
+            this.tsmi_LabjackHV,
             this.toolStripSeparator3});
             this.labjackToolStripMenuItem.Name = "labjackToolStripMenuItem";
             this.labjackToolStripMenuItem.Size = new System.Drawing.Size(55, 20);
@@ -257,20 +272,51 @@
             this.toolStripSeparator4.Name = "toolStripSeparator4";
             this.toolStripSeparator4.Size = new System.Drawing.Size(220, 6);
             // 
+            // bufferGroottemsToolStripMenuItem
+            // 
+            this.bufferGroottemsToolStripMenuItem.Name = "bufferGroottemsToolStripMenuItem";
+            this.bufferGroottemsToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
+            this.bufferGroottemsToolStripMenuItem.Text = "Buffer grootte [ms]";
+            // 
+            // tscb_BufferGrootte
+            // 
+            this.tscb_BufferGrootte.Items.AddRange(new object[] {
+            "10",
+            "20",
+            "50",
+            "100",
+            "200",
+            "500",
+            "1000",
+            "2000",
+            "5000"});
+            this.tscb_BufferGrootte.Name = "tscb_BufferGrootte";
+            this.tscb_BufferGrootte.Size = new System.Drawing.Size(121, 21);
+            this.tscb_BufferGrootte.Text = "500";
+            this.tscb_BufferGrootte.TextChanged += new System.EventHandler(this.toolStripComboBox1_TextChanged);
+            // 
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.creditzToolStripMenuItem});
+            this.creditzToolStripMenuItem,
+            this.tsmi_MeerInformatie});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
-            this.helpToolStripMenuItem.Text = "Help";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
+            this.helpToolStripMenuItem.Text = "Info";
             // 
             // creditzToolStripMenuItem
             // 
             this.creditzToolStripMenuItem.Name = "creditzToolStripMenuItem";
-            this.creditzToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
+            this.creditzToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.creditzToolStripMenuItem.Text = "Creditz";
             this.creditzToolStripMenuItem.Click += new System.EventHandler(this.creditzToolStripMenuItem_Click);
+            // 
+            // tsmi_MeerInformatie
+            // 
+            this.tsmi_MeerInformatie.Name = "tsmi_MeerInformatie";
+            this.tsmi_MeerInformatie.Size = new System.Drawing.Size(149, 22);
+            this.tsmi_MeerInformatie.Text = "Meer informatie";
+            this.tsmi_MeerInformatie.Click += new System.EventHandler(this.tsmi_MeerInformatie_Click);
             // 
             // btnStartStop
             // 
@@ -664,40 +710,11 @@
             this.cbxFIO4.UseVisualStyleBackColor = true;
             this.cbxFIO4.CheckedChanged += new System.EventHandler(this.cbxFIO4_CheckedChanged);
             // 
-            // toolStripSeparator5
+            // tsmi_LabjackHV
             // 
-            this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(163, 6);
-            // 
-            // expertSettingsToolStripMenuItem
-            // 
-            this.expertSettingsToolStripMenuItem.Name = "expertSettingsToolStripMenuItem";
-            this.expertSettingsToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
-            this.expertSettingsToolStripMenuItem.Text = "Expert settings";
-            this.expertSettingsToolStripMenuItem.Click += new System.EventHandler(this.expertSettingsToolStripMenuItem_Click_1);
-            // 
-            // bufferGroottemsToolStripMenuItem
-            // 
-            this.bufferGroottemsToolStripMenuItem.Name = "bufferGroottemsToolStripMenuItem";
-            this.bufferGroottemsToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
-            this.bufferGroottemsToolStripMenuItem.Text = "Buffer grootte [ms]";
-            // 
-            // tscb_BufferGrootte
-            // 
-            this.tscb_BufferGrootte.Items.AddRange(new object[] {
-            "10",
-            "20",
-            "50",
-            "100",
-            "200",
-            "500",
-            "1000",
-            "2000",
-            "5000"});
-            this.tscb_BufferGrootte.Name = "tscb_BufferGrootte";
-            this.tscb_BufferGrootte.Size = new System.Drawing.Size(121, 21);
-            this.tscb_BufferGrootte.Text = "500";
-            this.tscb_BufferGrootte.TextChanged += new System.EventHandler(this.toolStripComboBox1_TextChanged);
+            this.tsmi_LabjackHV.Name = "tsmi_LabjackHV";
+            this.tsmi_LabjackHV.Size = new System.Drawing.Size(153, 22);
+            this.tsmi_LabjackHV.Text = "U3-HV";
             // 
             // frmMain
             // 
@@ -811,6 +828,8 @@
         private System.Windows.Forms.ToolStripMenuItem expertSettingsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem bufferGroottemsToolStripMenuItem;
         private System.Windows.Forms.ToolStripComboBox tscb_BufferGrootte;
+        private System.Windows.Forms.ToolStripMenuItem tsmi_MeerInformatie;
+        private System.Windows.Forms.ToolStripMenuItem tsmi_LabjackHV;
     }
 }
 
