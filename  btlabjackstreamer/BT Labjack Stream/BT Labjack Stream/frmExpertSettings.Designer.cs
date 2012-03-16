@@ -363,6 +363,7 @@
             this.cbxFIO1_Digitaal.TabIndex = 41;
             this.cbxFIO1_Digitaal.Text = "digitaal";
             this.cbxFIO1_Digitaal.UseVisualStyleBackColor = true;
+            this.cbxFIO1_Digitaal.CheckedChanged += new System.EventHandler(this.cbxFIO1_Digitaal_CheckedChanged);
             // 
             // cbxFIO0_Digitaal
             // 
@@ -373,6 +374,7 @@
             this.cbxFIO0_Digitaal.TabIndex = 40;
             this.cbxFIO0_Digitaal.Text = "digitaal";
             this.cbxFIO0_Digitaal.UseVisualStyleBackColor = true;
+            this.cbxFIO0_Digitaal.CheckedChanged += new System.EventHandler(this.cbxFIO0_Digitaal_CheckedChanged);
             // 
             // cbxFIO2_Digitaal
             // 
@@ -383,6 +385,7 @@
             this.cbxFIO2_Digitaal.TabIndex = 42;
             this.cbxFIO2_Digitaal.Text = "digitaal";
             this.cbxFIO2_Digitaal.UseVisualStyleBackColor = true;
+            this.cbxFIO2_Digitaal.CheckedChanged += new System.EventHandler(this.cbxFIO2_Digitaal_CheckedChanged);
             // 
             // cbxFIO3_Digitaal
             // 
@@ -589,6 +592,7 @@
             this.cbxFIO7_Digitaal.TabIndex = 47;
             this.cbxFIO7_Digitaal.Text = "digitaal";
             this.cbxFIO7_Digitaal.UseVisualStyleBackColor = true;
+            this.cbxFIO7_Digitaal.CheckedChanged += new System.EventHandler(this.cbxFIO7_Digitaal_CheckedChanged);
             // 
             // cbxFIO6_Digitaal
             // 
@@ -599,6 +603,7 @@
             this.cbxFIO6_Digitaal.TabIndex = 46;
             this.cbxFIO6_Digitaal.Text = "digitaal";
             this.cbxFIO6_Digitaal.UseVisualStyleBackColor = true;
+            this.cbxFIO6_Digitaal.CheckedChanged += new System.EventHandler(this.cbxFIO6_Digitaal_CheckedChanged);
             // 
             // cbxFIO5_Digitaal
             // 
@@ -609,6 +614,7 @@
             this.cbxFIO5_Digitaal.TabIndex = 45;
             this.cbxFIO5_Digitaal.Text = "digitaal";
             this.cbxFIO5_Digitaal.UseVisualStyleBackColor = true;
+            this.cbxFIO5_Digitaal.CheckedChanged += new System.EventHandler(this.cbxFIO5_Digitaal_CheckedChanged);
             // 
             // cbxFIO4_Digitaal
             // 
@@ -619,6 +625,7 @@
             this.cbxFIO4_Digitaal.TabIndex = 44;
             this.cbxFIO4_Digitaal.Text = "digitaal";
             this.cbxFIO4_Digitaal.UseVisualStyleBackColor = true;
+            this.cbxFIO4_Digitaal.CheckedChanged += new System.EventHandler(this.cbxFIO4_Digitaal_CheckedChanged);
             // 
             // frmExpertSettings
             // 

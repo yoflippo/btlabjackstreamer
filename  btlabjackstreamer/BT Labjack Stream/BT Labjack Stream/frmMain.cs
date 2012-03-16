@@ -30,9 +30,10 @@ namespace BT_Labjack_Stream
         private List<double>[] dataChannel = null; //plek voor data
         private ExportData fh = null;
         private static frmExpertSettings frmExpert = null;
+        private static frmInfo frmInformatie = null;
         private string[] textBoxesMain = null;
         private const double msec = 1000.0;
-        private byte bDigitaleKanalen = 0;
+        private bool blLabjackHV = true;
         #region STRUCTS
         public struct metingInformatie
         {
@@ -45,8 +46,10 @@ namespace BT_Labjack_Stream
             public bool[] blIsHetAnalogeKanaalGeselecteerd;
             public Int16 aantalGeselecteerdeDigitaleKanalen;
             public bool[] blIsHetDigitaleKanaalGeselecteerd;
-            public bool[] IsHetKanaalGeselecteerd;
+            public bool[] blIsHetKanaalGeselecteerd;
             public int delayms;
+            public bool[] blMoetHetKanaalWordenOpgeslagen;
+            public int aantalKanalenDieMoetenWordenOpgeslagen;
         };
         public struct expertInformatie
         {
@@ -67,23 +70,13 @@ namespace BT_Labjack_Stream
         public frmMain()
         {
             InitializeComponent();
-
-            //set INFO meting struct
-            metingInfo.instellingAnalogeKanalen = 3;
-            metingInfo.instellingDigitaleKanalen = 0;
-            metingInfo.sampleFrequentie = 500;
-            metingInfo.blMarker = false;
-            metingInfo.aantalGeselecteerdeAnalogeKanalen = 0;
-            metingInfo.blIsHetAnalogeKanaalGeselecteerd = new bool[aantalKanalen];
-            metingInfo.delayms = 500;
-            metingInfo.aantalGeselecteerdeDigitaleKanalen = 0;
-            metingInfo.blIsHetDigitaleKanaalGeselecteerd = new bool[aantalKanalen];
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             connectToLabjack();
             frmExpert = new frmExpertSettings(expertSettingsToolStripMenuItem);
+            frmInformatie = new frmInfo();
             refreshSettings();
         }
 
@@ -102,7 +95,7 @@ namespace BT_Labjack_Stream
                 // Stop the stream
                 streamRunning = false;
                 streamThread.Join(); // Wait for the thread to close
-                StopStreaming();
+                stopStreaming();
 
                 // Reconfigure start button
                 btnStartStop.Text = "Start";
@@ -114,7 +107,7 @@ namespace BT_Labjack_Stream
             {
                 refreshSettings();
                 // Set up the stream
-                if (u3 != null && StartStreaming())
+                if (u3 != null && stelKanalenInEnStartStreaming())
                 {
                     streamRunning = true;
                     gbxInstellingen.Enabled = false;
@@ -133,7 +126,7 @@ namespace BT_Labjack_Stream
         /// <summary>
         /// Actually stops the stream on the LabJack
         /// </summary>
-        private void StopStreaming()
+        private void stopStreaming()
         {
             //Stop the stream
             try
@@ -152,7 +145,7 @@ namespace BT_Labjack_Stream
         /// Configure and start the stream on the LabJack
         /// </summary>
         /// <returns>True if successful and false otherwise</returns>
-        private bool StartStreaming()
+        private bool stelKanalenInEnStartStreaming()
         {
             try
             {
@@ -339,7 +332,10 @@ namespace BT_Labjack_Stream
                 if (streamRunning)
                 {
                     streamRunning = false;
-                    StopStreaming();
+                    stopStreaming();
+                    btnStartStop.Text = "Start";
+                    gbxInstellingen.Enabled = true;
+                    frmExpert.groupBoxExpertSettings = true;
                 }
             }
         }
@@ -393,20 +389,25 @@ namespace BT_Labjack_Stream
         private void saveDataInLists(double[] data)
         {
             //Schrijf waardes in Lists
+            int HouRekeningMetDigitaleKanalen = 0;
+            if (expertSettingsToolStripMenuItem.Checked)
+                HouRekeningMetDigitaleKanalen = 1;
+
             for (int i = 0; i < (metingInfo.aantalGeselecteerdeAnalogeKanalen * metingInfo.sampleFrequentie
-                * (metingInfo.delayms / msec)); i = i + metingInfo.aantalGeselecteerdeAnalogeKanalen+1) //+1 voor digitale kanalen
+                * (metingInfo.delayms / msec)); i = i + metingInfo.aantalGeselecteerdeAnalogeKanalen + HouRekeningMetDigitaleKanalen) //+1 voor digitale kanalen
             {
+                //analoog en differentieel opslaan
                 int j = 0;
-                for (int k = 0; k < aantalKanalen; k++) //analoog
+                for (int k = 0; k < aantalKanalen; k++) 
                 {
-                    if (metingInfo.blIsHetAnalogeKanaalGeselecteerd[k])
+                    if (metingInfo.blIsHetAnalogeKanaalGeselecteerd[k] && !metingInfo.blIsHetDigitaleKanaalGeselecteerd[k]) //alleen analoge of differntiele kanalen opslaan
                     {
                         dataChannel[k].Add(data[i + j]);
                         j++;
                     }
                 }
 
-                //digitale kanalen verwerken
+                //Daarna digitale kanalen verwerken
                 int[] digKanTemp = verkrijgBits(data[i + j]);
                 for (int k = 0; k < aantalKanalen; k++)
                 {
@@ -475,6 +476,16 @@ namespace BT_Labjack_Stream
                 //Read and display the firmware version of this U3.
                 LJUD.eGet(u3.ljhandle, LJUD.IO.GET_CONFIG, LJUD.CHANNEL.FIRMWARE_VERSION, ref dblValue, 0);
                 firmwareVersieToolStripMenuItem.Text = "Firmware versie:" + String.Format("{0:0.000}", dblValue);
+
+                //Hv or Lv
+                LJUD.eGet(u3.ljhandle, LJUD.IO.GET_CONFIG, LJUD.CHANNEL.U3HV, ref dblValue, 0);
+                if (dblValue >= 1.0)
+                    tsmi_LabjackHV.Text = "U3-HV (High Voltage, 0-10 V)";
+                else
+                {
+                    tsmi_LabjackHV.Text = "U3-LV (Low Voltage)";
+                    blLabjackHV = false;
+                }
             }
         }
 
@@ -482,15 +493,19 @@ namespace BT_Labjack_Stream
         {
             if (streamRunning)
                 return;
-            //instelling te meten kanalen
+
+            //RESET instelling te meten kanalen
+            metingInfo = new metingInformatie();
             metingInfo.blIsHetAnalogeKanaalGeselecteerd = new bool[aantalKanalen];
             metingInfo.blIsHetDigitaleKanaalGeselecteerd = new bool[aantalKanalen];
-            metingInfo.IsHetKanaalGeselecteerd = new bool[aantalKanalen];
+            metingInfo.blIsHetKanaalGeselecteerd = new bool[aantalKanalen];
+            metingInfo.blMoetHetKanaalWordenOpgeslagen = new bool[aantalKanalen];
             metingInfo.aantalGeselecteerdeAnalogeKanalen = 0;
             metingInfo.aantalGeselecteerdeDigitaleKanalen = 0;
             metingInfo.aantalGeselecteerdeKanalen = 0;
             metingInfo.instellingAnalogeKanalen = 0;
             metingInfo.instellingDigitaleKanalen = 0;
+            metingInfo.aantalKanalenDieMoetenWordenOpgeslagen = 0;
 
             //instellen Expert settings
             if (expertSettingsToolStripMenuItem.Checked)
@@ -510,6 +525,7 @@ namespace BT_Labjack_Stream
             expertInfo.cbxDigitaal = new bool[aantalKanalen];
             expertInfo.diffChannel = new int[aantalKanalen];
 
+            //verkrijg instellinge expert form
             expertInfo.cbxDifferentiaal[0] = frmExpert.cbx_Differentiaal_FIO0;  //diff
             expertInfo.cbxDifferentiaal[1] = frmExpert.cbx_Differentiaal_FIO1;
             expertInfo.cbxDifferentiaal[2] = frmExpert.cbx_Differentiaal_FIO2;
@@ -551,8 +567,11 @@ namespace BT_Labjack_Stream
                     metingInfo.blIsHetAnalogeKanaalGeselecteerd[0] = true; //
                     metingInfo.aantalGeselecteerdeAnalogeKanalen++;
                 }
-                metingInfo.IsHetKanaalGeselecteerd[0] = true;
+                metingInfo.blIsHetKanaalGeselecteerd[0] = true;
                 metingInfo.aantalGeselecteerdeKanalen++;
+
+                if (cbxOpslaanFIO0.Checked)
+                metingInfo.blMoetHetKanaalWordenOpgeslagen[0] = cbxOpslaanFIO0.Checked;
             }
 
             if (cbxFIO1.Checked)
@@ -569,8 +588,11 @@ namespace BT_Labjack_Stream
                     metingInfo.blIsHetAnalogeKanaalGeselecteerd[1] = true; //
                     metingInfo.aantalGeselecteerdeAnalogeKanalen++;
                 }
-                metingInfo.IsHetKanaalGeselecteerd[1] = true;
+                metingInfo.blIsHetKanaalGeselecteerd[1] = true;
                 metingInfo.aantalGeselecteerdeKanalen++;
+
+                if (cbxOpslaanFIO1.Checked)
+                metingInfo.blMoetHetKanaalWordenOpgeslagen[1] = cbxOpslaanFIO1.Checked;
             }
 
             if (cbxFIO2.Checked)
@@ -587,8 +609,11 @@ namespace BT_Labjack_Stream
                     metingInfo.blIsHetAnalogeKanaalGeselecteerd[2] = true; //
                     metingInfo.aantalGeselecteerdeAnalogeKanalen++;
                 }
-                metingInfo.IsHetKanaalGeselecteerd[2] = true;
+                metingInfo.blIsHetKanaalGeselecteerd[2] = true;
                 metingInfo.aantalGeselecteerdeKanalen++;
+
+                if (cbxOpslaanFIO2.Checked)
+                metingInfo.blMoetHetKanaalWordenOpgeslagen[2] = cbxOpslaanFIO2.Checked;
             }
 
             if (cbxFIO3.Checked)
@@ -605,8 +630,11 @@ namespace BT_Labjack_Stream
                     metingInfo.blIsHetAnalogeKanaalGeselecteerd[3] = true; //
                     metingInfo.aantalGeselecteerdeAnalogeKanalen++;
                 }
-                metingInfo.IsHetKanaalGeselecteerd[3] = true;
+                metingInfo.blIsHetKanaalGeselecteerd[3] = true;
                 metingInfo.aantalGeselecteerdeKanalen++;
+
+                if (cbxOpslaanFIO3.Checked)
+                metingInfo.blMoetHetKanaalWordenOpgeslagen[3] = cbxOpslaanFIO3.Checked;
             }
 
             if (cbxFIO4.Checked)
@@ -623,8 +651,11 @@ namespace BT_Labjack_Stream
                     metingInfo.blIsHetAnalogeKanaalGeselecteerd[4] = true; //
                     metingInfo.aantalGeselecteerdeAnalogeKanalen++;
                 }
-                metingInfo.IsHetKanaalGeselecteerd[4] = true;
+                metingInfo.blIsHetKanaalGeselecteerd[4] = true;
                 metingInfo.aantalGeselecteerdeKanalen++;
+
+                if (cbxOpslaanFIO4.Checked)
+                metingInfo.blMoetHetKanaalWordenOpgeslagen[4] = cbxOpslaanFIO4.Checked;
             }
 
             if (cbxFIO5.Checked)
@@ -641,8 +672,11 @@ namespace BT_Labjack_Stream
                     metingInfo.blIsHetAnalogeKanaalGeselecteerd[5] = true; //
                     metingInfo.aantalGeselecteerdeAnalogeKanalen++;
                 }
-                metingInfo.IsHetKanaalGeselecteerd[5] = true;
+                metingInfo.blIsHetKanaalGeselecteerd[5] = true;
                 metingInfo.aantalGeselecteerdeKanalen++;
+
+                if (cbxOpslaanFIO5.Checked)
+                metingInfo.blMoetHetKanaalWordenOpgeslagen[5] = cbxOpslaanFIO5.Checked;
             }
 
             if (cbxFIO6.Checked)
@@ -659,8 +693,11 @@ namespace BT_Labjack_Stream
                     metingInfo.blIsHetAnalogeKanaalGeselecteerd[6] = true; //
                     metingInfo.aantalGeselecteerdeAnalogeKanalen++;
                 }
-                metingInfo.IsHetKanaalGeselecteerd[6] = true;
+                metingInfo.blIsHetKanaalGeselecteerd[6] = true;
                 metingInfo.aantalGeselecteerdeKanalen++;
+
+                if (cbxOpslaanFIO6.Checked)
+                metingInfo.blMoetHetKanaalWordenOpgeslagen[6] = cbxOpslaanFIO6.Checked;
             }
 
             if (cbxFIO7.Checked)
@@ -677,10 +714,15 @@ namespace BT_Labjack_Stream
                     metingInfo.blIsHetAnalogeKanaalGeselecteerd[7] = true; //
                     metingInfo.aantalGeselecteerdeAnalogeKanalen++;
                 }
-                metingInfo.IsHetKanaalGeselecteerd[7] = true;
+                metingInfo.blIsHetKanaalGeselecteerd[7] = true;
                 metingInfo.aantalGeselecteerdeKanalen++;
+
+                if (cbxOpslaanFIO7.Checked)
+                metingInfo.blMoetHetKanaalWordenOpgeslagen[7] = cbxOpslaanFIO7.Checked;
             }
             #endregion
+
+
 
             //instellingen
             numScans = (2 * metingInfo.sampleFrequentie * metingInfo.delayms) / msec;
@@ -705,6 +747,10 @@ namespace BT_Labjack_Stream
 
             //set buffer grootte
             metingInfo.delayms = Convert.ToInt16(tscb_BufferGrootte.Text);
+
+            //tekst groupboxes
+            if (!blLabjackHV)
+                gbxFIO0_3.Text = "0-2,4 Volt";
         }
 
         #region CHECKBOXES
@@ -783,17 +829,17 @@ namespace BT_Labjack_Stream
 
         private void metingOpslaanAlsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (fh == null)
-                fh = new ExportData("BT Labjack Streamer");
+            fh = new ExportData("BT Labjack Streamer");
             fh.SaveFile();
 
             ////geef benodigde data aan ExportData
             fh.AantalGeselecteerdeKanalen = metingInfo.aantalGeselecteerdeKanalen;
-            fh.IsHetKanaalGeselecteerd = metingInfo.IsHetKanaalGeselecteerd;
+            fh.IsHetKanaalGeselecteerd = metingInfo.blIsHetKanaalGeselecteerd;
             fh.SampleFrequentie = metingInfo.sampleFrequentie;
             fh.LabjackID = serienummerToolStripMenuItem1.Text;
 
             fh.Export(dataChannel);
+            fh = null;
         }
 
         private void creditzToolStripMenuItem_Click(object sender, EventArgs e)
@@ -808,7 +854,7 @@ namespace BT_Labjack_Stream
             if (streamRunning)
             {
                 streamRunning = false; // Get the thread to close
-                StopStreaming();
+                stopStreaming();
                 Visible = false; // Hide the window
                 streamThread.Join(); // Wait for the thread to close
             }
@@ -876,15 +922,20 @@ namespace BT_Labjack_Stream
             for (int i = 7; 0 < i ; i--)
             {
                 double temp = Math.Pow(2,i);
-                if (w >= temp) //groter dan zit ie er in
+                if (w >= temp)  //1
                 {
                     b[i] = 1;
                     w -= temp;
                 }
-                else
+                else            //0
                     b[i] = 0;
             }
             return b;
+        }
+
+        private void tsmi_MeerInformatie_Click(object sender, EventArgs e)
+        {
+            frmInformatie.Show();
         }
         //EINDE KLASSE
     }

@@ -29,51 +29,189 @@ namespace BT_Labjack_Stream
         private void cbxFIO0_dif_CheckedChanged(object sender, EventArgs e)
         {
              combx_FIO0.Enabled = cbxFIO0_dif.Checked;
-             cbxFIO0_Digitaal.Enabled = !cbxFIO0_dif.Checked;
+             if (cbxFIO0_dif.Checked)
+             {
+                 cbxFIO0_Digitaal.Enabled = false;
+                 cbxFIO0_Digitaal.Checked = false;
+             }
+             else
+                 cbxFIO0_Digitaal.Enabled = true;
         }
 
         private void cbxFIO1_dif_CheckedChanged(object sender, EventArgs e)
         {
             combx_FIO1.Enabled = cbxFIO1_dif.Checked;
-            cbxFIO1_Digitaal.Enabled = !cbxFIO1_dif.Checked;
+            if (cbxFIO1_dif.Checked)
+            {
+                cbxFIO1_Digitaal.Enabled = false;
+                cbxFIO1_Digitaal.Checked = false;
+            }
+            else
+                cbxFIO1_Digitaal.Enabled = true;
         }
 
         private void cbxFIO2_dif_CheckedChanged(object sender, EventArgs e)
         {
             combx_FIO2.Enabled = cbxFIO2_dif.Checked;
-            cbxFIO2_Digitaal.Enabled = !cbxFIO2_dif.Checked;
+            if (cbxFIO2_dif.Checked)
+            {
+                cbxFIO2_Digitaal.Enabled = false;
+                cbxFIO2_Digitaal.Checked = false;
+            }
+            else
+                cbxFIO2_Digitaal.Enabled = true;
         }
 
         private void cbxFIO3_dif_CheckedChanged(object sender, EventArgs e)
         {
             combx_FIO3.Enabled = cbxFIO3_dif.Checked;
-            cbxFIO3_Digitaal.Enabled = !cbxFIO3_dif.Checked;
+            if (cbxFIO3_dif.Checked)
+            {
+                cbxFIO3_Digitaal.Enabled = false;
+                cbxFIO3_Digitaal.Checked = false;
+            }
+            else
+                cbxFIO3_Digitaal.Enabled = true;
         }
 
         private void cbxFIO4_dif_CheckedChanged(object sender, EventArgs e)
         {
             combx_FIO4.Enabled = cbxFIO4_dif.Checked;
-            cbxFIO4_Digitaal.Enabled = !cbxFIO4_dif.Checked;
+            if (cbxFIO4_dif.Checked)
+            {
+                cbxFIO4_Digitaal.Enabled = false;
+                cbxFIO4_Digitaal.Checked = false;
+            }
+            else
+                cbxFIO4_Digitaal.Enabled = true;
         }
 
         private void cbxFIO5_dif_CheckedChanged(object sender, EventArgs e)
         {
             combx_FIO5.Enabled = cbxFIO5_dif.Checked;
-            cbxFIO5_Digitaal.Enabled = !cbxFIO5_dif.Checked;
+            if (cbxFIO5_dif.Checked)
+            {
+                cbxFIO5_Digitaal.Enabled = false;
+                cbxFIO5_Digitaal.Checked = false;
+            }
+            else
+                cbxFIO5_Digitaal.Enabled = true;
         }
 
         private void cbxFIO6_dif_CheckedChanged(object sender, EventArgs e)
         {
             combx_FIO6.Enabled = cbxFIO6_dif.Checked;
-            cbxFIO6_Digitaal.Enabled = !cbxFIO6_dif.Checked;
+            if (cbxFIO6_dif.Checked)
+            {
+                cbxFIO6_Digitaal.Enabled = false;
+                cbxFIO6_Digitaal.Checked = false;
+            }
+            else
+                cbxFIO6_Digitaal.Enabled = true;
         }
 
         private void cbxFIO7_dif_CheckedChanged(object sender, EventArgs e)
         {
             combx_FIO7.Enabled = cbxFIO7_dif.Checked;
-            cbxFIO7_Digitaal.Enabled = !cbxFIO7_dif.Checked;
+            if (cbxFIO7_dif.Checked)
+            {
+                cbxFIO7_Digitaal.Enabled = false;
+                cbxFIO7_Digitaal.Checked = false;
+            }
+            else
+                cbxFIO7_Digitaal.Enabled = true;
         }
+
+        #region DIGITALE CHECKBOXES
+        private void cbxFIO0_Digitaal_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbxFIO0_Digitaal.Checked)
+            {
+                cbxFIO0_dif.Checked = false;
+                cbxFIO0_dif.Enabled = false;
+            }
+            else
+                cbxFIO0_dif.Enabled = true;
+        }
+          private void cbxFIO1_Digitaal_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbxFIO1_Digitaal.Checked)
+            {
+                cbxFIO1_dif.Checked = false;
+                cbxFIO1_dif.Enabled = false;
+            }
+            else
+                cbxFIO1_dif.Enabled = true;
+        }
+
+        private void cbxFIO2_Digitaal_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbxFIO2_Digitaal.Checked)
+            {
+                cbxFIO2_dif.Checked = false;
+                cbxFIO2_dif.Enabled = false;
+            }
+            else
+                cbxFIO2_dif.Enabled = true;
+        }
+
+        private void cbxFIO3_Digitaal_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbxFIO3_Digitaal.Checked)
+            {
+                cbxFIO3_dif.Checked = false;
+                cbxFIO3_dif.Enabled = false;
+            }
+            else
+                cbxFIO3_dif.Enabled = true;
+        }
+
+        private void cbxFIO4_Digitaal_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbxFIO4_Digitaal.Checked)
+            {
+                cbxFIO4_dif.Checked = false;
+                cbxFIO4_dif.Enabled = false;
+            }
+            else
+                cbxFIO4_dif.Enabled = true;
+        }
+
+        private void cbxFIO5_Digitaal_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbxFIO5_Digitaal.Checked)
+            {
+                cbxFIO5_dif.Checked = false;
+                cbxFIO5_dif.Enabled = false;
+            }
+            else
+                cbxFIO5_dif.Enabled = true;
+        }
+
+        private void cbxFIO6_Digitaal_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbxFIO6_Digitaal.Checked)
+            {
+                cbxFIO6_dif.Checked = false;
+                cbxFIO6_dif.Enabled = false;
+            }
+            else
+                cbxFIO6_dif.Enabled = true;
+        }
+
+        private void cbxFIO7_Digitaal_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbxFIO7_Digitaal.Checked)
+            {
+                cbxFIO7_dif.Checked = false;
+                cbxFIO7_dif.Enabled = false;
+            }
+            else
+                cbxFIO7_dif.Enabled = true;
+        }
+#endregion 
         #endregion
+
 
         #region ACCESSORS
 
@@ -272,6 +410,15 @@ namespace BT_Labjack_Stream
         }
         #endregion
 
+        //groupbox
+        public bool groupBoxExpertSettings
+        {
+            set
+            {
+                gbxInstellingen.Enabled = value;
+            }
+        }
+
         //Enable/disable Kanalen
         #region ENABLE KANALEN
         public bool EnableFIO0
@@ -279,11 +426,7 @@ namespace BT_Labjack_Stream
             set
             {
                 cbxFIO0_dif.Enabled = value;
-                if (cbxFIO0_dif.Checked)
-                {
-                    combx_FIO0.Enabled = value;
-                    cbxFIO0_Digitaal.Enabled = false;
-                }
+                cbxFIO0_Digitaal.Enabled = value;
             }
         }
 
@@ -292,11 +435,7 @@ namespace BT_Labjack_Stream
             set
             {
                 cbxFIO1_dif.Enabled = value;
-                if (cbxFIO1_dif.Checked)
-                {
-                    combx_FIO1.Enabled = value;
-                    cbxFIO1_Digitaal.Enabled = false;
-                }
+                cbxFIO1_Digitaal.Enabled = value;
             }
         }
 
@@ -305,11 +444,7 @@ namespace BT_Labjack_Stream
             set
             {
                 cbxFIO2_dif.Enabled = value;
-                if (cbxFIO2_dif.Checked)
-                {
-                    combx_FIO2.Enabled = value;
-                    cbxFIO2_Digitaal.Enabled = false;
-                }
+                cbxFIO2_Digitaal.Enabled = value;
             }
         }
 
@@ -318,11 +453,7 @@ namespace BT_Labjack_Stream
             set
             {
                 cbxFIO3_dif.Enabled = value;
-                if (cbxFIO3_dif.Checked)
-                {
-                    combx_FIO3.Enabled = value;
-                    cbxFIO3_Digitaal.Enabled = false;
-                }
+                cbxFIO3_Digitaal.Enabled = value;
             }
         }
 
@@ -331,11 +462,7 @@ namespace BT_Labjack_Stream
             set
             {
                 cbxFIO4_dif.Enabled = value;
-                if (cbxFIO4_dif.Checked)
-                {
-                    combx_FIO4.Enabled = value;
-                    cbxFIO4_Digitaal.Enabled = value;
-                }
+                cbxFIO4_Digitaal.Enabled = value;
             }
         }
 
@@ -344,11 +471,7 @@ namespace BT_Labjack_Stream
             set
             {
                 cbxFIO5_dif.Enabled = value;
-                if (cbxFIO5_dif.Checked)
-                {
-                    combx_FIO5.Enabled = value;
-                    cbxFIO5_Digitaal.Enabled = value;
-                }
+                cbxFIO5_Digitaal.Enabled = value;
             }
         }
 
@@ -357,11 +480,7 @@ namespace BT_Labjack_Stream
             set
             {
                 cbxFIO6_dif.Enabled = value;
-                if (cbxFIO6_dif.Checked)
-                {
-                    combx_FIO6.Enabled = value;
-                    cbxFIO6_Digitaal.Enabled = value;
-                }
+                cbxFIO6_Digitaal.Enabled = value;
             }
         }
 
@@ -370,22 +489,13 @@ namespace BT_Labjack_Stream
             set
             {
                 cbxFIO7_dif.Enabled = value;
-                if (cbxFIO7_dif.Checked)
-                {
-                    combx_FIO7.Enabled = value;
-                    cbxFIO7_Digitaal.Enabled = value;
-                }
+                cbxFIO7_Digitaal.Enabled = value;
             }
         }
         #endregion
 
-        private void cbxFIO3_Digitaal_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-
         #endregion 
+
         //EINDE KLASSE
     }
 }

@@ -54,3 +54,4 @@ C:\Users\mark\Desktop\ btlabjackstreamer\BT Labjack Stream\BT Labjack Stream\obj
 C:\Users\yflp\Desktop\ btlabjackstreamer\BT Labjack Stream\BT Labjack Stream\obj\x86\Debug\BT_Labjack_Stream.AboutBox.resources
 C:\Users\yflp\Desktop\ btlabjackstreamer\BT Labjack Stream\BT Labjack Stream\obj\x86\Debug\BT_Labjack_Stream.frmExpertSettings.resources
 C:\Users\yflp\Desktop\ btlabjackstreamer\BT Labjack Stream\BT Labjack Stream\obj\x86\Debug\BT_Labjack_Stream.frmMain.resources
+C:\Users\mark\Desktop\ btlabjackstreamer\BT Labjack Stream\BT Labjack Stream\obj\x86\Debug\BT_Labjack_Stream.frmInfo.resources
