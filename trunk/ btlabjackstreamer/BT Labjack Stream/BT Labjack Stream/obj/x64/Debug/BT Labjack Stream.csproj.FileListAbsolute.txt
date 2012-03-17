@@ -1,0 +1,14 @@
+C:\Users\mark\Desktop\ btlabjackstreamer\BT Labjack Stream\BT Labjack Stream\bin\x64\Debug\Program.cs
+C:\Users\mark\Desktop\ btlabjackstreamer\BT Labjack Stream\BT Labjack Stream\bin\x64\Debug\BT Labjack Stream.exe
+C:\Users\mark\Desktop\ btlabjackstreamer\BT Labjack Stream\BT Labjack Stream\bin\x64\Debug\BT Labjack Stream.pdb
+C:\Users\mark\Desktop\ btlabjackstreamer\BT Labjack Stream\BT Labjack Stream\bin\x64\Debug\LJUDDotNet.dll
+C:\Users\mark\Desktop\ btlabjackstreamer\BT Labjack Stream\BT Labjack Stream\obj\x64\Debug\ResolveAssemblyReference.cache
+C:\Users\mark\Desktop\ btlabjackstreamer\BT Labjack Stream\BT Labjack Stream\obj\x64\Debug\BT_Labjack_Stream.AboutBox.resources
+C:\Users\mark\Desktop\ btlabjackstreamer\BT Labjack Stream\BT Labjack Stream\obj\x64\Debug\BT_Labjack_Stream.frmExpertSettings.resources
+C:\Users\mark\Desktop\ btlabjackstreamer\BT Labjack Stream\BT Labjack Stream\obj\x64\Debug\BT_Labjack_Stream.frmMain.resources
+C:\Users\mark\Desktop\ btlabjackstreamer\BT Labjack Stream\BT Labjack Stream\obj\x64\Debug\BT_Labjack_Stream.frmInfo.resources
+C:\Users\mark\Desktop\ btlabjackstreamer\BT Labjack Stream\BT Labjack Stream\obj\x64\Debug\BT_Labjack_Stream.Properties.Resources.resources
+C:\Users\mark\Desktop\ btlabjackstreamer\BT Labjack Stream\BT Labjack Stream\obj\x64\Debug\GenerateResource.read.1.tlog
+C:\Users\mark\Desktop\ btlabjackstreamer\BT Labjack Stream\BT Labjack Stream\obj\x64\Debug\GenerateResource.write.1.tlog
+C:\Users\mark\Desktop\ btlabjackstreamer\BT Labjack Stream\BT Labjack Stream\obj\x64\Debug\BT Labjack Stream.exe
+C:\Users\mark\Desktop\ btlabjackstreamer\BT Labjack Stream\BT Labjack Stream\obj\x64\Debug\BT Labjack Stream.pdb
