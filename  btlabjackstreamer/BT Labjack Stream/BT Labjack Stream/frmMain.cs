@@ -109,7 +109,9 @@ namespace BT_Labjack_Stream
             {
                 refreshSettings();
                 // Set up the stream
-                if (u3 != null && StartStreaming())
+                if (metingInfo.aantalGeselecteerdeKanalen == 0)
+                    MessageBox.Show("Geen kanalen geselecteerd.");
+                else if (u3 != null  && StartStreaming())
                 {
                     streamRunning = true;
                     gbxInstellingen.Enabled = false;
