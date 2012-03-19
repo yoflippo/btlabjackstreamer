@@ -70,6 +70,8 @@ namespace BT_Labjack_Stream
         public frmMain()
         {
             InitializeComponent();
+      
+   
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -107,7 +109,7 @@ namespace BT_Labjack_Stream
             {
                 refreshSettings();
                 // Set up the stream
-                if (u3 != null && stelKanalenInEnStartStreaming())
+                if (u3 != null && StartStreaming())
                 {
                     streamRunning = true;
                     gbxInstellingen.Enabled = false;
@@ -145,7 +147,7 @@ namespace BT_Labjack_Stream
         /// Configure and start the stream on the LabJack
         /// </summary>
         /// <returns>True if successful and false otherwise</returns>
-        private bool stelKanalenInEnStartStreaming()
+        private bool StartStreaming()
         {
             try
             {
@@ -187,14 +189,14 @@ namespace BT_Labjack_Stream
                         //differentieel kanalen
                         if (expertInfo.cbxDifferentiaal[i])
                             LJUD.AddRequest(u3.ljhandle, LJUD.IO.ADD_STREAM_CHANNEL_DIFF, i, 0, expertInfo.diffChannel[i], 0);
-               
+
                         ////digitaal kanalen instellen (sowieso als expert settings is ingesteld)
                         //LJUD.AddRequest(u3.ljhandle, LJUD.IO.ADD_STREAM_CHANNEL, 193, 0, 0, 0); //193, digitaal 
                     }
-                 }
+                }
                 //De digitale kanalen instellen
                 LJUD.AddRequest(u3.ljhandle, LJUD.IO.ADD_STREAM_CHANNEL, 193, 0, 0, 0);
-          
+
                 #endregion
 
                 //Execute the list of requests.
@@ -495,7 +497,7 @@ namespace BT_Labjack_Stream
                 return;
 
             //RESET instelling te meten kanalen
-            metingInfo = new metingInformatie();
+           // metingInfo = new metingInformatie(); //mag niet dan werkt het niet meer
             metingInfo.blIsHetAnalogeKanaalGeselecteerd = new bool[aantalKanalen];
             metingInfo.blIsHetDigitaleKanaalGeselecteerd = new bool[aantalKanalen];
             metingInfo.blIsHetKanaalGeselecteerd = new bool[aantalKanalen];
