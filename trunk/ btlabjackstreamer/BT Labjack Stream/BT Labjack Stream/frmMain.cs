@@ -136,7 +136,8 @@ namespace BT_Labjack_Stream
             try
             {
                 if (u3 != null)
-                    LJUD.eGet(u3.ljhandle, LJUD.IO.STOP_STREAM, 0, ref dummyDouble, dummyDoubleArray);
+                    LJUD.ePut(u3.ljhandle, LJUD.IO.STOP_STREAM, 0, 0, 0);
+                    //LJUD.eGet(u3.ljhandle, LJUD.IO.STOP_STREAM, 0, ref dummyDouble, dummyDoubleArray);
             }
             catch (LabJackUDException e)
             {
@@ -887,6 +888,7 @@ namespace BT_Labjack_Stream
         {
             try
             {
+                LJUD.ePut(u3.ljhandle, LJUD.IO.STOP_STREAM, 0, 0, 0);
                 LJUD.Close();
             }
             catch (LabJackUDException)
