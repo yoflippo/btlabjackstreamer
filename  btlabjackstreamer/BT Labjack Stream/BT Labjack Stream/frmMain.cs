@@ -49,7 +49,6 @@ namespace BT_Labjack_Stream
             public bool[] blIsHetDigitaleKanaalGeselecteerd;
             public bool[] blIsHetKanaalGeselecteerd;
             public int delayms;
-            public bool[] blMoetHetKanaalWordenOpgeslagen;
             public int aantalKanalenDieMoetenWordenOpgeslagen;
         };
         public struct expertInformatie
@@ -80,7 +79,6 @@ namespace BT_Labjack_Stream
             connectToLabjack();
             frmExpert = new frmExpertSettings(expertSettingsToolStripMenuItem);
             frmInformatie = new frmInfo();
-            frmGrafiek = new frmGraph();
             refreshSettings();
         }
 
@@ -101,6 +99,9 @@ namespace BT_Labjack_Stream
                 streamThread.Join(); // Wait for the thread to close
                 stopStreaming();
 
+                //stop grafiek
+                frmGrafiek.blMagVanMain = false;
+
                 // Reconfigure start button
                 btnStartStop.Text = "Start";
                 btnStartStop.Enabled = true;
@@ -110,6 +111,17 @@ namespace BT_Labjack_Stream
             else
             {
                 refreshSettings();
+
+                //grafiek form opnieuw instellen
+                if (frmGrafiek != null)
+                    frmGrafiek.Close();
+                frmGrafiek = new frmGraph(metingInfo.aantalGeselecteerdeKanalen, ref metingInfo.sampleFrequentie, ref dataChannel);
+                //grafiek mag worden getekend
+                frmGrafiek.blMagVanMain = true;
+                //grafiek laten zien
+                if (grafiekToolStripMenuItem.Checked)
+                    frmGrafiek.Show();
+
                 // Set up the stream
                 if (metingInfo.aantalGeselecteerdeKanalen == 0)
                     MessageBox.Show("Geen kanalen geselecteerd.");
@@ -391,37 +403,33 @@ namespace BT_Labjack_Stream
                 tbxFIO6.Text = textBoxesMain[6];
                 tbxFIO7.Text = textBoxesMain[7];
 
-                //grafiek
-                if (grafiekToolStripMenuItem.Checked)
-                {
-                    frmGrafiek.FillGraph(readings[0], readings[0]);
-                }
+                ////grafiek
+                //if (grafiekToolStripMenuItem.Checked)
+                //{
+                //    frmGrafiek.FillGraph(readings[0], readings[0]);
+                //}
             }
         }
 
         private void saveDataInLists(double[] data)
         {
             //Schrijf waardes in Lists
-            int HouRekeningMetDigitaleKanalen = 0;
-            if (expertSettingsToolStripMenuItem.Checked)
-                HouRekeningMetDigitaleKanalen = 1;
-
             for (int i = 0; i < (metingInfo.aantalGeselecteerdeAnalogeKanalen * metingInfo.sampleFrequentie
-                * (metingInfo.delayms / msec)); i = i + metingInfo.aantalGeselecteerdeAnalogeKanalen + HouRekeningMetDigitaleKanalen) //+1 voor digitale kanalen
+                * (metingInfo.delayms / msec)); i = i + metingInfo.aantalGeselecteerdeAnalogeKanalen+1) //+1 voor digitale kanalen
             {
                 //analoog en differentieel opslaan
-                int j = 0;
-                for (int k = 0; k < aantalKanalen; k++) 
+                int tellerAnalogeKanalen = 0;
+                for (int k = 0; k < aantalKanalen; k++) //door kanalen lopen
                 {
                     if (metingInfo.blIsHetAnalogeKanaalGeselecteerd[k] && !metingInfo.blIsHetDigitaleKanaalGeselecteerd[k]) //alleen analoge of differntiele kanalen opslaan
                     {
-                        dataChannel[k].Add(data[i + j]);
-                        j++;
+                        dataChannel[k].Add(data[i + tellerAnalogeKanalen]);
+                        tellerAnalogeKanalen++;
                     }
                 }
 
                 //Daarna digitale kanalen verwerken
-                int[] digKanTemp = verkrijgBits(data[i + j]);
+                int[] digKanTemp = verkrijgBits(data[i + tellerAnalogeKanalen]);
                 for (int k = 0; k < aantalKanalen; k++)
                 {
                     if (metingInfo.blIsHetDigitaleKanaalGeselecteerd[k])
@@ -512,7 +520,6 @@ namespace BT_Labjack_Stream
             metingInfo.blIsHetAnalogeKanaalGeselecteerd = new bool[aantalKanalen];
             metingInfo.blIsHetDigitaleKanaalGeselecteerd = new bool[aantalKanalen];
             metingInfo.blIsHetKanaalGeselecteerd = new bool[aantalKanalen];
-            metingInfo.blMoetHetKanaalWordenOpgeslagen = new bool[aantalKanalen];
             metingInfo.aantalGeselecteerdeAnalogeKanalen = 0;
             metingInfo.aantalGeselecteerdeDigitaleKanalen = 0;
             metingInfo.aantalGeselecteerdeKanalen = 0;
@@ -582,10 +589,7 @@ namespace BT_Labjack_Stream
                 }
                 metingInfo.blIsHetKanaalGeselecteerd[0] = true;
                 metingInfo.aantalGeselecteerdeKanalen++;
-
-                if (cbxOpslaanFIO0.Checked)
-                metingInfo.blMoetHetKanaalWordenOpgeslagen[0] = cbxOpslaanFIO0.Checked;
-            }
+                            }
 
             if (cbxFIO1.Checked)
             {
@@ -603,9 +607,6 @@ namespace BT_Labjack_Stream
                 }
                 metingInfo.blIsHetKanaalGeselecteerd[1] = true;
                 metingInfo.aantalGeselecteerdeKanalen++;
-
-                if (cbxOpslaanFIO1.Checked)
-                metingInfo.blMoetHetKanaalWordenOpgeslagen[1] = cbxOpslaanFIO1.Checked;
             }
 
             if (cbxFIO2.Checked)
@@ -624,9 +625,6 @@ namespace BT_Labjack_Stream
                 }
                 metingInfo.blIsHetKanaalGeselecteerd[2] = true;
                 metingInfo.aantalGeselecteerdeKanalen++;
-
-                if (cbxOpslaanFIO2.Checked)
-                metingInfo.blMoetHetKanaalWordenOpgeslagen[2] = cbxOpslaanFIO2.Checked;
             }
 
             if (cbxFIO3.Checked)
@@ -645,9 +643,6 @@ namespace BT_Labjack_Stream
                 }
                 metingInfo.blIsHetKanaalGeselecteerd[3] = true;
                 metingInfo.aantalGeselecteerdeKanalen++;
-
-                if (cbxOpslaanFIO3.Checked)
-                metingInfo.blMoetHetKanaalWordenOpgeslagen[3] = cbxOpslaanFIO3.Checked;
             }
 
             if (cbxFIO4.Checked)
@@ -666,9 +661,6 @@ namespace BT_Labjack_Stream
                 }
                 metingInfo.blIsHetKanaalGeselecteerd[4] = true;
                 metingInfo.aantalGeselecteerdeKanalen++;
-
-                if (cbxOpslaanFIO4.Checked)
-                metingInfo.blMoetHetKanaalWordenOpgeslagen[4] = cbxOpslaanFIO4.Checked;
             }
 
             if (cbxFIO5.Checked)
@@ -687,9 +679,6 @@ namespace BT_Labjack_Stream
                 }
                 metingInfo.blIsHetKanaalGeselecteerd[5] = true;
                 metingInfo.aantalGeselecteerdeKanalen++;
-
-                if (cbxOpslaanFIO5.Checked)
-                metingInfo.blMoetHetKanaalWordenOpgeslagen[5] = cbxOpslaanFIO5.Checked;
             }
 
             if (cbxFIO6.Checked)
@@ -708,9 +697,6 @@ namespace BT_Labjack_Stream
                 }
                 metingInfo.blIsHetKanaalGeselecteerd[6] = true;
                 metingInfo.aantalGeselecteerdeKanalen++;
-
-                if (cbxOpslaanFIO6.Checked)
-                metingInfo.blMoetHetKanaalWordenOpgeslagen[6] = cbxOpslaanFIO6.Checked;
             }
 
             if (cbxFIO7.Checked)
@@ -729,15 +715,10 @@ namespace BT_Labjack_Stream
                 }
                 metingInfo.blIsHetKanaalGeselecteerd[7] = true;
                 metingInfo.aantalGeselecteerdeKanalen++;
-
-                if (cbxOpslaanFIO7.Checked)
-                metingInfo.blMoetHetKanaalWordenOpgeslagen[7] = cbxOpslaanFIO7.Checked;
             }
             #endregion
 
-
-
-            //instellingen
+            //instellingen meting
             numScans = (2 * metingInfo.sampleFrequentie * metingInfo.delayms) / msec;
             metingInfo.sampleFrequentie = Convert.ToInt16(tscbxSampleFrequentie.Text);
             adblData = new double[metingInfo.aantalGeselecteerdeKanalen * (Int16)numScans * 2];
@@ -764,54 +745,48 @@ namespace BT_Labjack_Stream
             //tekst groupboxes
             if (!blLabjackHV)
                 gbxFIO0_3.Text = "0-2,4 Volt";
+            else
+                gbxFIO0_3.Text = "0-10 Volt";
         }
 
         #region CHECKBOXES
         private void cbxFIO0_CheckedChanged(object sender, EventArgs e)
         {
-            cbxOpslaanFIO0.Enabled = cbxFIO0.Checked;
             frmExpert.EnableFIO0 = cbxFIO0.Checked;
         }
 
         private void cbxFIO1_CheckedChanged(object sender, EventArgs e)
         {
-            cbxOpslaanFIO1.Enabled = cbxFIO1.Checked;
             frmExpert.EnableFIO1 = cbxFIO1.Checked;
         }
 
         private void cbxFIO2_CheckedChanged(object sender, EventArgs e)
         {
-            cbxOpslaanFIO2.Enabled = cbxFIO2.Checked;
             frmExpert.EnableFIO2 = cbxFIO2.Checked;
         }
 
         private void cbxFIO3_CheckedChanged(object sender, EventArgs e)
         {
-            cbxOpslaanFIO3.Enabled = cbxFIO3.Checked;
             frmExpert.EnableFIO3 = cbxFIO3.Checked;
         }
 
         private void cbxFIO4_CheckedChanged(object sender, EventArgs e)
         {
-            cbxOpslaanFIO4.Enabled = cbxFIO4.Checked;
             frmExpert.EnableFIO4 = cbxFIO4.Checked;
         }
 
         private void cbxFIO5_CheckedChanged(object sender, EventArgs e)
         {
-            cbxOpslaanFIO5.Enabled = cbxFIO5.Checked;
             frmExpert.EnableFIO5 = cbxFIO5.Checked;
         }
 
         private void cbxFIO6_CheckedChanged(object sender, EventArgs e)
         {
-            cbxOpslaanFIO6.Enabled = cbxFIO6.Checked;
             frmExpert.EnableFIO6 = cbxFIO6.Checked;
         }
 
         private void cbxFIO7_CheckedChanged(object sender, EventArgs e)
         {
-            cbxOpslaanFIO7.Enabled = cbxFIO7.Checked;
             frmExpert.EnableFIO7 = cbxFIO7.Checked;
         }
         #endregion
@@ -915,18 +890,6 @@ namespace BT_Labjack_Stream
             cbxFIO5.Checked = AlleKanalenAanUit_ToolStripMenuItem.Checked;
             cbxFIO6.Checked = AlleKanalenAanUit_ToolStripMenuItem.Checked;
             cbxFIO7.Checked = AlleKanalenAanUit_ToolStripMenuItem.Checked;
-        }
-
-        private void GeselecteerdeKanalenOpslaan_ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            cbxOpslaanFIO0.Checked = cbxFIO0.Checked;
-            cbxOpslaanFIO1.Checked = cbxFIO1.Checked;
-            cbxOpslaanFIO2.Checked = cbxFIO2.Checked;
-            cbxOpslaanFIO3.Checked = cbxFIO3.Checked;
-            cbxOpslaanFIO4.Checked = cbxFIO4.Checked;
-            cbxOpslaanFIO5.Checked = cbxFIO5.Checked;
-            cbxOpslaanFIO6.Checked = cbxFIO6.Checked;
-            cbxOpslaanFIO7.Checked = cbxFIO7.Checked;
         }
 
         private int[] verkrijgBits(double waarde)

@@ -28,9 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmGraph));
             this.zg1 = new ZedGraph.ZedGraphControl();
             this.nudGraphY = new System.Windows.Forms.NumericUpDown();
             this.nudGraphX = new System.Windows.Forms.NumericUpDown();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.nudGraphY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudGraphX)).BeginInit();
             this.SuspendLayout();
@@ -39,7 +44,7 @@
             // 
             this.zg1.IsAutoScrollRange = true;
             this.zg1.IsScrollY2 = true;
-            this.zg1.Location = new System.Drawing.Point(19, 12);
+            this.zg1.Location = new System.Drawing.Point(12, 12);
             this.zg1.Name = "zg1";
             this.zg1.ScrollGrace = 0D;
             this.zg1.ScrollMaxX = 0D;
@@ -48,13 +53,13 @@
             this.zg1.ScrollMinX = 0D;
             this.zg1.ScrollMinY = 0D;
             this.zg1.ScrollMinY2 = 0D;
-            this.zg1.Size = new System.Drawing.Size(594, 332);
+            this.zg1.Size = new System.Drawing.Size(1083, 535);
             this.zg1.TabIndex = 13;
             this.zg1.ZoomStepFraction = 1D;
             // 
             // nudGraphY
             // 
-            this.nudGraphY.Location = new System.Drawing.Point(19, 367);
+            this.nudGraphY.Location = new System.Drawing.Point(151, 582);
             this.nudGraphY.Maximum = new decimal(new int[] {
             1000000,
             0,
@@ -64,14 +69,14 @@
             this.nudGraphY.Size = new System.Drawing.Size(120, 20);
             this.nudGraphY.TabIndex = 14;
             this.nudGraphY.Value = new decimal(new int[] {
-            2,
+            6,
             0,
             0,
             0});
             // 
             // nudGraphX
             // 
-            this.nudGraphX.Location = new System.Drawing.Point(177, 367);
+            this.nudGraphX.Location = new System.Drawing.Point(12, 582);
             this.nudGraphX.Maximum = new decimal(new int[] {
             1000000,
             0,
@@ -86,21 +91,53 @@
             0,
             0});
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label1.Location = new System.Drawing.Point(151, 566);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(36, 16);
+            this.label1.TabIndex = 16;
+            this.label1.Text = "Y-as";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label2.Location = new System.Drawing.Point(12, 566);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(35, 16);
+            this.label2.TabIndex = 17;
+            this.label2.Text = "X-as";
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // frmGraph
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkRed;
-            this.ClientSize = new System.Drawing.Size(625, 465);
+            this.ClientSize = new System.Drawing.Size(1107, 614);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.nudGraphX);
             this.Controls.Add(this.nudGraphY);
             this.Controls.Add(this.zg1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmGraph";
-            this.Text = "frmGraph";
+            this.Text = "Grafiek";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmGraph_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.nudGraphY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudGraphX)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -109,5 +146,8 @@
         private ZedGraph.ZedGraphControl zg1;
         private System.Windows.Forms.NumericUpDown nudGraphY;
         private System.Windows.Forms.NumericUpDown nudGraphX;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Timer timer1;
     }
 }

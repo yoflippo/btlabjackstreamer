@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Threading;
+using System.Diagnostics;
 
 using ZedGraph;
 
@@ -15,62 +16,90 @@ namespace BT_Labjack_Stream
     public partial class frmGraph : Form
     {
         #region Variabelen
+        private const int aantalKanalen = 8;
         int telAantalKeerTekenen = 0;
-        PointPairList listA = new PointPairList();
-        PointPairList listB = new PointPairList();
-        bool startMonitoring = false;
-        LineItem myCurveA = null;
-        LineItem myCurveB = null;
-        bool blDataIsJuist = false;
-        int maxYScale = 0;
-        int maxXScale = 0;
+        PointPairList[] lists = null;
+        LineItem[] myCurves = null;
+        int aantalGeselecteerdeKanalen = 0;
+        public string TitelGrafiek = "BT Labjack Streamer";
+        public string LabelYas = "Spanning [Volt]";
+        public string LabelXas = "Tijd [seconde]";
+        private string[] namenVanKanalen = null;
+        private readonly Color[] kleurLijst = new Color[aantalKanalen] { Color.Red, Color.Green, Color.Blue, Color.Black, Color.Yellow, Color.DeepPink, Color.GreenYellow, Color.Purple };
+        private List<double>[] data = null;
+        private int sampleFrequentie = 0;
+        Stopwatch stopwatch = null;
+        #endregion
+
+        #region CONSTRUCTOR
+        public frmGraph(int aantalGebruikteKanalen, ref int sampleFreq ,ref List<double>[] d)
+        {
+            aantalGeselecteerdeKanalen = aantalGebruikteKanalen;
+            namenVanKanalen = new string[aantalKanalen];
+            for (int i = 0; i < aantalGeselecteerdeKanalen; i++)
+            {
+                namenVanKanalen[i] = "FIO" + i.ToString();
+            }
+            data = d;
+            sampleFrequentie = sampleFreq;
+            InitializeComponent();
+            Reset();
+        }
         #endregion
 
 
-        public frmGraph()
-        {
-            InitializeComponent();
-            resetGraph();
-        }
-
-
-        private void resetGraph()
+        public void Reset()
         {
             GraphPane myPane = zg1.GraphPane;
-            string titel = "Reactie capacitieve knoppen";
+            stopwatch = new Stopwatch(); stopwatch.Start();
 
-                if (myCurveA == null)
-                {
-                    myCurveA = myPane.AddCurve("Knop A",
-                                    listA, Color.Red, SymbolType.None);//, SymbolType.Diamond);
-                    myCurveB = myPane.AddCurve("Knop B",
-                                    listB, Color.Blue, SymbolType.None);//, SymbolType.Diamond);
-                }
+            //Maak nieuw Lists aan voor de grafiek
+            lists = new PointPairList[aantalGeselecteerdeKanalen];
+            for (int i = 0; i < aantalGeselecteerdeKanalen; i++)
+            {
+                lists[i] = new PointPairList();
+            }
 
-                listA.Clear();
-                listB.Clear();
+            //Maak grafieklijnen aan
+            myCurves = new LineItem[aantalGeselecteerdeKanalen];
+            for (int i = 0; i < aantalGeselecteerdeKanalen; i++)
+            {
+                myCurves[i] = myPane.AddCurve(namenVanKanalen[i], lists[i], kleurLijst[i], SymbolType.None);
+            }
 
-                myPane.Title.Text = titel;
-                myPane.XAxis.Title.Text = "Tijd [sec]";
-                myPane.YAxis.Title.Text = "Spanning [Volt]";
+            nudGraphX.Value = sampleFrequentie;
 
-                myPane.YAxis.Scale.Max = (double)nudGraphY.Value;
-                myPane.YAxis.Scale.Min = 0;
+            myPane.Title.Text = TitelGrafiek;
+            myPane.XAxis.Title.Text = LabelXas;
+            myPane.YAxis.Title.Text = LabelYas;
 
-                myPane.XAxis.Scale.Max = (double)nudGraphX.Value;
-                myPane.XAxis.Scale.Min = 0;
+            myPane.YAxis.Scale.Max = (double)nudGraphY.Value;
+            myPane.YAxis.Scale.Min = 0;
 
-                myPane.AxisChange();
-                redrawGraph();
+            myPane.XAxis.Scale.Max = (double)nudGraphX.Value;
+            myPane.XAxis.Scale.Min = 0;
+
+            myPane.AxisChange();
+
+            redrawGraph();
         }
 
 
-        public void FillGraph(double knopA, double knopB)
+        private void FillGraph()
         {
             GraphPane myPane = zg1.GraphPane;
             telAantalKeerTekenen++;
-            listA.Add(telAantalKeerTekenen, knopA);
-            listB.Add(telAantalKeerTekenen, knopB);
+
+            //kies waarde uit list om te tekenen
+            //long verstrekenTijd = stopwatch.ElapsedMilliseconds-5000; //de tijd die 1 seconde later is gestart
+            //double omrekenGetal = (double)sampleFrequentie / 1000.0;
+            //int index = (int)(verstrekenTijd * omrekenGetal);
+
+            int index = data[0].Count - sampleFrequentie/3; //1 seconde vertraging;
+            for (int i = 0; i < aantalGeselecteerdeKanalen; i++)
+            {
+                lists[i].Add(telAantalKeerTekenen, data[i][index]);
+            }
 
             //X-as
             if (telAantalKeerTekenen >= myPane.XAxis.Scale.Max)
@@ -78,17 +107,15 @@ namespace BT_Labjack_Stream
                 myPane.XAxis.Scale.Max = myPane.XAxis.Scale.Min + (double)nudGraphX.Value;
                 myPane.XAxis.Scale.Min++;
             }
-            //Y-as
-            if (knopB > (double)nudGraphY.Value || knopA > (double)nudGraphY.Value)
-            {
-                int max = 1+(int)knopA;
-                nudGraphY.Value = max;
-                maxYScale = max;
-            }
-            redrawGraph();
+            ////Y-as
+            //if (knopA > (double)nudGraphY.Value || knopA > (double)nudGraphY.Value)
+            //{
+            //    int max = 1 + (int)knopA;
+            //    nudGraphY.Value = max;
+            //}
         }
 
-        public void redrawGraph()
+        private void redrawGraph()
         {
             GraphPane myPane = zg1.GraphPane;
 
@@ -104,6 +131,21 @@ namespace BT_Labjack_Stream
         {
             this.Hide();
             e.Cancel = true;
+        }
+
+
+        public bool blMagVanMain = true;
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (stopwatch.ElapsedMilliseconds > 1000 && blMagVanMain)
+            {
+                if (this.Visible)
+                {
+                    FillGraph();
+                    redrawGraph();
+                }
+
+            }
         }
 
 

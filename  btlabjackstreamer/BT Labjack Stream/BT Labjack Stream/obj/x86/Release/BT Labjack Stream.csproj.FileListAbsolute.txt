@@ -44,3 +44,5 @@ C:\Users\yflp\Desktop\ btlabjackstreamer\BT Labjack Stream\BT Labjack Stream\obj
 C:\Users\yflp\Desktop\ btlabjackstreamer\BT Labjack Stream\BT Labjack Stream\obj\x86\Release\BT_Labjack_Stream.frmMain.resources
 C:\Users\yflp\Desktop\ btlabjackstreamer\BT Labjack Stream\BT Labjack Stream\obj\x86\Release\BT_Labjack_Stream.frmInfo.resources
 C:\Users\mark\Desktop\ btlabjackstreamer\BT Labjack Stream\BT Labjack Stream\obj\x86\Release\BT_Labjack_Stream.frmInfo.resources
+C:\Users\yflp\Desktop\ btlabjackstreamer\BT Labjack Stream\BT Labjack Stream\bin\Release\ZedGraph.dll
+C:\Users\yflp\Desktop\ btlabjackstreamer\BT Labjack Stream\BT Labjack Stream\obj\x86\Release\BT_Labjack_Stream.frmGraph.resources
