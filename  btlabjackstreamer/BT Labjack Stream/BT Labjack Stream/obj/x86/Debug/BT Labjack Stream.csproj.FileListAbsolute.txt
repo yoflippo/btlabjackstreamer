@@ -34,7 +34,6 @@ C:\Users\yflp\Desktop\ btlabjackstreamer\BT Labjack Stream\BT Labjack Stream\obj
 C:\Users\yflp\Desktop\ btlabjackstreamer\BT Labjack Stream\BT Labjack Stream\obj\x86\Debug\BT_Labjack_Stream.Properties.Resources.resources
 C:\Users\yflp\Desktop\ btlabjackstreamer\BT Labjack Stream\BT Labjack Stream\obj\x86\Debug\GenerateResource.read.1.tlog
 C:\Users\yflp\Desktop\ btlabjackstreamer\BT Labjack Stream\BT Labjack Stream\obj\x86\Debug\GenerateResource.write.1.tlog
-C:\Users\yflp\Desktop\ btlabjackstreamer\BT Labjack Stream\BT Labjack Stream\bin\Debug\Program.cs
 C:\Users\yflp\Desktop\ btlabjackstreamer\BT Labjack Stream\BT Labjack Stream\bin\Debug\BT Labjack Stream.exe
 C:\Users\yflp\Desktop\ btlabjackstreamer\BT Labjack Stream\BT Labjack Stream\bin\Debug\BT Labjack Stream.pdb
 C:\Users\yflp\Desktop\ btlabjackstreamer\BT Labjack Stream\BT Labjack Stream\bin\Debug\LJUDDotNet.dll
@@ -55,3 +54,5 @@ C:\Users\yflp\Desktop\ btlabjackstreamer\BT Labjack Stream\BT Labjack Stream\obj
 C:\Users\yflp\Desktop\ btlabjackstreamer\BT Labjack Stream\BT Labjack Stream\obj\x86\Debug\BT_Labjack_Stream.frmMain.resources
 C:\Users\mark\Desktop\ btlabjackstreamer\BT Labjack Stream\BT Labjack Stream\obj\x86\Debug\BT_Labjack_Stream.frmInfo.resources
 C:\Users\yflp\Desktop\ btlabjackstreamer\BT Labjack Stream\BT Labjack Stream\obj\x86\Debug\BT_Labjack_Stream.frmInfo.resources
+C:\Users\yflp\Desktop\ btlabjackstreamer\BT Labjack Stream\BT Labjack Stream\bin\Debug\ZedGraph.dll
+C:\Users\yflp\Desktop\ btlabjackstreamer\BT Labjack Stream\BT Labjack Stream\obj\x86\Debug\BT_Labjack_Stream.frmGraph.resources

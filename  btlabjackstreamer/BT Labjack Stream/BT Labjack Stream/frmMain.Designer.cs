@@ -42,6 +42,7 @@
             this.firmwareVersieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.serienummerToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.hardwareVersieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmi_LabjackHV = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.instellingenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripTextBox1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -94,7 +95,7 @@
             this.cbxFIO6 = new System.Windows.Forms.CheckBox();
             this.cbxFIO5 = new System.Windows.Forms.CheckBox();
             this.cbxFIO4 = new System.Windows.Forms.CheckBox();
-            this.tsmi_LabjackHV = new System.Windows.Forms.ToolStripMenuItem();
+            this.grafiekToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.gbxInstellingen.SuspendLayout();
@@ -136,7 +137,8 @@
             this.beeldToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.instellingenAanuitToolStripMenuItem,
             this.toolStripSeparator5,
-            this.expertSettingsToolStripMenuItem});
+            this.expertSettingsToolStripMenuItem,
+            this.grafiekToolStripMenuItem});
             this.beeldToolStripMenuItem.Name = "beeldToolStripMenuItem";
             this.beeldToolStripMenuItem.Size = new System.Drawing.Size(45, 20);
             this.beeldToolStripMenuItem.Text = "Beeld";
@@ -205,6 +207,12 @@
             this.hardwareVersieToolStripMenuItem.Name = "hardwareVersieToolStripMenuItem";
             this.hardwareVersieToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.hardwareVersieToolStripMenuItem.Text = "Hardware versie";
+            // 
+            // tsmi_LabjackHV
+            // 
+            this.tsmi_LabjackHV.Name = "tsmi_LabjackHV";
+            this.tsmi_LabjackHV.Size = new System.Drawing.Size(153, 22);
+            this.tsmi_LabjackHV.Text = "U3-HV";
             // 
             // toolStripSeparator3
             // 
@@ -710,11 +718,12 @@
             this.cbxFIO4.UseVisualStyleBackColor = true;
             this.cbxFIO4.CheckedChanged += new System.EventHandler(this.cbxFIO4_CheckedChanged);
             // 
-            // tsmi_LabjackHV
+            // grafiekToolStripMenuItem
             // 
-            this.tsmi_LabjackHV.Name = "tsmi_LabjackHV";
-            this.tsmi_LabjackHV.Size = new System.Drawing.Size(153, 22);
-            this.tsmi_LabjackHV.Text = "U3-HV";
+            this.grafiekToolStripMenuItem.Name = "grafiekToolStripMenuItem";
+            this.grafiekToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.grafiekToolStripMenuItem.Text = "Grafiek aan/uit";
+            this.grafiekToolStripMenuItem.Click += new System.EventHandler(this.grafiekToolStripMenuItem_Click);
             // 
             // frmMain
             // 
@@ -830,6 +839,7 @@
         private System.Windows.Forms.ToolStripComboBox tscb_BufferGrootte;
         private System.Windows.Forms.ToolStripMenuItem tsmi_MeerInformatie;
         private System.Windows.Forms.ToolStripMenuItem tsmi_LabjackHV;
+        private System.Windows.Forms.ToolStripMenuItem grafiekToolStripMenuItem;
     }
 }
 
