@@ -1,0 +1,74 @@
+C:\Documents and Settings\Ralf\Mijn documenten\Visual Studio 2010\Projects\serialPort\serialPort\bin\Debug\recordSound.exe
+C:\Documents and Settings\Ralf\Mijn documenten\Visual Studio 2010\Projects\serialPort\serialPort\bin\Debug\recordSound.pdb
+C:\Documents and Settings\Ralf\Mijn documenten\Visual Studio 2010\Projects\serialPort\serialPort\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Ralf\Mijn documenten\Visual Studio 2010\Projects\serialPort\serialPort\obj\x86\Debug\WindowsFormsApplication1.Form1.resources
+C:\Documents and Settings\Ralf\Mijn documenten\Visual Studio 2010\Projects\serialPort\serialPort\obj\x86\Debug\WindowsFormsApplication1.Properties.Resources.resources
+C:\Documents and Settings\Ralf\Mijn documenten\Visual Studio 2010\Projects\serialPort\serialPort\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Documents and Settings\Ralf\Mijn documenten\Visual Studio 2010\Projects\serialPort\serialPort\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Documents and Settings\Ralf\Mijn documenten\Visual Studio 2010\Projects\serialPort\serialPort\obj\x86\Debug\recordSound.exe
+C:\Documents and Settings\Ralf\Mijn documenten\Visual Studio 2010\Projects\serialPort\serialPort\obj\x86\Debug\recordSound.pdb
+C:\Documents and Settings\Ralf\Mijn documenten\Visual Studio 2010\Projects\serialPort\serialPort\bin\Debug\ZedGraph.dll
+C:\Documents and Settings\Ralf\Mijn documenten\PROJECTS\C#\Forma\Telefooncentrale\serialPort\serialPort\obj\x86\Debug\recordSound.exe
+C:\Documents and Settings\Ralf\Mijn documenten\PROJECTS\C#\Forma\Telefooncentrale\serialPort\serialPort\obj\x86\Debug\recordSound.pdb
+C:\Documents and Settings\Ralf\Mijn documenten\PROJECTS\C#\Forma\Telefooncentrale\001__serialPort\serialPort\obj\x86\Debug\recordSound.exe
+C:\Documents and Settings\Ralf\Mijn documenten\PROJECTS\C#\Forma\Telefooncentrale\001__serialPort\serialPort\obj\x86\Debug\recordSound.pdb
+C:\Documents and Settings\Ralf\Mijn documenten\PROJECTS\C#\Forma\Telefooncentrale\001__serialPort\serialPort\bin\Debug\recordSound.exe
+C:\Documents and Settings\Ralf\Mijn documenten\PROJECTS\C#\Forma\Telefooncentrale\001__serialPort\serialPort\bin\Debug\recordSound.pdb
+C:\Documents and Settings\Ralf\Mijn documenten\PROJECTS\C#\Forma\Telefooncentrale\001__serialPort\serialPort\bin\Debug\ZedGraph.dll
+C:\Documents and Settings\Ralf\Mijn documenten\PROJECTS\C#\Forma\Telefooncentrale\001__serialPort\serialPort\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Ralf\Mijn documenten\PROJECTS\C#\Forma\Telefooncentrale\001__serialPort\serialPort\obj\x86\Debug\WindowsFormsApplication1.Form1.resources
+C:\Documents and Settings\Ralf\Mijn documenten\PROJECTS\C#\Forma\Telefooncentrale\001__serialPort\serialPort\obj\x86\Debug\WindowsFormsApplication1.Properties.Resources.resources
+C:\Documents and Settings\Ralf\Mijn documenten\PROJECTS\C#\Forma\Telefooncentrale\001__serialPort\serialPort\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Documents and Settings\Ralf\Mijn documenten\PROJECTS\C#\Forma\Telefooncentrale\001__serialPort\serialPort\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Documents and Settings\Ralf\Mijn documenten\PROJECTS\C#\Gadget\001__serialPort\serialPort\obj\x86\Debug\recordSound.exe
+C:\Documents and Settings\Ralf\Mijn documenten\PROJECTS\C#\Gadget\001__serialPort\serialPort\obj\x86\Debug\recordSound.pdb
+C:\Documents and Settings\Ralf\Mijn documenten\PROJECTS\C#\Gadget\001__serialPort\serialPort\bin\Debug\recordSound.exe
+C:\Documents and Settings\Ralf\Mijn documenten\PROJECTS\C#\Gadget\001__serialPort\serialPort\bin\Debug\recordSound.pdb
+C:\Documents and Settings\Ralf\Mijn documenten\PROJECTS\C#\Gadget\001__serialPort\serialPort\bin\Debug\ZedGraph.dll
+C:\Documents and Settings\Ralf\Mijn documenten\PROJECTS\C#\Gadget\001__serialPort\serialPort\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Ralf\Mijn documenten\PROJECTS\C#\Gadget\001__serialPort\serialPort\obj\x86\Debug\WindowsFormsApplication1.Form1.resources
+C:\Documents and Settings\Ralf\Mijn documenten\PROJECTS\C#\Gadget\001__serialPort\serialPort\obj\x86\Debug\WindowsFormsApplication1.Properties.Resources.resources
+C:\Documents and Settings\Ralf\Mijn documenten\PROJECTS\C#\Gadget\001__serialPort\serialPort\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Documents and Settings\Ralf\Mijn documenten\PROJECTS\C#\Gadget\001__serialPort\serialPort\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Documents and Settings\Ralf\Mijn documenten\PROJECTS\C#\Gadget\002__BezigMetMultiThread__serialPort\serialPort\obj\x86\Debug\recordSound.exe
+C:\Documents and Settings\Ralf\Mijn documenten\PROJECTS\C#\Gadget\002__BezigMetMultiThread__serialPort\serialPort\obj\x86\Debug\recordSound.pdb
+C:\Documents and Settings\Ralf\Mijn documenten\PROJECTS\C#\Gadget\002__BezigMetMultiThread__serialPort\serialPort\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Ralf\Mijn documenten\PROJECTS\C#\Gadget\002__BezigMetMultiThread__serialPort\serialPort\obj\x86\Debug\WindowsFormsApplication1.Form1.resources
+C:\Documents and Settings\Ralf\Mijn documenten\PROJECTS\C#\Gadget\002__BezigMetMultiThread__serialPort\serialPort\obj\x86\Debug\WindowsFormsApplication1.Properties.Resources.resources
+C:\Documents and Settings\Ralf\Mijn documenten\PROJECTS\C#\Gadget\002__BezigMetMultiThread__serialPort\serialPort\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Documents and Settings\Ralf\Mijn documenten\PROJECTS\C#\Gadget\002__BezigMetMultiThread__serialPort\serialPort\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Documents and Settings\Ralf\Mijn documenten\PROJECTS\C#\Gadget\002__BezigMetMultiThread__serialPort\serialPort\bin\Debug\recordSound.exe
+C:\Documents and Settings\Ralf\Mijn documenten\PROJECTS\C#\Gadget\002__BezigMetMultiThread__serialPort\serialPort\bin\Debug\recordSound.pdb
+C:\Documents and Settings\Ralf\Mijn documenten\PROJECTS\C#\Gadget\002__BezigMetMultiThread__serialPort\serialPort\bin\Debug\ZedGraph.dll
+C:\Documents and Settings\Ralf\Mijn documenten\PROJECTS\C#\Gadget\002__GemiddeldeVan10MetingenUitlezen__serialPort\serialPort\obj\x86\Debug\recordSound.exe
+C:\Documents and Settings\Ralf\Mijn documenten\PROJECTS\C#\Gadget\002__GemiddeldeVan10MetingenUitlezen__serialPort\serialPort\obj\x86\Debug\recordSound.pdb
+C:\Documents and Settings\Ralf\Mijn documenten\PROJECTS\C#\Gadget\002__GemiddeldeVan10MetingenUitlezen__serialPort\serialPort\bin\Debug\recordSound.exe
+C:\Documents and Settings\Ralf\Mijn documenten\PROJECTS\C#\Gadget\002__GemiddeldeVan10MetingenUitlezen__serialPort\serialPort\bin\Debug\recordSound.pdb
+C:\Documents and Settings\Ralf\Mijn documenten\PROJECTS\C#\Gadget\002__GemiddeldeVan10MetingenUitlezen__serialPort\serialPort\bin\Debug\ZedGraph.dll
+C:\Documents and Settings\Ralf\Mijn documenten\PROJECTS\C#\Gadget\002__GemiddeldeVan10MetingenUitlezen__serialPort\serialPort\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Ralf\Mijn documenten\PROJECTS\C#\Gadget\002__GemiddeldeVan10MetingenUitlezen__serialPort\serialPort\obj\x86\Debug\WindowsFormsApplication1.Form1.resources
+C:\Documents and Settings\Ralf\Mijn documenten\PROJECTS\C#\Gadget\002__GemiddeldeVan10MetingenUitlezen__serialPort\serialPort\obj\x86\Debug\WindowsFormsApplication1.Properties.Resources.resources
+C:\Documents and Settings\Ralf\Mijn documenten\PROJECTS\C#\Gadget\002__GemiddeldeVan10MetingenUitlezen__serialPort\serialPort\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Documents and Settings\Ralf\Mijn documenten\PROJECTS\C#\Gadget\002__GemiddeldeVan10MetingenUitlezen__serialPort\serialPort\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Documents and Settings\Ralf\Mijn documenten\PROJECTS\C#\Gadget\buttonPress\002__GemiddeldeVan10MetingenUitlezen__serialPort\serialPort\obj\x86\Debug\recordSound.exe
+C:\Documents and Settings\Ralf\Mijn documenten\PROJECTS\C#\Gadget\buttonPress\002__GemiddeldeVan10MetingenUitlezen__serialPort\serialPort\obj\x86\Debug\recordSound.pdb
+C:\Documents and Settings\Ralf\Mijn documenten\PROJECTS\C#\Gadget\buttonPress\002__GemiddeldeVan10MetingenUitlezen__serialPort\serialPort\bin\Debug\recordSound.exe
+C:\Documents and Settings\Ralf\Mijn documenten\PROJECTS\C#\Gadget\buttonPress\002__GemiddeldeVan10MetingenUitlezen__serialPort\serialPort\bin\Debug\recordSound.pdb
+C:\Documents and Settings\Ralf\Mijn documenten\PROJECTS\C#\Gadget\buttonPress\002__GemiddeldeVan10MetingenUitlezen__serialPort\serialPort\bin\Debug\ZedGraph.dll
+C:\Documents and Settings\Ralf\Mijn documenten\PROJECTS\C#\Gadget\buttonPress\002__GemiddeldeVan10MetingenUitlezen__serialPort\serialPort\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Ralf\Mijn documenten\PROJECTS\C#\Gadget\buttonPress\002__GemiddeldeVan10MetingenUitlezen__serialPort\serialPort\obj\x86\Debug\WindowsFormsApplication1.Form1.resources
+C:\Documents and Settings\Ralf\Mijn documenten\PROJECTS\C#\Gadget\buttonPress\002__GemiddeldeVan10MetingenUitlezen__serialPort\serialPort\obj\x86\Debug\WindowsFormsApplication1.Properties.Resources.resources
+C:\Documents and Settings\Ralf\Mijn documenten\PROJECTS\C#\Gadget\buttonPress\002__GemiddeldeVan10MetingenUitlezen__serialPort\serialPort\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Documents and Settings\Ralf\Mijn documenten\PROJECTS\C#\Gadget\buttonPress\002__GemiddeldeVan10MetingenUitlezen__serialPort\serialPort\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\stage\Desktop\Mark_button_test_4\C#_002__GemiddeldeVan10MetingenUitlezen__serialPort\serialPort\obj\x86\Debug\recordSound.exe
+C:\Users\stage\Desktop\Mark_button_test_4\C#_002__GemiddeldeVan10MetingenUitlezen__serialPort\serialPort\obj\x86\Debug\recordSound.pdb
+C:\Users\stage\Desktop\Mark_button_test_4\C#_002__GemiddeldeVan10MetingenUitlezen__serialPort\serialPort\bin\Debug\recordSound.exe
+C:\Users\stage\Desktop\Mark_button_test_4\C#_002__GemiddeldeVan10MetingenUitlezen__serialPort\serialPort\bin\Debug\recordSound.pdb
+C:\Users\stage\Desktop\Mark_button_test_4\C#_002__GemiddeldeVan10MetingenUitlezen__serialPort\serialPort\bin\Debug\ZedGraph.dll
+C:\Users\stage\Desktop\Mark_button_test_4\C#_002__GemiddeldeVan10MetingenUitlezen__serialPort\serialPort\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\stage\Desktop\Mark_button_test_4\C#_002__GemiddeldeVan10MetingenUitlezen__serialPort\serialPort\obj\x86\Debug\WindowsFormsApplication1.Form1.resources
+C:\Users\stage\Desktop\Mark_button_test_4\C#_002__GemiddeldeVan10MetingenUitlezen__serialPort\serialPort\obj\x86\Debug\WindowsFormsApplication1.Properties.Resources.resources
+C:\Users\stage\Desktop\Mark_button_test_4\C#_002__GemiddeldeVan10MetingenUitlezen__serialPort\serialPort\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\stage\Desktop\Mark_button_test_4\C#_002__GemiddeldeVan10MetingenUitlezen__serialPort\serialPort\obj\x86\Debug\GenerateResource.write.1.tlog
+I:\AFSTUDEERSTAGE\TEST SENSOREN\ECG\Klok\C#\C#_002__GemiddeldeVan10MetingenUitlezen__serialPort\serialPort\obj\x86\Debug\recordSound.exe
+I:\AFSTUDEERSTAGE\TEST SENSOREN\ECG\Klok\C#\C#_002__GemiddeldeVan10MetingenUitlezen__serialPort\serialPort\obj\x86\Debug\recordSound.pdb

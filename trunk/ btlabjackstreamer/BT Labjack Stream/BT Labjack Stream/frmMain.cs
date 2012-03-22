@@ -31,6 +31,7 @@ namespace BT_Labjack_Stream
         private ExportData fh = null;
         private static frmExpertSettings frmExpert = null;
         private static frmInfo frmInformatie = null;
+        private static frmGraph frmGrafiek = null;
         private string[] textBoxesMain = null;
         private const double msec = 1000.0;
         private bool blLabjackHV = true;
@@ -79,6 +80,7 @@ namespace BT_Labjack_Stream
             connectToLabjack();
             frmExpert = new frmExpertSettings(expertSettingsToolStripMenuItem);
             frmInformatie = new frmInfo();
+            frmGrafiek = new frmGraph();
             refreshSettings();
         }
 
@@ -388,6 +390,12 @@ namespace BT_Labjack_Stream
                 tbxFIO5.Text = textBoxesMain[5];
                 tbxFIO6.Text = textBoxesMain[6];
                 tbxFIO7.Text = textBoxesMain[7];
+
+                //grafiek
+                if (grafiekToolStripMenuItem.Checked)
+                {
+                    frmGrafiek.FillGraph(readings[0], readings[0]);
+                }
             }
         }
 
@@ -942,6 +950,15 @@ namespace BT_Labjack_Stream
         private void tsmi_MeerInformatie_Click(object sender, EventArgs e)
         {
             frmInformatie.Show();
+        }
+
+        private void grafiekToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            grafiekToolStripMenuItem.Checked = !grafiekToolStripMenuItem.Checked;
+            if (grafiekToolStripMenuItem.Checked)
+                frmGrafiek.Show();
+            else
+                frmGrafiek.Hide();
         }
         //EINDE KLASSE
     }

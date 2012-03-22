@@ -1,0 +1,9 @@
+C:\Documents and Settings\Ralf\Mijn documenten\Visual Studio 2010\Projects\serialPort\serialPort\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Ralf\Mijn documenten\Visual Studio 2010\Projects\serialPort\serialPort\obj\x86\Debug\WindowsFormsApplication1.Form1.resources
+C:\Documents and Settings\Ralf\Mijn documenten\Visual Studio 2010\Projects\serialPort\serialPort\obj\x86\Debug\WindowsFormsApplication1.Properties.Resources.resources
+C:\Documents and Settings\Ralf\Mijn documenten\Visual Studio 2010\Projects\serialPort\serialPort\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Documents and Settings\Ralf\Mijn documenten\Visual Studio 2010\Projects\serialPort\serialPort\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Documents and Settings\Ralf\Mijn documenten\Visual Studio 2010\Projects\serialPort\serialPort\bin\Debug\serialPort.exe
+C:\Documents and Settings\Ralf\Mijn documenten\Visual Studio 2010\Projects\serialPort\serialPort\bin\Debug\serialPort.pdb
+C:\Documents and Settings\Ralf\Mijn documenten\Visual Studio 2010\Projects\serialPort\serialPort\obj\x86\Debug\serialPort.exe
+C:\Documents and Settings\Ralf\Mijn documenten\Visual Studio 2010\Projects\serialPort\serialPort\obj\x86\Debug\serialPort.pdb

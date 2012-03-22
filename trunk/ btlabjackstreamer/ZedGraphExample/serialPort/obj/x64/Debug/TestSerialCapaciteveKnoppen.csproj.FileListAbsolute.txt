@@ -1,0 +1,12 @@
+C:\Users\stage\Desktop\Mark_button_test_4\C#_Cap_Knoppen_0\serialPort\bin\x64\Debug\TestSerialCapacitieveKnoppen.exe
+C:\Users\stage\Desktop\Mark_button_test_4\C#_Cap_Knoppen_0\serialPort\bin\x64\Debug\TestSerialCapacitieveKnoppen.pdb
+C:\Users\stage\Desktop\Mark_button_test_4\C#_Cap_Knoppen_0\serialPort\bin\x64\Debug\ZedGraph.dll
+C:\Users\stage\Desktop\Mark_button_test_4\C#_Cap_Knoppen_0\serialPort\obj\x64\Debug\ResolveAssemblyReference.cache
+C:\Users\stage\Desktop\Mark_button_test_4\C#_Cap_Knoppen_0\serialPort\obj\x64\Debug\WindowsFormsApplication1.Form1.resources
+C:\Users\stage\Desktop\Mark_button_test_4\C#_Cap_Knoppen_0\serialPort\obj\x64\Debug\WindowsFormsApplication1.Properties.Resources.resources
+C:\Users\stage\Desktop\Mark_button_test_4\C#_Cap_Knoppen_0\serialPort\obj\x64\Debug\GenerateResource.read.1.tlog
+C:\Users\stage\Desktop\Mark_button_test_4\C#_Cap_Knoppen_0\serialPort\obj\x64\Debug\GenerateResource.write.1.tlog
+C:\Users\stage\Desktop\Mark_button_test_4\C#_Cap_Knoppen_0\serialPort\obj\x64\Debug\TestSerialCapacitieveKnoppen.exe
+C:\Users\stage\Desktop\Mark_button_test_4\C#_Cap_Knoppen_0\serialPort\obj\x64\Debug\TestSerialCapacitieveKnoppen.pdb
+C:\Users\yflp\Desktop\ btlabjackstreamer\ZedGraphExample\serialPort\obj\x64\Debug\TestSerialCapacitieveKnoppen.exe
+C:\Users\yflp\Desktop\ btlabjackstreamer\ZedGraphExample\serialPort\obj\x64\Debug\TestSerialCapacitieveKnoppen.pdb
