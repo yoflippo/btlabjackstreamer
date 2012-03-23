@@ -23,16 +23,18 @@ namespace BT_Labjack_Stream
         int aantalGeselecteerdeKanalen = 0;
         public string TitelGrafiek = "BT Labjack Streamer";
         public string LabelYas = "Spanning [Volt]";
-        public string LabelXas = "Tijd [seconde]";
+        public string LabelXas = "Aantal metingen";
         private string[] namenVanKanalen = null;
         private readonly Color[] kleurLijst = new Color[aantalKanalen] { Color.Red, Color.Green, Color.Blue, Color.Black, Color.Yellow, Color.DeepPink, Color.GreenYellow, Color.Purple };
         private List<double>[] data = null;
         private int sampleFrequentie = 0;
+        private int aantalNieuweMeetPunten = 0;
         Stopwatch stopwatch = null;
+        private bool NieuweData = false;
         #endregion
 
         #region CONSTRUCTOR
-        public frmGraph(int aantalGebruikteKanalen, ref int sampleFreq ,ref List<double>[] d)
+        public frmGraph(int aantalGebruikteKanalen, ref int sampleFreq ,ref List<double>[] d, ref int buffer)
         {
             aantalGeselecteerdeKanalen = aantalGebruikteKanalen;
             namenVanKanalen = new string[aantalKanalen];
@@ -43,6 +45,7 @@ namespace BT_Labjack_Stream
             data = d;
             sampleFrequentie = sampleFreq;
             InitializeComponent();
+            timer1.Interval = buffer;
             Reset();
         }
         #endregion
@@ -67,8 +70,9 @@ namespace BT_Labjack_Stream
                 myCurves[i] = myPane.AddCurve(namenVanKanalen[i], lists[i], kleurLijst[i], SymbolType.None);
             }
 
-            nudGraphX.Value = sampleFrequentie;
+            nudGraphX.Value = sampleFrequentie*10;
 
+            //uiterlijk grafiek
             myPane.Title.Text = TitelGrafiek;
             myPane.XAxis.Title.Text = LabelXas;
             myPane.YAxis.Title.Text = LabelYas;
@@ -81,6 +85,11 @@ namespace BT_Labjack_Stream
 
             myPane.AxisChange();
 
+            //resetten van stuurvariabelen
+            telAantalKeerTekenen = 0;
+
+            //index getal bepalen
+            aantalNieuweMeetPunten = sampleFrequentie / (1000 / timer1.Interval); //aantal samples dat er bij is gekomen
             redrawGraph();
         }
 
@@ -88,39 +97,31 @@ namespace BT_Labjack_Stream
         private void FillGraph()
         {
             GraphPane myPane = zg1.GraphPane;
-            telAantalKeerTekenen++;
 
-            //kies waarde uit list om te tekenen
-            //long verstrekenTijd = stopwatch.ElapsedMilliseconds-5000; //de tijd die 1 seconde later is gestart
-            //double omrekenGetal = (double)sampleFrequentie / 1000.0;
-            //int index = (int)(verstrekenTijd * omrekenGetal);
-
-            int index = data[0].Count - sampleFrequentie/3; //1 seconde vertraging;
-            for (int i = 0; i < aantalGeselecteerdeKanalen; i++)
+            int temp = data[0].Count-(aantalNieuweMeetPunten*2);
+            if (temp > aantalNieuweMeetPunten)
             {
-                lists[i].Add(telAantalKeerTekenen, data[i][index]);
-            }
+                for (int i = 0; i < aantalGeselecteerdeKanalen; i++)
+                {
+                    int t = 0;
+                    for (int J = 1; J < aantalNieuweMeetPunten + 1; J++)
+                    {
+                        t = J + temp;
+                        lists[i].Add(t, data[i][t]);
+                        if (data[i][t] > (double)nudGraphY.Value)
+                            nudGraphY.Value = (decimal)data[i][t];
+                    }
+                }
 
-            //X-as
-            if (telAantalKeerTekenen >= myPane.XAxis.Scale.Max)
-            {
-                myPane.XAxis.Scale.Max = myPane.XAxis.Scale.Min + (double)nudGraphX.Value;
-                myPane.XAxis.Scale.Min++;
+                myPane.YAxis.Scale.Max = (double)nudGraphY.Value;
+                myPane.XAxis.Scale.Max = temp;
+                myPane.XAxis.Scale.Min = myPane.XAxis.Scale.Max - (double)nudGraphX.Value;
             }
-            ////Y-as
-            //if (knopA > (double)nudGraphY.Value || knopA > (double)nudGraphY.Value)
-            //{
-            //    int max = 1 + (int)knopA;
-            //    nudGraphY.Value = max;
-            //}
         }
 
         private void redrawGraph()
         {
             GraphPane myPane = zg1.GraphPane;
-
-            myPane.YAxis.Scale.Max = (double)nudGraphY.Value;
-            myPane.YAxis.Scale.Min = 0;
 
             myPane.AxisChange();
             zg1.Invalidate(); // Make sure the Graph gets redrawn
@@ -133,19 +134,23 @@ namespace BT_Labjack_Stream
             e.Cancel = true;
         }
 
+        public bool blNieuweData
+        {
+            set
+            {
+                NieuweData = value;
+            }
+        }
 
         public bool blMagVanMain = true;
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (stopwatch.ElapsedMilliseconds > 1000 && blMagVanMain)
-            {
-                if (this.Visible)
+            if (this.Visible & NieuweData)
                 {
+                    NieuweData = false;
                     FillGraph();
                     redrawGraph();
                 }
-
-            }
         }
 
 
