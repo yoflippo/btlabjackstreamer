@@ -35,6 +35,7 @@ namespace BT_Labjack_Stream
         private string[] textBoxesMain = null;
         private const double msec = 1000.0;
         private bool blLabjackHV = true;
+        private bool blNieuweData = false;
         #region STRUCTS
         public struct metingInformatie
         {
@@ -101,10 +102,14 @@ namespace BT_Labjack_Stream
 
                 //stop grafiek
                 frmGrafiek.blMagVanMain = false;
+                frmGrafiek.Reset();
 
                 // Reconfigure start button
                 btnStartStop.Text = "Start";
                 btnStartStop.Enabled = true;
+
+                //set grafiek tool strip menu 
+                 grafiekToolStripMenuItem.Checked = frmGrafiek.Visible;
             }
 
             // Otherwise, start the stream and thread
@@ -115,7 +120,7 @@ namespace BT_Labjack_Stream
                 //grafiek form opnieuw instellen
                 if (frmGrafiek != null)
                     frmGrafiek.Close();
-                frmGrafiek = new frmGraph(metingInfo.aantalGeselecteerdeKanalen, ref metingInfo.sampleFrequentie, ref dataChannel);
+                frmGrafiek = new frmGraph(metingInfo.aantalGeselecteerdeKanalen, ref metingInfo.sampleFrequentie, ref dataChannel, ref metingInfo.delayms);
                 //grafiek mag worden getekend
                 frmGrafiek.blMagVanMain = true;
                 //grafiek laten zien
@@ -132,6 +137,7 @@ namespace BT_Labjack_Stream
 
                     // Start stream thread
                     streamThread = new Thread(new ThreadStart(MakeReadings));
+                    streamThread.Priority = ThreadPriority.AboveNormal;
                     streamThread.IsBackground = false;
                     streamThread.Start();
 
@@ -298,7 +304,7 @@ namespace BT_Labjack_Stream
                     LJUD.eGet(u3.ljhandle, LJUD.IO.GET_STREAM_DATA, LJUD.CHANNEL.ALL_CHANNELS, ref numScansRequested, adblData);
                     ShowReadings(adblData);
                     saveDataInLists(adblData);
-
+                    frmGrafiek.blNieuweData = true;
                     //Retrieve the current backlog.  The UD driver retrieves stream data from
                     //the U3 in the background, but if the computer is too slow for some reason
                     //the driver might not be able to read the data as fast as the U3 is

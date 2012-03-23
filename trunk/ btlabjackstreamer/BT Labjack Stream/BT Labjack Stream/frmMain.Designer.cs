@@ -250,7 +250,7 @@
             "2000 "});
             this.tscbxSampleFrequentie.Name = "tscbxSampleFrequentie";
             this.tscbxSampleFrequentie.Size = new System.Drawing.Size(121, 21);
-            this.tscbxSampleFrequentie.Text = "500";
+            this.tscbxSampleFrequentie.Text = "100";
             this.tscbxSampleFrequentie.TextChanged += new System.EventHandler(this.tscbxSampleFrequentie_TextChanged);
             // 
             // toolStripSeparator1
@@ -290,7 +290,7 @@
             "5000"});
             this.tscb_BufferGrootte.Name = "tscb_BufferGrootte";
             this.tscb_BufferGrootte.Size = new System.Drawing.Size(121, 21);
-            this.tscb_BufferGrootte.Text = "250";
+            this.tscb_BufferGrootte.Text = "500";
             this.tscb_BufferGrootte.TextChanged += new System.EventHandler(this.toolStripComboBox1_TextChanged);
             // 
             // helpToolStripMenuItem
