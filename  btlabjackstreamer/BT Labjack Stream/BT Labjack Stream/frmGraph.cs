@@ -93,12 +93,15 @@ namespace BT_Labjack_Stream
             redrawGraph();
         }
 
-
+        private int aantalMeetPuntenOud = 0;
         private void FillGraph()
         {
             GraphPane myPane = zg1.GraphPane;
 
+            aantalNieuweMeetPunten = data[0].Count - aantalMeetPuntenOud;
             int temp = data[0].Count-(aantalNieuweMeetPunten*2);
+            aantalMeetPuntenOud = data[0].Count;
+
             if (temp > aantalNieuweMeetPunten)
             {
                 for (int i = 0; i < aantalGeselecteerdeKanalen; i++)
@@ -117,6 +120,7 @@ namespace BT_Labjack_Stream
                 myPane.XAxis.Scale.Max = temp;
                 myPane.XAxis.Scale.Min = myPane.XAxis.Scale.Max - (double)nudGraphX.Value;
             }
+            
         }
 
         private void redrawGraph()
@@ -151,6 +155,12 @@ namespace BT_Labjack_Stream
                     FillGraph();
                     redrawGraph();
                 }
+        }
+
+        private void frmGraph_Resize(object sender, EventArgs e)
+        {         
+            gbx_Settings.Location = new Point(12, this.Height - gbx_Settings.Height - 40);
+            zg1.Size = new System.Drawing.Size(this.Size.Width - 40, this.Size.Height - (gbx_Settings.Size.Height+80));
         }
 
 
