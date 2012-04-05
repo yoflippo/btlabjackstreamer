@@ -928,6 +928,11 @@ namespace BT_Labjack_Stream
             else
                 frmGrafiek.Hide();
         }
+
+        public bool ToolStripMenuItem_Grafiek_aan
+        {
+            set { grafiekToolStripMenuItem.Checked = value; }
+        }
         //EINDE KLASSE
     }
 }

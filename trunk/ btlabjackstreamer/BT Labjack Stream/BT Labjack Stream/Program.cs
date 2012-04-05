@@ -10,6 +10,8 @@ namespace BT_Labjack_Stream
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
+        /// 
+        public static frmMain frmHoofd;
         [STAThread]
         static void Main()
         {
@@ -18,6 +20,5 @@ namespace BT_Labjack_Stream
             frmHoofd = new frmMain();
             Application.Run(frmHoofd);
         }
-        public static frmMain frmHoofd = null;
     }
 }

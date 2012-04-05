@@ -77,7 +77,7 @@ namespace BT_Labjack_Stream
             myPane.XAxis.Title.Text = LabelXas;
             myPane.YAxis.Title.Text = LabelYas;
 
-            myPane.YAxis.Scale.Max = (double)nudGraphY.Value;
+            myPane.YAxis.Scale.Max = (double)nudGraphY.Value+10;
             myPane.YAxis.Scale.Min = 0;
 
             myPane.XAxis.Scale.Max = (double)nudGraphX.Value;
@@ -111,12 +111,11 @@ namespace BT_Labjack_Stream
                     {
                         t = J + temp;
                         lists[i].Add(t, data[i][t]);
-                        if (data[i][t] > (double)nudGraphY.Value)
+                        if (data[i][t] > (double)nudGraphY.Value) //testen of de waarde wordt weergegeven
                             nudGraphY.Value = (decimal)data[i][t];
                     }
                 }
 
-                myPane.YAxis.Scale.Max = (double)nudGraphY.Value;
                 myPane.XAxis.Scale.Max = temp;
                 myPane.XAxis.Scale.Min = myPane.XAxis.Scale.Max - (double)nudGraphX.Value;
             }
@@ -136,6 +135,7 @@ namespace BT_Labjack_Stream
         {
             this.Hide();
             e.Cancel = true;
+            Program.frmHoofd.ToolStripMenuItem_Grafiek_aan = false;
         }
 
         public bool blNieuweData
@@ -161,6 +161,18 @@ namespace BT_Labjack_Stream
         {         
             gbx_Settings.Location = new Point(12, this.Height - gbx_Settings.Height - 40);
             zg1.Size = new System.Drawing.Size(this.Size.Width - 40, this.Size.Height - (gbx_Settings.Size.Height+80));
+        }
+
+        private void frmGraph_VisibleChanged(object sender, EventArgs e)
+        {
+            if(this.Visible)
+                Program.frmHoofd.ToolStripMenuItem_Grafiek_aan = true;
+        }
+
+        private void nudGraphY_ValueChanged(object sender, EventArgs e)
+        {
+            GraphPane myPane = zg1.GraphPane;
+            myPane.YAxis.Scale.Max = (double)nudGraphY.Value;
         }
 
 

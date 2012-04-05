@@ -106,6 +106,7 @@
             0,
             0,
             0});
+            this.nudGraphY.ValueChanged += new System.EventHandler(this.nudGraphY_ValueChanged);
             // 
             // label2
             // 
@@ -148,6 +149,7 @@
             this.Name = "frmGraph";
             this.Text = "Grafiek";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmGraph_FormClosing);
+            this.VisibleChanged += new System.EventHandler(this.frmGraph_VisibleChanged);
             this.Resize += new System.EventHandler(this.frmGraph_Resize);
             this.gbx_Settings.ResumeLayout(false);
             this.gbx_Settings.PerformLayout();
