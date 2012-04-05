@@ -86,7 +86,7 @@ namespace BT_Labjack_Stream
                 sb.Append(nummer.ToString() + tab);
                 for (int kanaal = 0; kanaal < IsHetKanaalGeselecteerd.Length; kanaal++) //door kanalen lopen
                 {
-                    if (IsHetKanaalGeselecteerd[kanaal] && kanaal < AantalGeselecteerdeKanalen) //testen op kanaal is geselecteerd
+                    if (IsHetKanaalGeselecteerd[kanaal]) //testen op kanaal is geselecteerd
                     {
                         double temp = Math.Round(dataChannels[kanaal][nummer], 5); //10*(1/(2^16)) = 0.00000#####
                         sb.Append(temp.ToString() + tab);
