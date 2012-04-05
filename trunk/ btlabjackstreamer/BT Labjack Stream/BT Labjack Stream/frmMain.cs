@@ -379,7 +379,6 @@ namespace BT_Labjack_Stream
                 //stop alle waardes/tekst in textBoxesMain en schrijf onderaan alles naar textBoxes
                 textBoxesMain = new string[aantalKanalen];
 
-
                 int tellerReading = 0;              
                 for (int i = 0; i < aantalKanalen; i++)
                 {
@@ -728,9 +727,9 @@ namespace BT_Labjack_Stream
             numScans = (2 * metingInfo.sampleFrequentie * metingInfo.delayms) / msec;
             metingInfo.sampleFrequentie = Convert.ToInt16(tscbxSampleFrequentie.Text);
             adblData = new double[metingInfo.aantalGeselecteerdeKanalen * (Int16)numScans * 2];
-            dataChannel = new List<double>[metingInfo.aantalGeselecteerdeKanalen];
+            dataChannel = new List<double>[aantalKanalen];
 
-            for (int i = 0; i < metingInfo.aantalGeselecteerdeKanalen; i++) //prepareer juiste datalijsten
+            for (int i = 0; i < aantalKanalen; i++) //prepareer juiste datalijsten
             {
                 dataChannel[i] = new List<double>(120 * (int)metingInfo.sampleFrequentie * 2); //size 
             }
