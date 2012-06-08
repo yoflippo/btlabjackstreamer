@@ -25,6 +25,7 @@ namespace BT_Labjack_Stream
         public string LabelYas = "Spanning [Volt]";
         public string LabelXas = "Aantal metingen";
         private string[] namenVanKanalen = null;
+        private bool[] geselecteerdeKanalen = null;
         private readonly Color[] kleurLijst = new Color[aantalKanalen] { Color.Red, Color.Green, Color.Blue, Color.Black, Color.Yellow, Color.DeepPink, Color.GreenYellow, Color.Purple };
         private List<double>[] data = null;
         private int sampleFrequentie = 0;
@@ -34,18 +35,20 @@ namespace BT_Labjack_Stream
         #endregion
 
         #region CONSTRUCTOR
-        public frmGraph(int aantalGebruikteKanalen, ref int sampleFreq ,ref List<double>[] d, ref int buffer)
+        public frmGraph(int aantalGebruikteKanalen, ref int sampleFreq ,ref List<double>[] d, ref int buffer, bool[] isHetKanaalGeselecteerd)
         {
             aantalGeselecteerdeKanalen = aantalGebruikteKanalen;
             namenVanKanalen = new string[aantalKanalen];
             for (int i = 0; i < aantalGeselecteerdeKanalen; i++)
             {
-                namenVanKanalen[i] = "FIO" + i.ToString();
+                if(isHetKanaalGeselecteerd[i])
+                    namenVanKanalen[i] = "FIO" + i.ToString();
             }
             data = d;
             sampleFrequentie = sampleFreq;
             InitializeComponent();
             timer1.Interval = buffer;
+            geselecteerdeKanalen = isHetKanaalGeselecteerd;
             Reset();
         }
         #endregion
@@ -97,22 +100,27 @@ namespace BT_Labjack_Stream
         private void FillGraph()
         {
             GraphPane myPane = zg1.GraphPane;
-
             aantalNieuweMeetPunten = data[0].Count - aantalMeetPuntenOud;
             int temp = data[0].Count-(aantalNieuweMeetPunten*2);
             aantalMeetPuntenOud = data[0].Count;
+            int tmpGeselecteerdKanaal = 0;
+
 
             if (temp > aantalNieuweMeetPunten)
             {
-                for (int i = 0; i < aantalGeselecteerdeKanalen; i++)
+                for (int i = 0; i < aantalKanalen; i++)
                 {
-                    int t = 0;
-                    for (int J = 1; J < aantalNieuweMeetPunten + 1; J++)
+                    if (geselecteerdeKanalen[i])
                     {
-                        t = J + temp;
-                        lists[i].Add(t, data[i][t]);
-                        if (data[i][t] > (double)nudGraphY.Value) //testen of de waarde wordt weergegeven
-                            nudGraphY.Value = (decimal)data[i][t];
+                        int t = 0;
+                        for (int J = 1; J < aantalNieuweMeetPunten + 1; J++)
+                        {
+                            t = J + temp;
+                            lists[tmpGeselecteerdKanaal].Add(t, data[i][t]);
+                            if (data[i][t] > (double)nudGraphY.Value) //testen of de waarde wordt weergegeven
+                                nudGraphY.Value = (decimal)data[i][t];
+                        }
+                        tmpGeselecteerdKanaal++;
                     }
                 }
 
