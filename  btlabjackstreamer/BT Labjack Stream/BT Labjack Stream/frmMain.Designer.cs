@@ -562,7 +562,7 @@
             this.gbxFIO4_7.Size = new System.Drawing.Size(79, 122);
             this.gbxFIO4_7.TabIndex = 44;
             this.gbxFIO4_7.TabStop = false;
-            this.gbxFIO4_7.Text = "0-10 Volt";
+            this.gbxFIO4_7.Text = "0-2.4 Volt";
             // 
             // cbxFIO7
             // 
@@ -638,6 +638,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "frmMain";
             this.Text = "BT Labjack Streamer";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);

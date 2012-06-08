@@ -71,8 +71,6 @@ namespace BT_Labjack_Stream
         public frmMain()
         {
             InitializeComponent();
-      
-   
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -88,6 +86,7 @@ namespace BT_Labjack_Stream
             // If we are already streaming, end the stream and thread
             if (streamRunning)
             {
+                instellingenToolStripMenuItem.Enabled = true;
                 gbxInstellingen.Enabled = true;
                 // Tell the user that we are busy because
                 // we have to wait for the thread to close
@@ -116,11 +115,12 @@ namespace BT_Labjack_Stream
             else
             {
                 refreshSettings();
-
+                instellingenToolStripMenuItem.Enabled = false;
                 //grafiek form opnieuw instellen
                 if (frmGrafiek != null)
                     frmGrafiek.Close();
-                frmGrafiek = new frmGraph(metingInfo.aantalGeselecteerdeKanalen, ref metingInfo.sampleFrequentie, ref dataChannel, ref metingInfo.delayms);
+                frmGrafiek = new frmGraph(metingInfo.aantalGeselecteerdeKanalen, ref metingInfo.sampleFrequentie, ref dataChannel, ref metingInfo.delayms,
+                    metingInfo.blIsHetKanaalGeselecteerd);
                 //grafiek mag worden getekend
                 frmGrafiek.blMagVanMain = true;
                 //grafiek laten zien
@@ -932,6 +932,36 @@ namespace BT_Labjack_Stream
         public bool ToolStripMenuItem_Grafiek_aan
         {
             set { grafiekToolStripMenuItem.Checked = value; }
+        }
+
+        private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // If we are already streaming, end the stream and thread
+            if (streamRunning)
+            {
+                gbxInstellingen.Enabled = true;
+                // Tell the user that we are busy because
+                // we have to wait for the thread to close
+                btnStartStop.Text = "Wachten...";
+                btnStartStop.Enabled = false;
+                Update();
+
+                // Stop the stream
+                streamRunning = false;
+                streamThread.Join(); // Wait for the thread to close
+                stopStreaming();
+
+                //stop grafiek
+                frmGrafiek.blMagVanMain = false;
+                frmGrafiek.Reset();
+
+                // Reconfigure start button
+                btnStartStop.Text = "Start";
+                btnStartStop.Enabled = true;
+
+                //set grafiek tool strip menu 
+                grafiekToolStripMenuItem.Checked = frmGrafiek.Visible;
+            }
         }
         //EINDE KLASSE
     }
