@@ -518,7 +518,11 @@ namespace BT_Labjack_Stream
         private void refreshSettings()
         {
             if (streamRunning)
+            {
+                instellingenToolStripMenuItem.Enabled = false;
                 return;
+            }
+            instellingenToolStripMenuItem.Enabled = true;
 
             //RESET instelling te meten kanalen
            // metingInfo = new metingInformatie(); //mag niet dan werkt het niet meer
