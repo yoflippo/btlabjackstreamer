@@ -44,6 +44,7 @@
             // 
             // zg1
             // 
+            this.zg1.AutoSize = true;
             this.zg1.IsAutoScrollRange = true;
             this.zg1.IsScrollY2 = true;
             this.zg1.Location = new System.Drawing.Point(12, 12);
@@ -58,6 +59,7 @@
             this.zg1.Size = new System.Drawing.Size(880, 451);
             this.zg1.TabIndex = 13;
             this.zg1.ZoomStepFraction = 1D;
+            this.zg1.ZoomEvent += new ZedGraph.ZedGraphControl.ZoomEventHandler(this.zg1_ZoomEvent);
             // 
             // timer1
             // 
@@ -156,6 +158,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudGraphY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudGraphX)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 

@@ -39,7 +39,7 @@ namespace BT_Labjack_Stream
         {
             aantalGeselecteerdeKanalen = aantalGebruikteKanalen;
             namenVanKanalen = new string[aantalKanalen];
-            for (int i = 0; i < aantalGeselecteerdeKanalen; i++)
+            for (int i = 0; i < aantalKanalen; i++)
             {
                 if(isHetKanaalGeselecteerd[i])
                     namenVanKanalen[i] = "FIO" + i.ToString();
@@ -68,9 +68,14 @@ namespace BT_Labjack_Stream
 
             //Maak grafieklijnen aan
             myCurves = new LineItem[aantalGeselecteerdeKanalen];
-            for (int i = 0; i < aantalGeselecteerdeKanalen; i++)
+            int tempGetalLists = 0;
+            for (int i = 0; i < aantalKanalen; i++)
             {
-                myCurves[i] = myPane.AddCurve(namenVanKanalen[i], lists[i], kleurLijst[i], SymbolType.None);
+                if (geselecteerdeKanalen[i])
+                {
+                    myCurves[tempGetalLists] = myPane.AddCurve(namenVanKanalen[i], lists[tempGetalLists], kleurLijst[i], SymbolType.None);
+                    tempGetalLists++;
+                }
             }
 
             nudGraphX.Value = sampleFrequentie*10;
@@ -181,6 +186,12 @@ namespace BT_Labjack_Stream
         {
             GraphPane myPane = zg1.GraphPane;
             myPane.YAxis.Scale.Max = (double)nudGraphY.Value;
+        }
+
+        private void zg1_ZoomEvent(ZedGraphControl sender, ZoomState oldState, ZoomState newState)
+        {
+            GraphPane myPane = zg1.GraphPane;
+            nudGraphX.Value = (decimal)(myPane.XAxis.Scale.Max-myPane.XAxis.Scale.Min);
         }
 
 
