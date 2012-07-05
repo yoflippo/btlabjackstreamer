@@ -47,12 +47,26 @@ namespace BT_Labjack_Stream
             data = d;
             sampleFrequentie = sampleFreq;
             InitializeComponent();
-            timer1.Interval = buffer;
+            timer1.Interval = buffer/10;
             geselecteerdeKanalen = isHetKanaalGeselecteerd;
             Reset();
         }
         #endregion
 
+        private int Count(List<double>[] l){
+            int aantal = 0;
+            if (l[0].Count == 0)
+            {
+                for (int i = 0; i < aantalKanalen; i++)
+                {
+                    if (l[i].Count > aantal)
+                        aantal = l[i].Count;
+                }
+                return aantal;
+            }
+            else
+                return l[0].Count;
+        }
 
         public void Reset()
         {
@@ -105,9 +119,10 @@ namespace BT_Labjack_Stream
         private void FillGraph()
         {
             GraphPane myPane = zg1.GraphPane;
-            aantalNieuweMeetPunten = data[0].Count - aantalMeetPuntenOud;
-            int temp = data[0].Count-(aantalNieuweMeetPunten*2);
-            aantalMeetPuntenOud = data[0].Count;
+            
+            aantalNieuweMeetPunten = Count(data) - aantalMeetPuntenOud;
+            int temp = Count(data) - (aantalNieuweMeetPunten * 2);
+            aantalMeetPuntenOud = Count(data);
             int tmpGeselecteerdKanaal = 0;
 
 

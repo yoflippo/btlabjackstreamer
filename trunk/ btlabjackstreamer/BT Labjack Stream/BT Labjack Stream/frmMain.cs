@@ -36,6 +36,7 @@ namespace BT_Labjack_Stream
         private const double msec = 1000.0;
         private bool blLabjackHV = true;
         private bool blNieuweData = false;
+
         #region STRUCTS
         public struct metingInformatie
         {
@@ -76,7 +77,7 @@ namespace BT_Labjack_Stream
         private void Form1_Load(object sender, EventArgs e)
         {
             connectToLabjack();
-            frmExpert = new frmExpertSettings(expertSettingsToolStripMenuItem);
+            frmExpert = new frmExpertSettings(expertSettingsToolStripMenuItem, blLabjackHV);
             frmInformatie = new frmInfo();
             refreshSettings();
         }
